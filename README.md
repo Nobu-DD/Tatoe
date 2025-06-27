@@ -108,7 +108,7 @@
 | 項目      | 内容                                                   |
 | ------- | ---------------------------------------------------- |
 | バックエンド  | Ruby on Rails 7.0.0・Ruby 3.2.3                                 |
-| フロントエンド | HTML, CSS, TailwindCSS, Turbo                        |
+| フロントエンド | HTML, CSS, TailwindCSS, Daisy UI, Turbo(Hotwire)               |
 | データベース  | PostgreSQL                                           |
 | ストレージ   | AWS S3(本リリース後の拡張にて画像ファイル投稿)               |
 | 認証        | Devise |
