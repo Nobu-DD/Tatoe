@@ -121,4 +121,4 @@
 ![画面遷移図](https://i.gyazo.com/d61bf98c39573f4cb957a45cc4c9e920.png)
 
 ## ER図
-![ER図](https://i.gyazo.com/8a21820afb4d7d2127b3e38d550ea45b.png)
+![ER図](https://i.gyazo.com/49eaeb23ff23d26df6c50e999af0cb24.png)
