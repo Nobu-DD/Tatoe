@@ -118,3 +118,7 @@
 
 ## 画面遷移図
 [Tatoe 画面遷移図](https://www.figma.com/design/h52ZY57d0laEO1PN7lCgp2/Tatoe?node-id=0-1&t=EiHWBsNduQXxuWzz-1)
+![画面遷移図](https://i.gyazo.com/d61bf98c39573f4cb957a45cc4c9e920.png)
+
+## ER図
+![ER図](https://i.gyazo.com/49eaeb23ff23d26df6c50e999af0cb24.png)
