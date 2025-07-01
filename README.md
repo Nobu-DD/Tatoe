@@ -115,3 +115,6 @@
 | デプロイ    | Render |
 | 開発環境    | Docker |
 | 外部API    | OpenAI API（gpt-4.1-nano）                 |
+
+## 画面遷移図
+[Tatoe 画面遷移図](https://www.figma.com/design/h52ZY57d0laEO1PN7lCgp2/Tatoe?node-id=0-1&t=EiHWBsNduQXxuWzz-1)
