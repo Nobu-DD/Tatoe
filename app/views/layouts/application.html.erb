@@ -11,9 +11,12 @@
   <%= yield :head %>
 
   <link rel="manifest" href="/manifest.json">
+
   <link rel="icon" href="/Tatoe_v1.0.png" type="image/png">
   <link rel="icon" href="/Tatoe_favicon.ico" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/Tatoe_v1.0.png">
+  <%= favicon_link_tag("Tatoe_v1-1.1.ico") %>
+
   <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
   <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
 </head>
