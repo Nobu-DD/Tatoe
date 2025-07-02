@@ -27,7 +27,7 @@
       <svg class="w-4 h-4 mr-1 inline-block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M12 2a10 10 0 100 20 10 10 0 000-20z" />
       </svg>
-      アプリの使い方
+      アプリの使い方(未実装)
     </button>
   </div>
 </section>
@@ -39,73 +39,8 @@
     <h3 class="text-lg font-bold text-gray-800">人気のお題</h3>
     <span class="ml-2 bg-orange-100 text-orange-600 text-xs px-2 py-1 rounded">HOT</span>
   </div>
-
-  <div class="bg-white border-0 shadow-md rounded-2xl overflow-hidden mb-6">
-    <div class="p-4 bg-gradient-to-r from-[#F0F9FF] to-[#E0F2FE]">
-      <div class="flex items-start justify-between mb-3">
-        <span class="bg-[#E0F2FE] text-[#0369A1] text-xs px-2 py-1 rounded">競馬</span>
-        <div class="flex items-center space-x-3 text-sm text-gray-500">
-          <div class="flex items-center">
-            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M11 18a7 7 0 100-14 7 7 0 000 14z" />
-            </svg>
-            24
-          </div>
-          <div class="flex items-center">
-            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" />
-            </svg>
-            156
-          </div>
-        </div>
-      </div>
-
-      <h4 class="font-semibold text-gray-800 mb-2 leading-relaxed">競馬の日本ダービーを別のスポーツで例えると？</h4>
-
-      <div class="flex items-center text-sm text-gray-600">
-        <span class="text-xs bg-[#E0F2FE] text-[#0369A1] rounded-full px-2 py-1">競馬太郎</span>
-      </div>
-    </div>
-
-    <div class="px-4 py-3 bg-yellow-50 border-l-4 border-yellow-300">
-      <div class="flex items-center mb-2">
-        <svg class="w-4 h-4 text-yellow-600 mr-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M12 2a10 10 0 100 20 10 10 0 000-20z" />
-        </svg>
-        <span class="text-sm font-medium text-yellow-700">ヒント</span>
-      </div>
-      <div class="flex flex-wrap gap-2">
-        <span class="bg-white px-3 py-1 rounded-full text-xs text-gray-600 border border-yellow-200">若い年齢の時しか出れない</span>
-        <span class="bg-white px-3 py-1 rounded-full text-xs text-gray-600 border border-yellow-200">最強決定戦</span>
-        <span class="bg-white px-3 py-1 rounded-full text-xs text-gray-600 border border-yellow-200">一生に一度のチャンス</span>
-      </div>
-    </div>
-
-    <div class="p-4">
-      <div class="bg-gray-50 rounded-xl p-3 relative">
-        <div class="absolute -top-2 left-4 w-4 h-4 bg-gray-50 transform rotate-45"></div>
-        <p class="text-sm text-gray-700 font-medium">💡 甲子園の決勝戦！理由：若い年齢の時しか出れない最強決定戦だから</p>
-      </div>
-
-      <div class="flex items-center justify-between mt-3">
-        <button class="text-[#A0D8EF] flex items-center text-sm">
-          <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M11 18a7 7 0 100-14 7 7 0 000 14z" />
-          </svg>
-          例えてみる
-        </button>
-        <button class="text-gray-500 flex items-center text-sm">
-          <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" />
-          </svg>
-          確かに！
-        </button>
-      </div>
-    </div>
-  </div>
+  <%= render 'topics/popular' %>
 </section>
-
-<!-- 最近のお題セクション -->
 <section class="px-4 py-6">
   <div class="flex items-center mb-4">
     <svg class="w-5 h-5 text-gray-500 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -113,40 +48,5 @@
     </svg>
     <h3 class="text-lg font-bold text-gray-800">最近のお題</h3>
   </div>
-
-  <div class="bg-white border-0 shadow-sm rounded-xl p-4 mb-3">
-    <div class="flex items-start justify-between mb-2">
-      <span class="text-xs bg-orange-100 text-orange-700 px-2 py-1 rounded">回答募集中</span>
-      <span class="text-xs bg-[#E0F2FE] text-[#0369A1] px-2 py-1 rounded">プログラミング</span>
-    </div>
-    <h4 class="font-medium text-gray-800 mb-2 text-sm leading-relaxed">プログラミングのデバッグを日常生活で例えると？</h4>
-    <div class="flex items-center justify-between">
-      <span class="text-sm text-gray-600">コード職人</span>
-      <span class="text-xs text-gray-500">確かに 23</span>
-    </div>
-  </div>
-
-  <div class="bg-white border-0 shadow-sm rounded-xl p-4 mb-3">
-    <div class="flex items-start justify-between mb-2">
-      <span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded">新着</span>
-      <span class="text-xs bg-[#E0F2FE] text-[#0369A1] px-2 py-1 rounded">グルメ</span>
-    </div>
-    <h4 class="font-medium text-gray-800 mb-2 text-sm leading-relaxed">ラーメン二郎の食べ方を他の料理で例えると？</h4>
-    <div class="flex items-center justify-between">
-      <span class="text-sm text-gray-600">二郎マニア</span>
-      <span class="text-xs text-gray-500">確かに 15</span>
-    </div>
-  </div>
-
-  <div class="bg-white border-0 shadow-sm rounded-xl p-4">
-    <div class="flex items-start justify-between mb-2">
-      <span class="text-xs bg-orange-100 text-orange-700 px-2 py-1 rounded">回答募集中</span>
-      <span class="text-xs bg-[#E0F2FE] text-[#0369A1] px-2 py-1 rounded">アニメ</span>
-    </div>
-    <h4 class="font-medium text-gray-800 mb-2 text-sm leading-relaxed">アニメの聖地巡礼を他の趣味で例えると？</h4>
-    <div class="flex items-center justify-between">
-      <span class="text-sm text-gray-600">アニメ好き</span>
-      <span class="text-xs text-gray-500">確かに 31</span>
-    </div>
-  </div>
+  <%= render 'topics/recently' %>
 </section>
