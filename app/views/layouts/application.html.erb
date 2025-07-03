@@ -21,10 +21,11 @@
   <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
 </head>
 
-<body>
+<body class="min-h-screen bg-[#FAFAFA]">
   <%= render 'shared/header' %>
   <main>
-    <%# ここにフラッシュメッセージを記述予定   %>
+    <%= notice %>
+    <%= alert %>
     <%= yield %>
   </main>
   <%= render'shared/footer' %>
