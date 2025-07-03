@@ -1,11 +1,26 @@
-<header class="bg-white border-gray-100 px-4 py-3 sticky top-0">
-  <div class="flex items-center justify-between">
+<header class="bg-white border-gray-100 sticky top-0">
+  <div class="navbar pl-3 pr-3 items-center justify-between">
     <div class="flex items-center space-x-2">
-      <%= image_tag 'Tatoe_v1-1.1.png', class: "w-8", alt: 'Tatoeロゴ' %>
+      <%= link_to root_path, class: "flex"  do %>
+      <%= image_tag  'Tatoe_v1-1.1.png', class: "w-8", alt: 'Tatoeロゴ' %>
       <h1 class="text-xl font-bold text-[#A0D8EF]">Tatoe</h1>
+      <% end %>
     </div>
-
-    <%# ここからハンバーガーメニュー%>
+    <% if user_signed_in? %>
+    <div>
+      <%= link_to destroy_user_session_path, data: { turbo_method: :delete }, class: "btn btn-outline btn-error" do %>
+      <h1>ログアウト</h1>
+      <% end %>
+    </div>
+    <% else %>
+    <div>
+      <%= link_to new_user_session_path, class: "btn btn-outline btn-info" do %>
+      <h1>ログイン</h1>
+      <% end %>
+    </div>
+    <% end %>
+  </div>
+  <%# ここからハンバーガーメニュー
     <label class="btn btn-circle swap swap-rotate">
       <!-- this hidden checkbox controls the state -->
       <input type="checkbox" />
@@ -21,11 +36,12 @@
     </label>
     <%# ここまでハンバーガーメニュー%>
 
-    <%#  <button class="text-gray-600">
+  <%#  <button class="text-gray-600">
        <svg class="w-6 h-6" stroke-width="2" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
       </svg>
        </button>
 %>
-  </div>
+
+
 </header>
