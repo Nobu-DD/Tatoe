@@ -4,5 +4,6 @@ class Topic < ApplicationRecord
   validates :published_at, presence: true
 
   has_many :hints, dependent: :destroy
+  has_many :answers, dependent: :destroy
   belongs_to :user
 end
