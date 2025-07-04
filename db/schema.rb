@@ -10,9 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_07_04_054123) do
+ActiveRecord::Schema[7.2].define(version: 2025_07_04_055755) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "answer_reactions", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "answer_id"
+    t.bigint "reaction_id"
+    t.datetime "published_at", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["answer_id"], name: "index_answer_reactions_on_answer_id"
+    t.index ["reaction_id"], name: "index_answer_reactions_on_reaction_id"
+    t.index ["user_id"], name: "index_answer_reactions_on_user_id"
+  end
 
   create_table "answers", force: :cascade do |t|
     t.bigint "user_id"
