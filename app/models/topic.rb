@@ -3,5 +3,6 @@ class Topic < ApplicationRecord
   validates :description, length: { maximum: 255 }
   validates :published_at, presence: true
 
+  has_many :hints, dependent: :destroy
   belongs_to :user
 end
