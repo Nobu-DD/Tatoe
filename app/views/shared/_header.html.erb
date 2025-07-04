@@ -13,11 +13,18 @@
       <% end %>
     </div>
     <% else %>
-    <div>
-      <%= link_to new_user_session_path, class: "btn btn-outline btn-info" do %>
-      <h1>ログイン</h1>
-      <% end %>
-    </div>
+    <ul class="menu menu-horizontal">
+      <li>
+        <%= link_to new_user_session_path, class: "btn btn-outline btn-info" do %>
+        <h1>ログイン</h1>
+        <% end %>
+      </li>
+      <li class="ml-4">
+        <%= link_to new_registration_path(resource_name), class: "btn btn-outline btn-info" do %>
+        <h1>新規登録</h1>
+        <% end %>
+      </li>
+    </ul>
     <% end %>
   </div>
   <%# ここからハンバーガーメニュー
