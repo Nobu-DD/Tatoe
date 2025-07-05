@@ -1,4 +1,6 @@
 class AnswerReaction < ApplicationRecord
+  include PublishedAtSettable
+
   validates :published_at, presence: true
 
   belongs_to :user
