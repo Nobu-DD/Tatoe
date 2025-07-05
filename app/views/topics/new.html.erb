@@ -7,10 +7,8 @@
     <%= form_with model: @topic do |f| %>
     <!-- ジャンル選択 -->
     <div class=" mb-5">
-      <%= fields_for :genre, @topic.genre do |f| %>
-      <%= f.label :genre_names, "お題ジャンル", class: "block text-sm font-medium text-gray-700 mb-3" %>
-      <%= f.text_field :name, autofocus: true, class: "input input-info w-full rounded-xl border-gray-200", placeholder: "ジャンルはスペースで区切ってください" %>
-      <% end %>
+      <%= f.label :genre_names, "お題ジャンル(区切りはスペース、カンマ[,、]、スラッシュ[/])", class: "block text-sm font-medium text-gray-700 mb-3" %>
+      <%= f.text_field :genre_names, autofocus: true, class: "input input-info w-full rounded-xl border-gray-200", placeholder: "ジャンルはスペースで区切ってください" %>
     </div>
 
     <!-- タイトル -->
@@ -27,11 +25,9 @@
 
     <!-- ヒント -->
     <div class="mb-5">
-      <%= fields_for :hint, @topic.hint do |f| %>
-      <%= f.label :body, "ヒント (任意・最大3つ)", class: "block text-sm font-medium text-gray-700 mb-2" %>
-      <% 3.times do |i| %>
-      <%= f.text_field :body, placeholder: "ヒント#{i + 1}", class: "mb-2 w-full rounded-xl border-gray-200" %>
-      <% end %>
+      <p class="block text-sm font-medium text-gray-700 mb-2">ヒント(任意・最大3つ)</p>
+      <%= f.fields_for :hints do |f| %>
+      <%= f.text_field :body, placeholder: "ヒント", class: "input input-info w-full mb-2 rounded-xl border-gray-200" %>
       <% end %>
     </div>
 
