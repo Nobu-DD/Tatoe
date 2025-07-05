@@ -7,6 +7,7 @@ class Topic < ApplicationRecord
 
   has_many :hints, dependent: :destroy
   has_many :answers, dependent: :destroy
+  has_many :topic_genres, dependent: :destroy
   belongs_to :user
 
   def genres_save(genres)
