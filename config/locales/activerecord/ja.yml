@@ -1,0 +1,14 @@
+ja:
+  activerecord:
+    models:
+      user: ユーザー
+      topic: お題
+    attributes:
+      user:
+        name: ニックネーム
+        email: メールアドレス
+        avatar: アイコン写真
+      topic:
+        title: お題タイトル
+        description: お題の説明
+        published_at: 公開日時
