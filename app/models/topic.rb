@@ -17,6 +17,16 @@ class Topic < ApplicationRecord
 
   private
 
+  # Ransack
+  def self.ransackable_attributes(auth_object = nil)
+    %w(title description) + _ransackers.keys
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    %w[user genres hints]
+  end
+
+  # ジャンル新規登録
   def assign_genres
     return if genre_names.blank?
 
