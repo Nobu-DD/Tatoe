@@ -1,0 +1,14 @@
+<div class="bg-white border-0 shadow-sm rounded-xl p-4 mb-3">
+  <div class="flex items-start mb-2">
+    <% topic.genres.each do |genre| %>
+    <span class="text-xs bg-orange-100 text-orange-700 px-2 py-1 rounded mr-2">
+      <%= genre.name %></span>
+    <% end %>
+  </div>
+  <h4 class="font-medium text-gray-800 mb-2 text-sm leading-relaxed"><%= topic.title %></h4>
+  <div class="flex items-center justify-between">
+    <span class="text-sm text-gray-600">
+      <%= topic.user.name %></span>
+    <span class="text-xs text-gray-500">いいね(未実装)</span>
+  </div>
+</div>

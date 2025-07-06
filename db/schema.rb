@@ -46,7 +46,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_07_05_123234) do
 
   create_table "hints", force: :cascade do |t|
     t.bigint "topic_id"
-    t.text "body", null: false
+    t.text "body", default: "", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["topic_id"], name: "index_hints_on_topic_id"

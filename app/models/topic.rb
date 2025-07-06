@@ -1,8 +1,8 @@
 class Topic < ApplicationRecord
   include PublishedAtSettable
-  after_save :assign_genres
+  before_save :assign_genres
 
-  validates :title, presence: true, length: { maximum: 30 }
+  validates :title, presence: true, length: { maximum: 255 }
   validates :description, length: { maximum: 255 }
   validates :published_at, presence: true
 
@@ -14,6 +14,8 @@ class Topic < ApplicationRecord
 
   attr_accessor :genre_names
   accepts_nested_attributes_for :hints, allow_destroy: true
+
+  private
 
   def assign_genres
     return if genre_names.blank?
