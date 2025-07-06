@@ -10,14 +10,46 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_07_02_044421) do
+ActiveRecord::Schema[7.2].define(version: 2025_07_05_123234) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "answer_reactions", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "answer_id"
+    t.bigint "reaction_id"
+    t.datetime "published_at", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["answer_id"], name: "index_answer_reactions_on_answer_id"
+    t.index ["reaction_id"], name: "index_answer_reactions_on_reaction_id"
+    t.index ["user_id"], name: "index_answer_reactions_on_user_id"
+  end
+
+  create_table "answers", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "topic_id"
+    t.text "body", null: false
+    t.text "reason"
+    t.datetime "published_at", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["topic_id"], name: "index_answers_on_topic_id"
+    t.index ["user_id"], name: "index_answers_on_user_id"
+  end
 
   create_table "genres", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "hints", force: :cascade do |t|
+    t.bigint "topic_id"
+    t.text "body", default: "", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["topic_id"], name: "index_hints_on_topic_id"
   end
 
   create_table "my_genres", force: :cascade do |t|
@@ -27,6 +59,31 @@ ActiveRecord::Schema[7.2].define(version: 2025_07_02_044421) do
     t.datetime "updated_at", null: false
     t.index ["genre_id"], name: "index_my_genres_on_genre_id"
     t.index ["user_id"], name: "index_my_genres_on_user_id"
+  end
+
+  create_table "reactions", force: :cascade do |t|
+    t.integer "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "topic_genres", force: :cascade do |t|
+    t.bigint "topic_id"
+    t.bigint "genre_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["genre_id"], name: "index_topic_genres_on_genre_id"
+    t.index ["topic_id"], name: "index_topic_genres_on_topic_id"
+  end
+
+  create_table "topics", force: :cascade do |t|
+    t.bigint "user_id"
+    t.text "title", null: false
+    t.text "description"
+    t.datetime "published_at", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_topics_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
