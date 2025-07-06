@@ -1,4 +1,7 @@
 class TopicsController < ApplicationController
+  def index
+    @
+  end
   def new
     @topic = Topic.new
     3.times { @topic.hints.build }
