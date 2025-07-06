@@ -1,1 +1,92 @@
-<h1>お題詳細ページ</h1>
+<div class="px-4 py-10">
+  <div class="bg-white shadow-lg rounded-2xl w-full p-8 space-y-6">
+    <div class="text-center mb-5">
+      <h2 class=" text-2xl font-bold text-gray-800">お題詳細</h2>
+    </div>
+    <div class="bg-white px-4 py-6 border-b border-gray-100">
+      <div class="mb-4">
+        <div class="flex justify-between mb-3">
+          <div class="flex">
+            <% @topic.genres.each do |genre|%>
+            <span class="bg-[#E0F2FE] text-[#0369A1] text-xs px-2 py-1 rounded-full mr-1"><%= genre.name %></span>
+            <% end %>
+          </div>
+          <div class="flex items-center space-x-3 text-sm text-gray-500">
+            <span>例え <%=@topic.answers.size%></span>
+          </div>
+        </div>
+
+        <h2 class="text-xl font-bold text-gray-800 mb-3 leading-relaxed"><%= @topic.title %></h2>
+
+        <% if @topic.description.present? %>
+        <p class="text-gray-600 text-sm mb-4 leading-relaxed"><%= @topic.description %></p>
+        <% end %>
+
+        <div class="mb-4">
+          <div class="flex justify-between text-sm text-gray-600">
+            <div>
+              <span><%= @topic.user.name %></span>
+            </div>
+            <div>
+              <span><%= l @topic.published_at %></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hints -->
+        <% if @topic.hints.any? %>
+        <div class="mb-4">
+          <div class="flex items-center mb-2">
+            <svg class="w-4 h-4 text-yellow-600 mr-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span class="text-sm font-medium text-yellow-700">ヒント</span>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <% @topic.hints.each do |hint| %>
+            <span class="bg-yellow-50 px-3 py-1 rounded-full text-xs text-yellow-700 border border-yellow-200"><%= hint.body %></span>
+            <% end %>
+          </div>
+        </div>
+        <% end %>
+
+        <%= link_to new_topic_answer_path(@topic), class: "block mt-4 w-full text-center bg-[#A0D8EF] hover:bg-[#7CC7E8] text-white px-4 py-2 rounded-xl" do %>
+        例えを投稿する
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Examples -->
+    <div class="px-4 py-6">
+      <h3 class="text-lg font-bold text-gray-800 mb-4">みんなの例え</h3>
+
+      <% if @topic.answers.any? %>
+      <div class="space-y-4">
+        <% @topic.answers.each do |answer| %>
+        <div class="bg-white p-4 rounded-xl shadow-sm">
+          <div class="flex justify-between items-center mb-2">
+            <span class="text-sm text-gray-700"><%= answer.user.name %></span>
+            <span class="text-xs text-gray-500"><%= l answer.published_at %></span>
+          </div>
+          <div class="bg-gray-50 rounded-xl p-3 mb-3">
+            <p class="text-gray-800 font-medium mb-2">💡 <%= answer.content %></p>
+            <% if answer.reason.present? %>
+            <p class="text-sm text-gray-600"><%= example.reason %></p>
+            <% end %>
+          </div>
+          <div class="text-xs text-gray-500">コメント: <%= answer.comments.count %>件</div>
+        </div>
+        <% end %>
+      </div>
+      <% else %>
+      <div class="text-center py-12">
+        <svg class="w-12 h-12 text-gray-300 mx-auto mb-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M17 8h2a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2v-8a2 2 0 012-2h2m4-4h4m-4 4h4m-4 4h4" />
+        </svg>
+        <p class="text-gray-500">まだ例えが投稿されていません</p>
+        <p class="text-sm text-gray-400">最初の例えを投稿してみませんか？</p>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>

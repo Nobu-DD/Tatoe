@@ -19,7 +19,7 @@ class TopicsController < ApplicationController
   end
 
   def show
-    @topic = Topic.find(params[:id])
+    @topic = Topic.includes(:user, :genres, :hints, :answers).find(params[:id])
   end
 
   private
