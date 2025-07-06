@@ -6,7 +6,7 @@ class TopicsController < ApplicationController
 
   def create
     @topic = current_user.topics.new(topic_params)
-    if @topic.save!
+    if @topic.save
       redirect_to @topic, notice: t("topics.create.success")
     else
       render :new, status: :unprocessable_entity, notice: t("spots.create.failure")
@@ -22,7 +22,7 @@ class TopicsController < ApplicationController
   def topic_params
     params.require(:topic).permit(
       :title, :description, :genre_names,
-      hints_attributes: [:id, :body, :_destroy]
+      hints_attributes: [ :id, :body, :_destroy ]
     )
   end
 end
