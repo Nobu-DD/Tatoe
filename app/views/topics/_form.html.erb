@@ -1,6 +1,6 @@
 <%= form_with model: @topic do |f| %>
 <!-- ジャンル選択 -->
-<div class=" mb-5">
+<div class="mb-5">
   <%= f.label :genre_names, "お題ジャンル(区切りはスペース、カンマ[,、]、スラッシュ[/])", class: "block text-sm font-medium text-gray-700 mb-3" %>
   <%= f.text_field :genre_names, autofocus: true, class: "input input-info w-full rounded-xl border-gray-200", placeholder: "ジャンルはスペースで区切ってください" %>
 </div>
