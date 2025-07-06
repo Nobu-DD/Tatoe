@@ -69,12 +69,12 @@
             <span class="text-xs text-gray-500"><%= l answer.published_at %></span>
           </div>
           <div class="bg-gray-50 rounded-xl p-3 mb-3">
-            <p class="text-gray-800 font-medium mb-2">💡 <%= answer.content %></p>
+            <p class="text-gray-800 font-medium mb-2">💡 <%= answer.body %></p>
             <% if answer.reason.present? %>
-            <p class="text-sm text-gray-600"><%= example.reason %></p>
+            <p class="text-sm text-gray-600"><%= answer.reason %></p>
             <% end %>
           </div>
-          <div class="text-xs text-gray-500">コメント: <%= answer.comments.count %>件</div>
+          <%# ここにコメント数記述%>
         </div>
         <% end %>
       </div>
