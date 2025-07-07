@@ -13,9 +13,9 @@ class TopicsController < ApplicationController
   def create
     @topic = current_user.topics.new(topic_params)
     if @topic.save
-      redirect_to @topic, notice: t("topics.create.success")
+      redirect_to @topic, notice: t("topic.create.success")
     else
-      render :new, status: :unprocessable_entity, notice: t("spots.create.failure")
+      render :new, status: :unprocessable_entity, alert: t("topic.create.failure")
     end
   end
 
