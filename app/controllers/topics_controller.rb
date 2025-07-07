@@ -20,6 +20,7 @@ class TopicsController < ApplicationController
 
   def show
     @topic = Topic.includes(:user, :genres, :hints, :answers).find(params[:id])
+    @reactions = Reaction.topic_reactions(@topic)
   end
 
   private

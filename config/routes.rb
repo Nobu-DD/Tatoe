@@ -10,7 +10,9 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   resources :topics, only: %i[index new create show] do
-    resources :answers, only: %i[new create]
+    resources :answers, only: %i[new create] do
+      resource :answer_reactions, only: %i[create destroy]
+    end
   end
   # Render dynamic PWA files from app/views/pwa/*
   get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
