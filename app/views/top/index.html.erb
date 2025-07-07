@@ -8,21 +8,22 @@
   </div>
 
   <div class="mb-4">
-    <button class="w-full bg-[#A0D8EF] hover:bg-[#7CC7E8] text-white py-4 text-lg font-semibold rounded-2xl shadow-lg flex items-center justify-center">
-      <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
-      </svg>
-      お題を投稿！
-    </button>
+    <%= link_to new_topic_path, class: "w-full bg-[#A0D8EF] hover:bg-[#7CC7E8] text-white py-4 text-lg font-semibold rounded-2xl shadow-lg flex items-center justify-center" do %>
+    <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+    </svg>
+    <span>お題を投稿！</span>
+    <% end %>
   </div>
 
   <div class="flex space-x-2">
-    <button class="flex-1 rounded-xl border border-[#A0D8EF] text-[#0369A1] bg-white px-3 py-2 text-sm font-medium">
-      <svg class="w-4 h-4 mr-1 inline-block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M11 18a7 7 0 100-14 7 7 0 000 14z" />
-      </svg>
-      お題を探す
-    </button>
+    <%= link_to topics_path, class: "flex flex-1 rounded-xl border border-[#A0D8EF] text-[#0369A1] bg-white px-3 py-2 text-sm font-medium items-center justify-center" do %>
+    <svg class="w-4 h-4 mr-1 inline-block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M11 18a7 7 0 100-14 7 7 0 000 14z" />
+    </svg>
+    <span>お題を探す</span>
+    <% end %>
+
     <button class="flex-1 rounded-xl border border-[#A0D8EF] text-[#0369A1] bg-white px-3 py-2 text-sm font-medium">
       <svg class="w-4 h-4 mr-1 inline-block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M12 2a10 10 0 100 20 10 10 0 000-20z" />
