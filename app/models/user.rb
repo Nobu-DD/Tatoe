@@ -10,4 +10,6 @@ class User < ApplicationRecord
   has_many :answers, dependent: :destroy
   has_many :my_genres, dependent: :destroy
   has_many :genres, through: :my_genres
+  has_many :answer_reactions, dependent: :destroy
+  has_many :reactions, through: :answer_reactions
 end

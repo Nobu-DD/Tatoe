@@ -74,6 +74,19 @@
             <p class="text-sm text-gray-600"><%= answer.reason %></p>
             <% end %>
           </div>
+          <%# リアクションボタン実装予定
+          <div class="flex justify-end">%>
+          <%# if user_signed_in? %>
+          <%# reaction_types.each do |type, name| %>
+          <%# if current_user.answer_reactions.exists?(answer_id: answer.id, reaction_id: reaction.id) %>
+          <%#= render "unanswer_reaction" %>
+          <%# else %>
+          <%#= render "answer_reaction" %>
+          <%# end %>
+          <%# end %>
+          <%# end %>
+          <%# </div> %>
+          <%# リアクションボタンはここまで %>
           <%# ここにコメント数記述%>
         </div>
         <% end %>
