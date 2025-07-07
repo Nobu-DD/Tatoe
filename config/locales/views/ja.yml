@@ -2,3 +2,16 @@ ja:
   time:
     formats:
       default: "%Y/%m/%d %H:%M:%S"
+  devise:
+    failure:
+      unauthenticated: ログインが必要です。
+      user:
+        invalid: メールアドレスまたはパスワードが違います。
+    sessions:
+      user:
+        signed_in: ログインが完了しました。
+        signed_out: ログアウトが完了しました。
+  topic:
+    create:
+      success: お題を投稿しました。
+      failure: お題内容に不備があります。

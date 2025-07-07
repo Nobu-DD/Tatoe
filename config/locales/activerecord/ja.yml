@@ -3,12 +3,28 @@ ja:
     models:
       user: ユーザー
       topic: お題
+      genre: ジャンル
+      answer: 例え
     attributes:
       user:
         name: ニックネーム
         email: メールアドレス
+        password: パスワード
+        password_confirmation: 確認用パスワード
         avatar: アイコン写真
       topic:
         title: お題タイトル
         description: お題の説明
         published_at: 公開日時
+        genres: ジャンル
+      genre:
+        name: お題ジャンル
+      answer:
+        body: 例え内容
+    errors:
+      models:
+        genre:
+          attributes:
+            name:
+              blank: "を入力してください。"
+              too_long: "は%{count}文字以内で入力してください。"
