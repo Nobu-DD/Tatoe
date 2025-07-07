@@ -24,8 +24,12 @@
 <body class="min-h-screen bg-[#FAFAFA]">
   <%= render 'shared/header' %>
   <main>
-    <%= notice %>
-    <%= alert %>
+    <div role="alert" class="alert alert-info">
+      <%= notice %>
+    </div>
+    <div>
+      <%= alert %>
+    </div>
     <%= yield %>
   </main>
   <%= render'shared/footer' %>
