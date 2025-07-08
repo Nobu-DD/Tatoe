@@ -21,21 +21,23 @@
   <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
 </head>
 
-<body class="min-h-screen bg-[#FAFAFA]">
+<body class="min-h-screen ">
 
   <%= render 'shared/header' %>
-  <main class="pb-20">
-    <% if flash[:notice] %>
-    <div role="alert" class="alert alert-info">
-      <%= notice %>
+  <main class="pb-20 bg-white">
+    <div class="w-full max-w-2xl mx-auto bg-[#FAFAFA]">
+      <% if flash[:notice] %>
+      <div role="alert" class="alert alert-info">
+        <%= notice %>
+      </div>
+      <% end %>
+      <% if flash[:alert] %>
+      <div role="alert" class="alert alert-error">
+        <%= alert %>
+      </div>
+      <% end %>
+      <%= yield %>
     </div>
-    <% end %>
-    <% if flash[:alert] %>
-    <div role="alert" class="alert alert-error">
-      <%= alert %>
-    </div>
-    <% end %>
-    <%= yield %>
   </main>
   <%= render'shared/footer' %>
 </body>
