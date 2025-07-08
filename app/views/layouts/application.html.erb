@@ -22,14 +22,19 @@
 </head>
 
 <body class="min-h-screen bg-[#FAFAFA]">
+
   <%= render 'shared/header' %>
-  <main>
+  <main class="pb-20">
+    <% if flash[:notice] %>
     <div role="alert" class="alert alert-info">
       <%= notice %>
     </div>
-    <div>
+    <% end %>
+    <% if flash[:alert] %>
+    <div role="alert" class="alert alert-error">
       <%= alert %>
     </div>
+    <% end %>
     <%= yield %>
   </main>
   <%= render'shared/footer' %>
