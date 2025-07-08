@@ -1,4 +1,4 @@
-<% if topics %>
+<% if topics.present? %>
 <% topics.each do |topic|%>
 <%= link_to topic do %>
 <div class="flex items-center inline-block bg-gradient-to-r from-yellow-400 to-orange-400 text-white rounded-full px-3 py-1 mb-2">
