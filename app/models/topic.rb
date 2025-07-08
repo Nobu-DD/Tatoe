@@ -10,10 +10,13 @@ class Topic < ApplicationRecord
   has_many :answers, dependent: :destroy
   has_many :topic_genres, dependent: :destroy
   has_many :genres, through: :topic_genres
+  has_many :pickups, dependent: :destroy
   belongs_to :user
 
   attr_accessor :genre_names
   accepts_nested_attributes_for :hints, allow_destroy: true
+
+  scope :with_active_pickup, -> { joins(:pickups).merge(Pickup.active)}
 
   private
 

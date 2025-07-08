@@ -3,6 +3,8 @@ class Pickup < ApplicationRecord
   validate :start_must_be_before_end, if: -> { end_at.present? }
   belongs_to :topic
 
+  scope :active, -> { where("start_at <= ? AND (end_at IS NULL OR end_at >= ?)", Time.current, Time.current) }
+
   private
 
   def start_must_be_before_end
