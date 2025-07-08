@@ -5,5 +5,6 @@ class CreateTopicGenres < ActiveRecord::Migration[7.2]
       t.belongs_to :genre
       t.timestamps
     end
+    add_index :topic_genres, [:topic_id, :genre_id], unique: :true
   end
 end

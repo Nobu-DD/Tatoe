@@ -23,6 +23,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_07_05_123234) do
     t.datetime "updated_at", null: false
     t.index ["answer_id"], name: "index_answer_reactions_on_answer_id"
     t.index ["reaction_id"], name: "index_answer_reactions_on_reaction_id"
+    t.index ["user_id", "answer_id", "reaction_id"], name: "idx_on_user_id_answer_id_reaction_id_ac9ce2e37f", unique: true
     t.index ["user_id"], name: "index_answer_reactions_on_user_id"
   end
 
@@ -58,11 +59,12 @@ ActiveRecord::Schema[7.2].define(version: 2025_07_05_123234) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["genre_id"], name: "index_my_genres_on_genre_id"
+    t.index ["user_id", "genre_id"], name: "index_my_genres_on_user_id_and_genre_id", unique: true
     t.index ["user_id"], name: "index_my_genres_on_user_id"
   end
 
   create_table "reactions", force: :cascade do |t|
-    t.integer "name", null: false
+    t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -73,6 +75,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_07_05_123234) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["genre_id"], name: "index_topic_genres_on_genre_id"
+    t.index ["topic_id", "genre_id"], name: "index_topic_genres_on_topic_id_and_genre_id", unique: true
     t.index ["topic_id"], name: "index_topic_genres_on_topic_id"
   end
 
