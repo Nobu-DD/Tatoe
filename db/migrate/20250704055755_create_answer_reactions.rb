@@ -7,6 +7,6 @@ class CreateAnswerReactions < ActiveRecord::Migration[7.2]
       t.datetime :published_at, null: false
       t.timestamps
     end
-    add_index :answer_reactions, [:user_id, :answer_id, :reaction_id], unique: :true
+    add_index :answer_reactions, [ :user_id, :answer_id, :reaction_id ], unique: :true
   end
 end

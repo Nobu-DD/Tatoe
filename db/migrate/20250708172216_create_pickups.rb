@@ -6,6 +6,6 @@ class CreatePickups < ActiveRecord::Migration[7.2]
       t.datetime :end_at
       t.timestamps
     end
-    add_index :pickups, [:start_at, :end_at]
+    add_index :pickups, [ :start_at, :end_at ]
   end
 end

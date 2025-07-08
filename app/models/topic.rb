@@ -16,7 +16,7 @@ class Topic < ApplicationRecord
   attr_accessor :genre_names
   accepts_nested_attributes_for :hints, allow_destroy: true
 
-  scope :with_active_pickup, -> { joins(:pickups).merge(Pickup.active)}
+  scope :with_active_pickup, -> { joins(:pickups).merge(Pickup.active) }
 
   private
 
