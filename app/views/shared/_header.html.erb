@@ -3,26 +3,20 @@
     <div class="flex items-center space-x-2">
       <%= link_to root_path, class: "flex"  do %>
       <%= image_tag  'Tatoe_v1-1.1.png', class: "w-8", alt: 'Tatoeロゴ' %>
-      <h1 class="text-xl font-bold text-[#A0D8EF]">Tatoe</h1>
+      <span class="text-xl font-bold text-[#A0D8EF]">Tatoe</span>
       <% end %>
     </div>
     <% if user_signed_in? %>
     <div>
-      <%= link_to destroy_user_session_path, data: { turbo_method: :delete }, class: "btn btn-outline btn-error" do %>
-      <h1>ログアウト</h1>
-      <% end %>
+      <%= link_to "ログアウト", destroy_user_session_path, data: { turbo_method: :delete }, class: "btn btn-outline btn-error" %>
     </div>
     <% else %>
     <ul class="menu menu-horizontal">
       <li>
-        <%= link_to new_user_session_path, class: "btn btn-outline btn-info" do %>
-        <h1>ログイン</h1>
-        <% end %>
+        <%= link_to "ログイン", new_user_session_path, class: "btn btn-outline btn-info" %>
       </li>
-      <li class="ml-4">
-        <%= link_to new_user_registration_path, class: "btn btn-outline btn-info" do %>
-        <h1>新規登録</h1>
-        <% end %>
+      <li class="ml-3">
+        <%= link_to "新規登録", new_user_registration_path, class: "btn btn-outline btn-info" %>
       </li>
     </ul>
     <% end %>
