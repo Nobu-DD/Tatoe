@@ -34,13 +34,17 @@
 </section>
 <section class="px-4 py-6">
   <div class="flex items-center mb-4">
-    <svg class="w-5 h-5 text-orange-500 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M3 3v18h18" />
-    </svg>
-    <h3 class="text-lg font-bold text-gray-800">人気のお題</h3>
-    <span class="ml-2 bg-orange-100 text-orange-600 text-xs px-2 py-1 rounded">HOT</span>
+    <div class="flex items-center bg-gradient-to-r from-orange-500 to-red-500 text-white px-3 py-1 rounded-full mr-3">
+      <span class="text-sm font-bold">PICKUP</span>
+    </div>
+    <h3 class="text-lg font-bold text-gray-800">ピックアップ！</h3>
+    <% if @pickup_topic %>
+    <div class="flex items-center ml-2 bg-gradient-to-r from-yellow-400 to-orange-400 text-white rounded-full px-3 py-1">
+      <span class="text-xs font-bold">7/13~7/20</span>
+    </div>
+    <% end %>
   </div>
-  <%= render 'topics/popular' %>
+  <%= render 'topics/pickup' %>
 </section>
 <section class="px-4 py-6">
   <div class="flex items-center mb-4">
