@@ -57,12 +57,13 @@
       <%= render 'shared/error_messages', object: f.object %>
       <%= f.hidden_field :topic_id %>
       <div class="mb-5">
-        <%= f.label :body, "例えの内容", class: "block text-sm font-medium text-gray-700 mb-3" %>
-        <%= f.text_field :body, autofocus: true, class: "input input-info text-base w-full rounded-xl border-gray-200", placeholder: "例えをこちらに書いてください" %>
+        <%= f.label :body, "例えるなら...", class: "block text-sm font-medium text-gray-700 mb-3" %>
+        <%= f.text_field :body, autofocus: true, class: "input input-info text-base w-full rounded-xl border-gray-200 mb-2", placeholder: "例えをこちらに" %>
+        <span class="text-sm pl-1 opacity-50">例：〇〇(単体)　〇〇の〇〇にそっくり！　〇〇に例えてみた！　</span>
       </div>
       <div class="mb-5">
         <%= f.label :reason, "理由・説明(任意)", class: "block text-sm font-medium text-gray-700 mb-3" %>
-        <%= f.text_field :reason, class: "input input-info text-base w-full rounded-xl border-gray-200", placeholder: "例えた理由を教えて下さい" %>
+        <%= f.text_area :reason, class: "textarea textarea-info text-base w-full rounded-xl border-gray-200", placeholder: "例えた理由を教えて下さい" %>
       </div>
       <%= f.submit "例えを投稿", class: "w-full bg-[#A0D8EF] hover:bg-[#7CC7E8] text-white py-4 text-lg font-semibold rounded-xl shadow-lg" %>
       <% end %>

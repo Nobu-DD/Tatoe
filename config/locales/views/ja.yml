@@ -15,3 +15,6 @@ ja:
     create:
       success: お題を投稿しました。
       failure: お題内容に不備があります。
+  topics:
+    create:
+      success: 例えを投稿しました。
