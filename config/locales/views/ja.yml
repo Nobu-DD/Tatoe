@@ -2,6 +2,7 @@ ja:
   time:
     formats:
       default: "%Y/%m/%d %H:%M:%S"
+      pickup: "%m/%d %H:%M:%S"
   devise:
     failure:
       unauthenticated: ログインが必要です。

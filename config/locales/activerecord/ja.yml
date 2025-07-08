@@ -5,6 +5,7 @@ ja:
       topic: お題
       genre: ジャンル
       answer: 例え
+      pickup: ピックアップ
     attributes:
       user:
         name: ニックネーム
@@ -21,6 +22,9 @@ ja:
         name: お題ジャンル
       answer:
         body: 例え内容
+      pickup:
+        start_at: 開始日時
+        end_at: 終了日時
     errors:
       models:
         genre:
