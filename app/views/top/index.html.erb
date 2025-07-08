@@ -38,13 +38,8 @@
       <span class="text-sm font-bold">PICKUP</span>
     </div>
     <h3 class="text-lg font-bold text-gray-800">ピックアップ！</h3>
-    <% if @pickup_topic %>
-    <div class="flex items-center ml-2 bg-gradient-to-r from-yellow-400 to-orange-400 text-white rounded-full px-3 py-1">
-      <span class="text-xs font-bold">7/13~7/20</span>
-    </div>
-    <% end %>
   </div>
-  <%= render 'topics/pickup' %>
+  <%= render 'topics/pickups', topics: @pickup_topics %>
 </section>
 <section class="px-4 py-6">
   <div class="flex items-center mb-4">

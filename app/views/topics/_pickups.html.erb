@@ -1,8 +1,19 @@
-<% if @pickup_topic %>
+<% if topics %>
+<% topics.each do |topic|%>
+<%= link_to topic do %>
+<div class="flex items-center inline-block bg-gradient-to-r from-yellow-400 to-orange-400 text-white rounded-full px-3 py-1 mb-2">
+  <span class="text-sm font-bold"><%= l topic.pickups.first.start_at, format: :pickup %>〜<%= l topic.pickups.first.end_at, format: :pickup %></span>
+</div>
 <div class="bg-white border-0 shadow-md rounded-2xl overflow-hidden mb-6">
   <div class="p-4 bg-gradient-to-r from-[#F0F9FF] to-[#E0F2FE]">
     <div class="flex items-start justify-between mb-3">
-      <span class="bg-[#E0F2FE] text-[#0369A1] text-xs px-2 py-1 rounded">競馬</span>
+      <div class="">
+        <% topic.genres.each do |genre| %>
+        <span class="bg-[#E0F2FE] text-[#0369A1] text-xs px-2 py-1 rounded"><%= genre.name %></span>
+        <% end %>
+      </div>
+      <span class="text-xs text-gray-500"><%= l topic.published_at %></span>
+      <%# 例え数といいね数。現在未実装
       <div class="flex items-center space-x-3 text-sm text-gray-500">
         <div class="flex items-center">
           <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -17,12 +28,13 @@
           156
         </div>
       </div>
+      %>
     </div>
 
-    <h4 class="font-semibold text-gray-800 mb-2 leading-relaxed">競馬の日本ダービーを別のスポーツで例えると？</h4>
+    <h4 class="font-semibold text-gray-800 mb-2 leading-relaxed"><%= topic.title %></h4>
 
     <div class="flex items-center text-sm text-gray-600">
-      <span class="text-xs bg-[#E0F2FE] text-[#0369A1] rounded-full px-2 py-1">競馬太郎</span>
+      <span class="text-xs bg-[#E0F2FE] text-[#0369A1] rounded-full px-2 py-1"><%= topic.user.name %></span>
     </div>
   </div>
 
@@ -34,36 +46,32 @@
       <span class="text-sm font-medium text-yellow-700">ヒント</span>
     </div>
     <div class="flex flex-wrap gap-2">
-      <span class="bg-white px-3 py-1 rounded-full text-xs text-gray-600 border border-yellow-200">若い年齢の時しか出れない</span>
-      <span class="bg-white px-3 py-1 rounded-full text-xs text-gray-600 border border-yellow-200">最強決定戦</span>
-      <span class="bg-white px-3 py-1 rounded-full text-xs text-gray-600 border border-yellow-200">一生に一度のチャンス</span>
+      <% topic.hints.each do |hint| %>
+      <span class="bg-white px-3 py-1 rounded-full text-xs text-gray-600 border border-yellow-200"><%= hint.body %></span>
+      <% end %>
     </div>
   </div>
-
-  <div class="p-4">
+  <%#
     <div class="bg-gray-50 rounded-xl p-3 relative">
       <div class="absolute -top-2 left-4 w-4 h-4 bg-gray-50 transform rotate-45"></div>
       <p class="text-sm text-gray-700 font-medium">💡 甲子園の決勝戦！理由：若い年齢の時しか出れない最強決定戦だから</p>
     </div>
-
-    <div class="flex items-center justify-between mt-3">
-      <button class="text-[#A0D8EF] flex items-center text-sm">
-        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M11 18a7 7 0 100-14 7 7 0 000 14z" />
-        </svg>
-        例えてみる
-      </button>
-      <%# 良いね機能は本リリースにて実装
+    %>
+  <div class="h-10 bg-white">
+  </div>
+  <%= link_to new_topic_answer_path(topic), class: "text-white flex items-center justify-center bg-[#A0D8EF] h-15" do %>
+  <span class="text-2xl font-medium">例えを投稿する</span>
+  <% end %>
+  <%# 良いね機能は本リリースにて実装
       <button class="text-gray-500 flex items-center text-sm">
         <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" />
         </svg>
         良いねマーク(ハート)
-      </button>
-      %>
-    </div>
-  </div>
+        %>
 </div>
+<% end %>
+<% end %>
 <% else %>
 <div class="bg-gradient-to-br from-gray-50 to-blue-50 border-0 shadow-sm rounded-2xl">
   <div class="py-8 px-4 text-center">
