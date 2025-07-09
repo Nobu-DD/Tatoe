@@ -18,6 +18,11 @@ class Topic < ApplicationRecord
 
   scope :with_active_pickup, -> { joins(:pickups).merge(Pickup.active) }
 
+  # 編集ページにgenre_names
+  def edit_genre_names_form
+    genres.pluck(:name).join(",")
+  end
+
   private
 
   # Ransack
