@@ -21,9 +21,14 @@ ja:
       failure: お題内容に不備があります。
     update:
       success: お題を更新しました。
-      failure: お代内容に不備があります。
+      failure: お題内容に不備があります。
     deleted:
       success: お題を削除しました。
-  topics:
+  answer:
     create:
       success: 例えを投稿しました。
+    update:
+      success: 例えを更新しました。
+      failure: 例え内容に不備があります。
+    deleted:
+      success: 例えを削除しました。

@@ -16,7 +16,7 @@
       <%= button_to edit_topic_answer_path(topic_id: answer.topic_id, id: answer.id), method: :get, class: "btn btn-outline btn-info rounded-xl" do %>
       <span>編集</span>
       <% end %>
-      <%= button_to topic_answer_path(answer),  method: :delete, data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？"}, class: "btn btn-outline btn-error rounded-xl ml-2" do %>
+      <%= button_to topic_answer_path(topic_id: answer.topic_id, id: answer.id),  method: :delete, data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？"}, class: "btn btn-outline btn-error rounded-xl ml-2" do %>
       <span>削除</span>
       <% end %>
     </div>
