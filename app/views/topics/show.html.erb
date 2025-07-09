@@ -67,9 +67,9 @@
     <div class="px-4 py-6">
       <h3 class="text-lg font-bold text-gray-800 mb-4">みんなの例え</h3>
 
-      <% if @topic.answers.any? %>
+      <% if @answers.any? %>
       <div class="space-y-4">
-        <% @topic.answers.each do |answer| %>
+        <% @answers.each do |answer| %>
         <div class="bg-white p-4 rounded-xl shadow-sm">
           <div class="flex justify-between items-center mb-2">
             <span class="text-sm text-gray-700"><%= answer.user.name %></span>

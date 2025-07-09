@@ -5,7 +5,7 @@ class AnswersController < ApplicationController
   end
 
   def create
-    @answer = current_user.answers.new(answer_params)
+    @answer = current_user.answers.build(answer_params)
     @topic = Topic.includes(:user, :genres, :hints, :answers).find(params[:topic_id])
     if @answer.save
       redirect_to @topic, notice: t("topics.create.success")
