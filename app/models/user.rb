@@ -12,4 +12,8 @@ class User < ApplicationRecord
   has_many :genres, through: :my_genres
   has_many :answer_reactions, dependent: :destroy
   has_many :reactions, through: :answer_reactions
+
+  def own?(object)
+    id == object.user_id
+  end
 end

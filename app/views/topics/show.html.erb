@@ -32,7 +32,16 @@
             </div>
           </div>
         </div>
-
+        <% if current_user.own?(@topic) %>
+        <div class="flex justify-between mb-2 space-x-3">
+          <%= button_to edit_topic_path(@topic), method: :get, form_class: "w-1/2", class: "btn btn-outline btn-info w-full" do %>
+          <span>お題を編集</span>
+          <% end %>
+          <%= button_to topic_path(@topic), method: :delete, data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？"}, form_class: "w-1/2", class: "btn btn-outline btn-error w-full" do %>
+          <span>お題を削除</span>
+          <% end %>
+        </div>
+        <% end %>
         <!-- Hints -->
         <% if @topic.hints.any? %>
         <div class="mb-4">
@@ -58,9 +67,9 @@
     <div class="px-4 py-6">
       <h3 class="text-lg font-bold text-gray-800 mb-4">みんなの例え</h3>
 
-      <% if @topic.answers.any? %>
+      <% if @answers.any? %>
       <div class="space-y-4">
-        <% @topic.answers.each do |answer| %>
+        <% @answers.each do |answer| %>
         <div class="bg-white p-4 rounded-xl shadow-sm">
           <div class="flex justify-between items-center mb-2">
             <span class="text-sm text-gray-700"><%= answer.user.name %></span>
