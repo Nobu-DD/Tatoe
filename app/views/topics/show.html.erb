@@ -32,7 +32,7 @@
             </div>
           </div>
         </div>
-        <% if current_user.own?(@topic) %>
+        <% if current_user && current_user.own?(@topic) %>
         <div class="flex justify-between mb-2 space-x-3">
           <%= button_to edit_topic_path(@topic), method: :get, form_class: "w-1/2", class: "btn btn-outline btn-info w-full" do %>
           <span>お題を編集</span>
