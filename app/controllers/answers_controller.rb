@@ -14,6 +14,11 @@ class AnswersController < ApplicationController
     end
   end
 
+  def edit
+    # 編集機能開発途中
+    @answer = current_user
+  end
+
   private
 
   def answer_params
