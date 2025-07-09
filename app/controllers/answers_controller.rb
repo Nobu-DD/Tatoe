@@ -15,8 +15,8 @@ class AnswersController < ApplicationController
   end
 
   def edit
-    # 編集機能開発途中
-    @answer = current_user
+    @topic = Topic.includes(:user, :genres, :hints, :answers).find(params[:topic_id])
+    @answer = current_user.answers.find(params[:id])
   end
 
   private
