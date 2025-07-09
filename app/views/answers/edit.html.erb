@@ -1,11 +1,11 @@
 <div class="px-4 py-10">
   <div class="bg-white shadow-lg rounded-2xl w-full py-8 px-4 space-y-6">
     <div class="text-center mb-5">
-      <h2 class=" text-2xl font-bold text-gray-800">例え投稿</h2>
+      <h2 class=" text-2xl font-bold text-gray-800">例え編集</h2>
     </div>
     <%= render 'topics/description', topic: @topic %>
     <div class="px-4 py-6">
-      <%= form_with model: @answer, url: topic_answers_path do |f| %>
+      <%= form_with model: @answer, url: topic_answer_path, method: "patch" do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
       <%= f.hidden_field :topic_id %>
       <div class="mb-5">
@@ -17,7 +17,7 @@
         <%= f.label :reason, "理由・説明(任意)", class: "block text-sm font-medium text-gray-700 mb-3" %>
         <%= f.text_area :reason, class: "textarea textarea-info text-base w-full rounded-xl border-gray-200", placeholder: "例えた理由を教えて下さい" %>
       </div>
-      <%= f.submit "投稿", class: "w-full bg-[#A0D8EF] hover:bg-[#7CC7E8] text-white py-4 text-lg font-semibold rounded-xl shadow-lg" %>
+      <%= f.submit "変更", class: "w-full bg-[#A0D8EF] hover:bg-[#7CC7E8] text-white py-4 text-lg font-semibold rounded-xl shadow-lg" %>
       <% end %>
     </div>
   </div>
