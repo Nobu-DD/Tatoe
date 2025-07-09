@@ -33,6 +33,14 @@
           </div>
         </div>
 
+        <div class="flex justify-between mb-2 space-x-3">
+          <%= button_to edit_topic_path(@topic), method: :get, form_class: "w-1/2", class: "btn btn-outline btn-info w-full" do %>
+          <span>お題を編集</span>
+          <% end %>
+          <%= button_to topic_path(@topic), method: :delete, data: { confirm: "本当に削除しますか？"}, form_class: "w-1/2", class: "btn btn-outline btn-error w-full" do %>
+          <span>お題を削除</span>
+          <% end %>
+        </div>
         <!-- Hints -->
         <% if @topic.hints.any? %>
         <div class="mb-4">

@@ -11,7 +11,7 @@ class TopicsController < ApplicationController
   end
 
   def create
-    @topic = current_user.topics.new(topic_params)
+    @topic = current_user.topics.build(topic_params)
     if @topic.save
       redirect_to @topic, notice: t("topic.create.success")
     else
@@ -22,6 +22,23 @@ class TopicsController < ApplicationController
   def show
     @topic = Topic.includes(:user, :genres, :hints, :answers).find(params[:id])
     @reactions = Reaction.topic_reactions(@topic)
+  end
+
+  def edit
+    @topic = current_user.topics.find(params[:id])
+    @topic.genre_names = @topic.edit_genre_names_form
+  end
+
+  def update
+    @topic = current_user.topics.find(params[:id])
+    if @topic.update(topic_params)
+      redirect_to @topic, notice: t("topic.update.success")
+    else
+      render :edit, status: :unprocessable_entity, alert: t("topic.create.failure")
+    end
+  end
+
+  def destroy
   end
 
   private
