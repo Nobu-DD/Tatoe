@@ -1,16 +1,10 @@
 <%= form_with model: topic do |f| %>
 <%= render 'shared/error_messages', object: f.object %>
-<!-- ジャンル選択 -->
-<div class="mb-5">
-  <%= f.label :genre_names, "お題ジャンル(区切りはスペース カンマ、スラッシュ/)", class: "block text-base font-medium text-gray-700" %>
-  <span class="text-sm pl-2 opacity-50">例：Tatoe お題 例え　RUNTEQ,プログラミング,スクール　Ruby/MySQL/React など</span>
-  <%= f.text_field :genre_names, autofocus: true, class: "input input-info text-base w-full rounded-xl border-gray-200 mt-1", placeholder: "" %>
-</div>
 
 <!-- タイトル -->
 <div class="mb-5">
   <%= f.label :title, "お題タイトル", class: "block text-base font-medium text-gray-700" %>
-  <span class="text-sm pl-2 opacity-50">例：Tatoeをあなたの「得意ジャンル」で例えると？</span>
+  <span class="text-sm pl-2 opacity-50">例:Tatoeをあなたの「得意ジャンル」で例えると？</span>
   <%= f.text_area :title, class: "textarea textarea-info text-base w-full rounded-xl border-gray-200 mt-1", placeholder: "" %>
 </div>
 
@@ -19,6 +13,13 @@
   <%= f.label :description, "お題の説明 (任意)", class: "block text-base font-medium text-gray-700" %>
   <span class="text-sm pl-2 opacity-50">例：知らない趣味や考え方を、ちょっとだけ理解できるアプリ「Tatoe」。あなたの得意な分野で、わかりやすく例えてみましょう！</span>
   <%= f.text_area :description, class: "textarea textarea-info text-base w-full rounded-xl border-gray-200 mt-1", placeholder: "" %>
+</div>
+
+<!-- ジャンル選択 -->
+<div class="mb-5">
+  <%= f.label :genre_names, "お題ジャンル(区切りはスペース カンマ、スラッシュ/)", class: "block text-base font-medium text-gray-700" %>
+  <span class="text-sm pl-2 opacity-50">例：Tatoe お題 例え　RUNTEQ,プログラミング,スクール　Ruby/MySQL/React など</span>
+  <%= f.text_field :genre_names, autofocus: true, class: "input input-info text-base w-full rounded-xl border-gray-200 mt-1", placeholder: "" %>
 </div>
 
 <!-- ヒント -->
