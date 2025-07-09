@@ -12,6 +12,9 @@ ja:
       user:
         signed_in: ログインが完了しました。
         signed_out: ログアウトが完了しました。
+    registrations:
+      user:
+        signed_up: 新規登録が完了しました。
   topic:
     create:
       success: お題を投稿しました。
@@ -19,6 +22,8 @@ ja:
     update:
       success: お題を更新しました。
       failure: お代内容に不備があります。
+    deleted:
+      success: お題を削除しました。
   topics:
     create:
       success: 例えを投稿しました。

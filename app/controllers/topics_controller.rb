@@ -39,6 +39,9 @@ class TopicsController < ApplicationController
   end
 
   def destroy
+    topic = current_user.topics.find(params[:id])
+    topic.destroy!
+    redirect_to topics_path, notice: t("topic.deleted.success")
   end
 
   private
