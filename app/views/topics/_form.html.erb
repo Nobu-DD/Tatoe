@@ -1,5 +1,6 @@
 <%= form_with model: topic do |f| %>
 <%= render 'shared/error_messages', object: f.object %>
+
 <!-- ジャンル選択 -->
 <div class="mb-5">
   <%= f.label :genre_names, "お題ジャンル(区切りはスペース カンマ、スラッシュ/)", class: "block text-base font-medium text-gray-700" %>
