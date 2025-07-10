@@ -60,13 +60,13 @@
   <div class="h-10 bg-white">
   </div>
   <% if user_signed_in? %>
-  <%= link_to new_topic_answer_path(topic), class: "text-white flex items-center justify-center bg-[#A0D8EF] hover:bg-[#7CC7E8] h-15" do %>
-  <span class="text-2xl font-medium">例えを投稿する</span>
+  <%= link_to new_topic_answer_path(topic), class: "text-white flex items-center justify-center bg-[#A0D8EF] hover:bg-[#7CC7E8] h-15 font-semibold" do %>
+  <span class="text-2xl">例えを投稿する</span>
   <% end %>
   <% else %>
-  <%= link_to new_user_session_path, class: "text-white flex flex-col items-center justify-center bg-[#A0D8EF] hover:bg-[#7CC7E8] py-3" do %>
-  <span class="text-2xl font-medium">例えを投稿する</span>
-  <span>※ログインページに遷移します</span>
+  <%= link_to new_user_session_path, class: "text-white flex flex-col items-center justify-center bg-[#A0D8EF] hover:bg-[#7CC7E8] py-3 font-semibold" do %>
+  <span class="text-2xl">例えを投稿する</span>
+  <span>※ログイン画面に進みます</span>
   <% end %>
   <% end %>
   <%#-------- 良いね機能は本リリースにて実装 ------------
