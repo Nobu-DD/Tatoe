@@ -8,7 +8,7 @@
     <div class="bg-gray-50 rounded-xl p-3 mb-3">
       <p class="text-gray-800 font-medium mb-2">💡 <%= answer.body %></p>
       <% if answer.reason.present? %>
-      <p class="text-sm text-gray-600"><%= answer.reason %></p>
+      <p class="text-sm text-gray-600"><%= simple_format(answer.reason) %></p>
       <% end %>
     </div>
     <% if current_user && current_user.own?(answer) %>
