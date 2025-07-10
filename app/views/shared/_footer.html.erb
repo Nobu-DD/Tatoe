@@ -7,12 +7,20 @@
       </svg>
       <span class="text-xs">お題検索</span>
       <% end %>
-
+      <% if user_signed_in? %>
       <%= link_to new_topic_path, class: "flex-col h-auto py-2 px-3 #{controller_name == 'topics' && action_name == 'new' ? 'bg-[#A0D8EF] text-white' : 'text-gray-600'} rounded-xl flex items-center" do %>
       <svg class="w-5 h-5 mb-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
       </svg>
       <span class="text-xs">お題投稿</span>
+      <% end %>
+      <% else %>
+      <%= link_to new_user_session_path, data: { turbo_method: :get, turbo_confirm: "ログインが必要です。ログインページに遷移します。"}, class: "flex-col h-auto py-2 px-3 #{controller_name == 'topics' && action_name == 'new' ? 'bg-[#A0D8EF] text-white' : 'text-gray-600'} rounded-xl flex items-center" do %>
+      <svg class="w-5 h-5 mb-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+      </svg>
+      <span class="text-xs">お題投稿</span>
+      <% end %>
       <% end %>
 
       <%= link_to '#', class: "flex-col h-auto py-2 px-3 #{controller_name == 'rankings' ? 'bg-[#A0D8EF] text-white' : 'text-gray-600'} rounded-xl flex items-center pointer-events-none opacity-25" do %>
