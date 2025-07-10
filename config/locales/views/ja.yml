@@ -8,6 +8,7 @@ ja:
       unauthenticated: ログインが必要です。
       user:
         invalid: メールアドレスまたはパスワードが違います。
+        not_found_in_database: メールアドレスまたはパスワードが違います。
     sessions:
       user:
         signed_in: ログインが完了しました。
