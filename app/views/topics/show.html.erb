@@ -22,7 +22,7 @@
       <h3 class="text-lg font-bold text-gray-800 mb-4">みんなの例え</h3>
 
       <% if @answers.any? %>
-      <%= render "topics/answer", answers: @answers %>
+      <%= render "topics/answer", answers: @answers, reactions: @reactions %>
       <% else %>
       <div class="text-center py-12">
         <svg class="w-12 h-12 text-gray-300 mx-auto mb-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
