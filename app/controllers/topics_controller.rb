@@ -22,7 +22,7 @@ class TopicsController < ApplicationController
   def show
     @topic = Topic.includes(:user, :genres, :hints, :answers).find(params[:id])
     @answers = @topic.answers.order(created_at: :desc)
-    @reactions = Reaction.topic_reactions(@topic)
+    @reactions = Reaction.all
   end
 
   def edit

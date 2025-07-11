@@ -11,30 +11,31 @@
       <p class="text-sm text-gray-600"><%= simple_format(answer.reason) %></p>
       <% end %>
     </div>
-    <% if current_user && current_user.own?(answer) %>
     <div class="flex justify-end">
-      <%= button_to edit_topic_answer_path(topic_id: answer.topic_id, id: answer.id), method: :get, class: "btn btn-outline btn-info rounded-xl" do %>
-      <span>編集</span>
+      <% if current_user && current_user.own?(answer) %>
+      <div class="flex">
+        <%= button_to edit_topic_answer_path(topic_id: answer.topic_id, id: answer.id), method: :get, class: "btn btn-outline btn-info rounded-xl" do %>
+        <span>編集</span>
+        <% end %>
+        <%= button_to topic_answer_path(topic_id: answer.topic_id, id: answer.id),  method: :delete, data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？"}, class: "btn btn-outline btn-error rounded-xl ml-2" do %>
+        <span>削除</span>
+        <% end %>
+      </div>
+      <% else %>
+      <div class="flex">
+        <% if user_signed_in? %>
+        <% reactions.each do |reaction| %>
+        <% if current_user.answer_reactions.exists?(answer_id: answer.id, reaction_id: reaction.id) %>
+        <%= render "answer_reactions/unanswer_reaction", answer: answer, reaction: reaction %>
+        <% else %>
+        <%= render "answer_reactions/answer_reaction", answer: answer, reaction: reaction %>
+        <% end %>
+        <% end %>
+        <% end %>
+      </div>
       <% end %>
-      <%= button_to topic_answer_path(topic_id: answer.topic_id, id: answer.id),  method: :delete, data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？"}, class: "btn btn-outline btn-error rounded-xl ml-2" do %>
-      <span>削除</span>
-      <% end %>
+      <%# ここにコメント数記述%>
     </div>
-    <% end %>
-    <%# リアクションボタン実装予定
-          <div class="flex justify-end">%>
-    <%# if user_signed_in? %>
-    <%# reaction_types.each do |type, name| %>
-    <%# if current_user.answer_reactions.exists?(answer_id: answer.id, reaction_id: reaction.id) %>
-    <%#= render "unanswer_reaction" %>
-    <%# else %>
-    <%#= render "answer_reaction" %>
-    <%# end %>
-    <%# end %>
-    <%# end %>
-    <%# </div> %>
-    <%# リアクションボタンはここまで %>
-    <%# ここにコメント数記述%>
   </div>
   <% end %>
 </div>
