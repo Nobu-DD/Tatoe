@@ -1,4 +1,4 @@
-<%= button_to topic_answer_answer_reactions_path(topic_id: answer.topic_id, answer_id: answer.id, reaction_id: reaction.id),
+<%= link_to topic_answer_answer_reactions_path(topic_id: answer.topic_id, answer_id: answer.id, reaction_id: reaction.id),
               method: :delete,
               id: "unanswer_reaction_answer_#{answer.id}_reaction_#{reaction.id}",
               data: { turbo_method: :delete },
