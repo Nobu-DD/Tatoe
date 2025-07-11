@@ -1,0 +1,3 @@
+<%= turbo_stream.replace "answer_reaction_answer_#{@answer.id}_reaction_#{@reaction.id}" do %>
+  <%= render "answer_reactions/unanswer_reaction", answer: @answer, reaction: @reaction %>
+<% end %>

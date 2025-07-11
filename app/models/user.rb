@@ -16,4 +16,17 @@ class User < ApplicationRecord
   def own?(object)
     id == object.user_id
   end
+
+  def answer_reaction(answer, reaction)
+    answer_reactions.find_or_create_by(answer: answer, reaction: reaction)
+  end
+
+  def unanswer_reaction(answer, reaction)
+    answer_reactions.find_by(answer: answer, reaction: reaction)&.destroy
+  end
+
+  def answer_reaction?(answer, reaction)
+    # 間違っている可能性有り。マイページ追加時に確認
+    answer_reactions.include?(answer: answer, reaction: reaction)
+  end
 end
