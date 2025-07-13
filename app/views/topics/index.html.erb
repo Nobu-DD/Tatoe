@@ -5,12 +5,12 @@
     </div>
     <!-- 検索フォーム -->
     <div class=" bg-white p-4 rounded-xl shadow mb-6">
+      <span class="text-sm pl-2 opacity-50">※タグ・名前検索機能、並び替え機能は後日実装予定</span>
       <%= search_form_for @q do |f| %>
       <div class="mb-4 relative">
         <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 z-40" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m0 0A7 7 0 1110 3a7 7 0 015 12z" />
         </svg>
-        <span class="text-sm pl-2 opacity-50">※タグ・名前検索機能、並び替え機能は後日実装予定</span>
         <%= f.search_field :title_or_description_cont, placeholder: "お題タイトル、説明を検索...", class: "input input-info text-base pl-10 h-12 w-full rounded-xl border-gray-200 z-30" %>
       </div>
 
