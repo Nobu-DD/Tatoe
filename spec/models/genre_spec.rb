@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Genre, type: :model do
+RSpec.describe "Genre", type: :model do
   describe 'バリデーションチェック' do
     context 'ジャンルを登録する時' do
       it 'ジャンル名があれば登録出来る' do

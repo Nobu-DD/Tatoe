@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Answer, type: :model do
+RSpec.describe "Answer", type: :model do
   describe 'バリデーションチェック' do
     context 'お題に対して例えを投稿出来る' do
       it '全ての値が入力されている時' do

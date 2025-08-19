@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe User, type: :model do
+RSpec.describe "User", type: :model do
   describe 'バリデーションチェック' do
     context 'ユーザーを保存させる時' do
       it '全ての値が入力されている場合(avatar以外)' do

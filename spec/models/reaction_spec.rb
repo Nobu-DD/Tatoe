@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Reaction, type: :model do
+RSpec.describe "Reaction", type: :model do
   describe 'バリデーションチェック' do
     context '管理者がリアクションを登録出来る' do
       it 'リアクション名を指定した時' do

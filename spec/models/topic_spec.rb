@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Topic, type: :model do
+RSpec.describe "Topic", type: :model do
   describe 'バリデーションチェック' do
     context 'ユーザーが投稿するお題を保存させる時' do
       it '全ての項目を入力した時' do
