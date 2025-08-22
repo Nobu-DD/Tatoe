@@ -626,14 +626,25 @@
           null
         ]
       },
+      "/myapp/spec/factories/topics.rb": {
+        "lines": [
+          1,
+          1,
+          5,
+          5,
+          5,
+          null,
+          null
+        ]
+      },
       "/myapp/spec/factories/users.rb": {
         "lines": [
           1,
           1,
-          7,
-          7,
-          7,
-          7,
+          11,
+          11,
+          11,
+          11,
           null,
           null
         ]
@@ -779,14 +790,28 @@
           1,
           1,
           1,
+          4,
+          4,
+          4,
+          null,
+          1,
+          1,
           1,
           null,
           1,
+          1,
+          1,
+          1,
           null,
           null,
           1,
           1,
+          1,
+          1,
+          1,
           null,
+          1,
+          1,
           1,
           null,
           null,
@@ -1048,8 +1073,73 @@
           null,
           null
         ]
+      },
+      "/myapp/app/models/topic.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null,
+          1,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null,
+          null,
+          1,
+          0,
+          null,
+          0,
+          0,
+          null,
+          null
+        ]
+      },
+      "/myapp/app/models/concerns/published_at_settable.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          null,
+          1,
+          4,
+          null,
+          null
+        ]
       }
     },
-    "timestamp": 1755851576
+    "timestamp": 1755853672
   }
 }
