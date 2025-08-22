@@ -24,7 +24,7 @@ RSpec.describe "Answer", type: :model do
       it '例えが入力されていない時' do
         @answer.body = ""
         expect(@answer).to be_invalid
-        expect(@answer.errors[:body]).to eq(["を入力してください"])
+        expect(@answer.errors[:body]).to eq([ "を入力してください" ])
       end
     end
   end

@@ -19,17 +19,17 @@ RSpec.describe "Pickup", type: :model do
       it 'ピックアップが(開始時間 > 終了時間)で入力' do
         @pickup.start_at = @pickup.end_at + 1.day
         expect(@pickup).to be_invalid
-        expect(@pickup.errors[:start_at]).to eq(["は終了日時より前に設定してください"])
+        expect(@pickup.errors[:start_at]).to eq([ "は終了日時より前に設定してください" ])
       end
       it '開始時間が入力されていない' do
         @pickup.start_at = nil
         expect(@pickup).to be_invalid
-        expect(@pickup.errors[:start_at]).to eq(["を入力してください"])
+        expect(@pickup.errors[:start_at]).to eq([ "を入力してください" ])
       end
       it '終了時間が入力されていない' do
         @pickup.end_at = nil
         expect(@pickup).to be_invalid
-        expect(@pickup.errors[:end_at]).to eq(["を入力してください"])
+        expect(@pickup.errors[:end_at]).to eq([ "を入力してください" ])
       end
     end
   end

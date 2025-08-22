@@ -14,7 +14,7 @@ RSpec.describe "Reaction", type: :model do
       it 'リアクション名が空の場合' do
         @reaction.name = ""
         expect(@reaction).to be_invalid
-        expect(@reaction.errors[:name]).to eq(["を入力してください"])
+        expect(@reaction.errors[:name]).to eq([ "を入力してください" ])
       end
     end
   end

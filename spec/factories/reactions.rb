@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :reaction do
-    name { "確かに！"}
+    name { "確かに！" }
   end
 end

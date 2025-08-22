@@ -21,7 +21,7 @@ RSpec.describe "Topic", type: :model do
       it 'お題タイトルが入力されない時' do
         @topic.title = ""
         expect(@topic).to be_invalid
-        expect(@topic.errors[:title]).to eq(["を入力してください"])
+        expect(@topic.errors[:title]).to eq([ "を入力してください" ])
       end
       it 'ユーザーが未ログインの場合' do
         @topic.user_id = nil

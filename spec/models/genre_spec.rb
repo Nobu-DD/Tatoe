@@ -14,11 +14,11 @@ RSpec.describe "Genre", type: :model do
       it 'ジャンル名が空白、またはnilの場合登録できない' do
         @genre.name = " "
         expect(@genre).to be_invalid
-        expect(@genre.errors[:name]).to eq(["を入力してください。"])
+        expect(@genre.errors[:name]).to eq([ "を入力してください。" ])
         @genre2 = build(:genre)
         @genre2.name = nil
         expect(@genre2).to be_invalid
-        expect(@genre2.errors[:name]).to eq(["を入力してください。"])
+        expect(@genre2.errors[:name]).to eq([ "を入力してください。" ])
       end
     end
   end
