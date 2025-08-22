@@ -1,14 +1,19 @@
 {
   "RSpec": {
     "coverage": {
-      "/myapp/spec/models/genre_spec.rb": {
+      "/myapp/spec/models/pickup_spec.rb": {
         "lines": [
           1,
           null,
           1,
           1,
           1,
-          2,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
           null,
           1,
           1,
@@ -20,6 +25,12 @@
           1,
           1,
           1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
           1,
           1,
           1,
@@ -650,7 +661,17 @@
         "lines": [
           1,
           1,
-          4,
+          1,
+          null,
+          null
+        ]
+      },
+      "/myapp/spec/factories/pickups.rb": {
+        "lines": [
+          1,
+          1,
+          5,
+          5,
           null,
           null
         ]
@@ -659,9 +680,9 @@
         "lines": [
           1,
           1,
-          1,
-          1,
-          1,
+          5,
+          5,
+          5,
           null,
           null
         ]
@@ -670,10 +691,10 @@
         "lines": [
           1,
           1,
-          1,
-          1,
-          1,
-          1,
+          5,
+          5,
+          5,
+          5,
           null,
           null
         ]
@@ -754,8 +775,13 @@
           null
         ]
       },
-      "/myapp/app/models/genre.rb": {
+      "/myapp/app/models/topic.rb": {
         "lines": [
+          1,
+          1,
+          1,
+          null,
+          1,
           1,
           1,
           null,
@@ -763,10 +789,78 @@
           1,
           1,
           1,
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null,
+          1,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null,
+          null,
+          1,
+          4,
+          null,
+          0,
+          0,
+          null,
+          null
+        ]
+      },
+      "/myapp/app/models/concerns/published_at_settable.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          null,
+          1,
+          4,
+          null,
+          null
+        ]
+      },
+      "/myapp/app/models/pickup.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          5,
+          1,
+          null,
+          1,
+          null,
+          1,
+          null,
+          1,
+          2,
+          1,
+          null,
+          null,
           null
         ]
       }
     },
-    "timestamp": 1755856007
+    "timestamp": 1755860124
   }
 }
