@@ -4,6 +4,10 @@ RSpec.describe "Users", type: :system do
   describe "newアクション" do
     context "正常系" do
       it "新規登録画面に遷移する" do
+        # パスを指定して遷移する
+        visit('/users/sign_up')
+        # 新規登録画面に遷移しているか確認
+        expect(page).to have_current_path(new_user_registration_path)
       end
     end
   end
