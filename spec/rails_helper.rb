@@ -36,6 +36,7 @@ rescue ActiveRecord::PendingMigrationError => e
   abort e.to_s.strip
 end
 RSpec.configure do |config|
+  # Capybaraの設定を記述
   config.before(:each, type: :system) do
     driven_by :remote_chrome
     Capybara.server_host = IPSocket.getaddress(Socket.gethostname)
@@ -44,6 +45,7 @@ RSpec.configure do |config|
     Capybara.ignore_hidden_elements = false
   end
 
+  # deviseのテストヘルパーメソッドを使用するための設定
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include Devise::Test::ControllerHelpers, type: :view
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
