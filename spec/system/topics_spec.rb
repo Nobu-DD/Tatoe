@@ -2,7 +2,19 @@ require 'rails_helper'
 
 RSpec.describe "Topics", type: :system do
   describe 'indexアクション' do
+    before do
+      @user = create(:user)
+      @topics = create_list(:topic, 5, user_id: @user.id)
+    end
     it 'お題検索ページにて登録順にお題を一覧表示する(投稿が新しい順)' do
+      visit(root_path)
+      click_link 'お題検索'
+      expect(topics_path)
+      expected_order_ids = @topics.sort_by { |topic| topic.published_at }.reverse.map(&:id)
+      topic_elements = all('.topic-item')
+      actual_order_ids = topic_elements.map { |element| element['data-id'].to_i }
+      binding.pry
+      expect(actual_order_ids).to eq(expected_order_ids)
     end
     it '検索フォームでお題の「タイトル」「説明」を入れると検索することが出来る' do
     end

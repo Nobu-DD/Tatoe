@@ -34,14 +34,14 @@ RSpec.describe "Top", type: :system do
       # お題を5件ほど新規作成する
       @topics = create_list(:topic, 5, user_id: @user.id)
       # sort_byでtopicのpublished_atを対象にして昇順に並び替え。reverseで昇順から降順に切り替え、mapでidのみを抽出して配列格納
-      expected_order_ids = @topics.sort_by { |topic| topic.published_at }.reverse.map(&:id)
+      expected_datetimes = @topics.sort_by { |topic| topic.published_at }.reverse.map{|topic| I18n.l(topic.published_at)}
+        # I18n.l(topic.published_at, format: :long)
       # 一覧ページを更新する
       visit(current_path)
       # erbから例えの要素を配列として格納。topicのdivをtopic-itemクラスとして定義
-      topic_elements = all('.topic-item')
-      actual_order_ids = topic_elements.map { |element| element['data-id'].to_i }
+      actual_datetimes = all('.published-at').map(&:text)
       # 一覧として表示されているお題の順番が"降順"になっているか検証
-      expect(actual_order_ids).to eq(expected_order_ids)
+      expect(actual_datetimes).to eq(expected_datetimes)
     end
   end
 end
