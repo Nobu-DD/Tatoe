@@ -11,7 +11,7 @@ RSpec.describe "Topics", type: :system do
       visit(root_path)
       click_link 'お題検索'
       expect(page).to have_current_path(topics_path)
-      expected_datetimes = @topics.sort_by { |topic| topic.published_at }.reverse.map{|topic| I18n.l(topic.published_at)}
+      expected_datetimes = @topics.sort_by { |topic| topic.published_at }.reverse.map { |topic| I18n.l(topic.published_at) }
       actual_datetimes = all('.published-at').map(&:text)
       expect(actual_datetimes).to eq(expected_datetimes)
     end
@@ -37,7 +37,7 @@ RSpec.describe "Topics", type: :system do
       # 検索ボタンを押す
       click_button '検索'
       # 入力したお題が表示されているか検証
-      expect(page).to have_selector('.topic-item', count:1)
+      expect(page).to have_selector('.topic-item', count: 1)
       expect(page).to have_selector('.topic-title', text: "#{search_topic.title}")
       # 入力してないお題が表示されていないか検証
       search_excluded_topics.each do |topic|
@@ -127,13 +127,12 @@ RSpec.describe "Topics", type: :system do
     end
   end
   describe 'updateアクション' do
-
     context '正常系' do
       it '「お題を更新ボタン」を押すと、お題が更新される(ジャンルとヒントを新たに追加し、タイトルと説明を変更)' do
         sign_in(@user)
         visit(edit_topic_path(@topics[0]))
-        expected_genres = ["web開発", "例え", "バトラン"]
-        expected_hints = ["コミュニケーションのきっかけ", "知らなかったことを学ぶことが出来る", "理解を深めることも可能"]
+        expected_genres = [ "web開発", "例え", "バトラン" ]
+        expected_hints = [ "コミュニケーションのきっかけ", "知らなかったことを学ぶことが出来る", "理解を深めることも可能" ]
         fill_in 'お題タイトル', with: 'Tatoeを別のアプリで例えると？'
         fill_in 'お題の説明', with: 'Tatoeとは一体なんなんでしょうか？他の分野で例えましょう！'
         fill_in 'お題ジャンル', with: 'web開発 例え バトラン'

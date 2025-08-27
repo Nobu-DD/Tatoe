@@ -14,7 +14,7 @@ RSpec.describe "Answers", type: :system do
       # お題詳細ページの'例えを投稿！'ボタンを押す
       click_link '例えを投稿！'
       # たとえ作成ページに遷移しているか検証
-      expect(page).to have_selector('h2', text:"例え投稿")
+      expect(page).to have_selector('h2', text: "例え投稿")
       expect(page).to have_current_path(new_topic_answer_path(@topic))
     end
   end

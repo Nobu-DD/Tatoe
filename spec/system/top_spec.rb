@@ -34,8 +34,7 @@ RSpec.describe "Top", type: :system do
       # お題を5件ほど新規作成する
       @topics = create_list(:topic, 5, user_id: @user.id)
       # sort_byでtopicのpublished_atを対象にして昇順に並び替え。reverseで昇順から降順に切り替え、mapでidのみを抽出して配列格納
-      expected_datetimes = @topics.sort_by { |topic| topic.published_at }.reverse.map{|topic| I18n.l(topic.published_at)}
-        # I18n.l(topic.published_at, format: :long)
+      expected_datetimes = @topics.sort_by { |topic| topic.published_at }.reverse.map { |topic| I18n.l(topic.published_at) }
       # 一覧ページを更新する
       visit(current_path)
       # erbから例えの要素を配列として格納。topicのdivをtopic-itemクラスとして定義
