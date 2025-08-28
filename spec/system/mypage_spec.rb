@@ -13,7 +13,7 @@ RSpec.describe "Mypage", type: :system do
       # フッターのマイページボタンをクリックする
       click_link 'マイページ'
       # マイページのpathに遷移しているか検証
-      expect(page).to have_current_path(mypage_path)
+      expect(page).to have_current_path(mypage_path(@user))
       # ページタイトルがマイページと表示されているか検証
       expect(page).to have_selector('h2', 'マイページ')
       # 認証しているユーザー情報が表示されているか検証(ニックネーム、メールアドレス)
@@ -33,7 +33,7 @@ RSpec.describe "Mypage", type: :system do
       # ログインボタンをクリック
       click_button 'ログイン'
       # マイページのpathに遷移しているか検証
-      expect(page).to have_current_path(mypage_path)
+      expect(page).to have_current_path(mypage_path(@user))
       # ログイン完了のフラッシュメッセージが入力されているか検証
       expect(page).to have_selector('.alert-info', text: 'ログインが完了しました。')
       # ページタイトルがマイページと表示されているか検証
