@@ -4,7 +4,7 @@ RSpec.describe "Mypage", type: :system do
   before do
     @user = create(:user)
   end
-  describe 'newアクション' do
+  describe 'showアクション' do
     it 'フッターのマイページボタンを押すと、マイページに遷移する' do
       # 作成したユーザ-にログインする
       sign_in(@user)
@@ -17,8 +17,8 @@ RSpec.describe "Mypage", type: :system do
       # ページタイトルがマイページと表示されているか検証
       expect(page).to have_selector('h2', text: 'マイページ')
       # 認証しているユーザー情報が表示されているか検証(ニックネーム、メールアドレス)
-      expect(page).to have_selector('p', @user.name)
-      expect(page).to have_selector('p', @user.email)
+      expect(page).to have_selector('span', text: @user.name)
+      expect(page).to have_selector('span', text: @user.email)
     end
     it '未認証だった場合、ログインページに遷移する。ログイン後マイページに遷移' do
       # トップページに遷移する
@@ -41,8 +41,8 @@ RSpec.describe "Mypage", type: :system do
       # ページタイトルがマイページと表示されているか検証
       expect(page).to have_selector('h2', text: 'マイページ')
       # 認証しているユーザー情報が表示されているか検証(ニックネーム、メールアドレス)
-      expect(page).to have_selector('p', @user.name)
-      expect(page).to have_selector('p', @user.email)
+      expect(page).to have_selector('span', text: @user.name)
+      expect(page).to have_selector('span', text: @user.email)
     end
   end
 end
