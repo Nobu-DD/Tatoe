@@ -13,9 +13,9 @@ RSpec.describe "Mypage", type: :system do
       # フッターのマイページボタンをクリックする
       click_link 'マイページ'
       # マイページのpathに遷移しているか検証
-      expect(page).to have_current_path(mypage_path(@user))
+      expect(page).to have_current_path(mypage_path)
       # ページタイトルがマイページと表示されているか検証
-      expect(page).to have_selector('h2', 'マイページ')
+      expect(page).to have_selector('h2', text: 'マイページ')
       # 認証しているユーザー情報が表示されているか検証(ニックネーム、メールアドレス)
       expect(page).to have_selector('p', @user.name)
       expect(page).to have_selector('p', @user.email)
@@ -24,7 +24,9 @@ RSpec.describe "Mypage", type: :system do
       # トップページに遷移する
       visit(root_path)
       # フッターのマイページボタンをクリックする
-      click_link 'マイページ'
+      accept_confirm do
+        click_link 'マイページ'
+      end
       # ログイン画面に遷移しているか検証
       expect(page).to have_current_path(new_user_session_path)
       # 作成したユーザー情報を入力する
@@ -33,11 +35,11 @@ RSpec.describe "Mypage", type: :system do
       # ログインボタンをクリック
       click_button 'ログイン'
       # マイページのpathに遷移しているか検証
-      expect(page).to have_current_path(mypage_path(@user))
+      expect(page).to have_current_path(mypage_path)
       # ログイン完了のフラッシュメッセージが入力されているか検証
       expect(page).to have_selector('.alert-info', text: 'ログインが完了しました。')
       # ページタイトルがマイページと表示されているか検証
-      expect(page).to have_selector('h2', 'マイページ')
+      expect(page).to have_selector('h2', text: 'マイページ')
       # 認証しているユーザー情報が表示されているか検証(ニックネーム、メールアドレス)
       expect(page).to have_selector('p', @user.name)
       expect(page).to have_selector('p', @user.email)

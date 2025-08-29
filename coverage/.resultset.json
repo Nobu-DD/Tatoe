@@ -78,11 +78,11 @@
           1,
           null,
           1,
-          37,
-          37,
-          37,
-          37,
-          37,
+          39,
+          39,
+          39,
+          39,
+          39,
           null,
           null,
           null,
@@ -725,10 +725,10 @@
         "lines": [
           1,
           1,
-          52,
-          52,
-          52,
-          52,
+          54,
+          54,
+          54,
+          54,
           null,
           null
         ]
@@ -751,6 +751,7 @@
           1,
           null,
           null,
+          1,
           null,
           1,
           1,
@@ -825,14 +826,14 @@
         "lines": [
           1,
           1,
-          19,
-          19,
+          20,
+          20,
           null,
-          19,
-          19,
-          19,
-          19,
-          19,
+          20,
+          20,
+          20,
+          20,
+          20,
           null,
           null
         ]
@@ -1162,6 +1163,58 @@
           null
         ]
       },
+      "/myapp/spec/system/mypage_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          2,
+          null,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          null,
+          1,
+          null,
+          1,
+          null,
+          1,
+          null,
+          1,
+          0,
+          null,
+          1,
+          null,
+          1,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          null,
+          1,
+          null,
+          1,
+          null,
+          0,
+          0,
+          null,
+          null,
+          null
+        ]
+      },
       "/myapp/spec/system/top_spec.rb": {
         "lines": [
           1,
@@ -1201,7 +1254,6 @@
           1,
           null,
           11,
-          null,
           null,
           1,
           null,
@@ -1344,7 +1396,6 @@
           null,
           null,
           1,
-          null,
           1,
           1,
           1,
@@ -1592,7 +1643,7 @@
           1,
           1,
           null,
-          32,
+          35,
           null,
           null,
           1,
@@ -1673,7 +1724,7 @@
           6,
           1,
           null,
-          32,
+          35,
           null,
           1,
           null,
@@ -1705,12 +1756,12 @@
           null,
           null,
           1,
-          26,
+          28,
           null,
           null,
           null,
-          null,
-          null,
+          1,
+          25,
           null,
           null,
           null,
@@ -1738,7 +1789,7 @@
           1,
           null,
           1,
-          61,
+          65,
           null,
           null
         ]
@@ -1749,8 +1800,8 @@
           1,
           null,
           1,
-          31,
-          31,
+          34,
+          34,
           null,
           null
         ]
@@ -1912,6 +1963,24 @@
           null
         ]
       },
+      "/myapp/app/controllers/mypages_controller.rb": {
+        "lines": [
+          1,
+          1,
+          2,
+          null,
+          null
+        ]
+      },
+      "/myapp/app/models/my_genre.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          1,
+          null
+        ]
+      },
       "/myapp/app/controllers/users/registrations_controller.rb": {
         "lines": [
           null,
@@ -1979,6 +2048,6 @@
         ]
       }
     },
-    "timestamp": 1756288276
+    "timestamp": 1756452308
   }
 }
