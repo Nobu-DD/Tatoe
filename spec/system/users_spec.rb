@@ -11,6 +11,11 @@ RSpec.describe "Users", type: :system do
       end
     end
   end
+  describe "editアクション" do
+    it "マイページの編集ボタンを押すと、編集ページに遷移する" do
+
+    end
+  end
   describe "createアクション" do
     before do
       # パスを指定して新規登録ページに遷移する
@@ -81,6 +86,18 @@ RSpec.describe "Users", type: :system do
         expect(page).to have_selector('.alert-error', text: '確認用パスワードとパスワードの入力が一致しません')
         expect(page).to have_link('ログイン')
         expect(page).to have_link('新規登録')
+      end
+    end
+  end
+  describe "updateアクション" do
+    context "正常系" do
+      it "全ての値を変更した後、マイページに遷移する" do
+
+      end
+    end
+    context "異常系" do
+      it "ユーザー名・メールアドレスが空欄の場合、フラッシュメッセージを返す" do
+        
       end
     end
   end
