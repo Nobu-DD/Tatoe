@@ -93,32 +93,57 @@ RSpec.describe "Users", type: :system do
     describe "editアクション" do
       it "マイページの編集ボタンを押すと、編集ページに遷移する" do
         # マイページに遷移する
+        visit(mypage_path)
         # マイページの編集ボタンを押す
+        click_link "編集"
         # マイページの編集ページに遷移しているか検証
+        expect(page).to have_current_path(edit_user_registration_path(@user))
+        expect(page).to have_selector("h2", text: "ユーザー編集")
       end
     end
     describe "updateアクション" do
       context "正常系" do
         it "全ての値を変更した後、マイページに遷移する" do
-        # マイページに直接遷移する
-        # マイページの各フォームに入力する
-        # 変更ボタンを押す
-        # マイページに遷移しているか検証
-        # フラッシュメッセージが表示されているか検証
-        # ユーザーの各項目が、編集ページで入れていた値になっているか検証
+          # ユーザー編集に直接遷移する
+          visit(edit_user_registration_path(@user))
+          # ユーザー編集の各フォームに入力する
+          fill_in 'ユーザー名', with: '例え太郎'
+          fill_in 'メールアドレス', with: 'tatoe@example.com'
+          fill_in '好き・得意ジャンル', with: 'プログラミング Rails RUNTEQ'
+          # 変更ボタンを押す
+          click_button '変更'
+          # マイページに遷移しているか検証
+          expect(page).to have_current_path(mypage_path)
+          # フラッシュメッセージが表示されているか検証
+          expect(page).to have_selector(".alert-info", text: "ユーザー情報を変更しました")
+          # ユーザーの各項目が、編集ページで入れていた値になっているか検証
+          expect(page).to have_selector("span", text: "例え太郎")
+          expect(page).to have_selector("span", text: "tatoe@example.com")
+          expect(page).to have_selector("span", text: "プログラミング")
+          expect(page).to have_selector("span", text: "Rails")
+          expect(page).to have_selector("span", text: "RUNTEQ")
         end
       end
       context "異常系" do
         it "ユーザー名・メールアドレスが空欄の場合、フラッシュメッセージを返す" do
-        # マイページに直接遷移する
-        # ユーザー名を空白にする
-        # 変更ボタンを押す
-        # 編集ページに遷移するか検証
-        # ユーザー名を入力していないというフラッシュメッセージを出力しているか検証
-        # メールアドレスを空白にする
-        # 変更ボタンを押す
-        # 編集ページに遷移するか検証
-        # メールアドレスを入力していないというフラッシュメッセージを出力しているか検証
+          # 編集ページに直接遷移する
+          visit(edit_user_registration_path(@user))
+          # ユーザー名を空白にする
+          fill_in 'ユーザー名', with: ''
+          # 変更ボタンを押す
+          click_button '変更'
+          # 編集ページに遷移するか検証
+          expect(page).to have_current_path(edit_user_registration_path(@user))
+          # ユーザー名を入力していないというフラッシュメッセージを出力しているか検証
+          expect(page).to have_selector('.alert-error', text: 'ユーザー名を入力してください。')
+          # メールアドレスを空白にする
+          fill_in 'メールアドレス', with: ''
+          # 変更ボタンを押す
+          click_button '変更'
+          # 編集ページに遷移するか検証
+          expect(page).to have_current_path(edit_user_registration_path(@user))
+          # メールアドレスを入力していないというフラッシュメッセージを出力しているか検証
+          expect(page).to have_selector('.alert-error', text: 'メールアドレスを入力してください。')
         end
       end
     end
