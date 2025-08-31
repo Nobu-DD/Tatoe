@@ -53,11 +53,11 @@
             <label class="text-sm font-medium leading-none text-gray-700">好き・得意ジャンル</label>
             <div class="flex items-start justify-between p-3 bg-gray-50 rounded-xl">
               <div class="flex-1">
-                <% if @user[:favorite_genres].present? %>
+                <% if @user.genres.present? %>
                 <div class="flex flex-wrap gap-1">
-                  <% @user[:favorite_genres].split("、").each do |genre| %>
+                  <% @user.genres.each do |genre| %>
                   <span class="bg-[#E0F2FE] text-[#0369A1] px-2 py-1 rounded-full text-xs">
-                    <%= genre.strip %>
+                    <%= genre.name %>
                   </span>
                   <% end %>
                 </div>
