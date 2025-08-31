@@ -44,7 +44,7 @@ RSpec.describe "Users", type: :system do
           click_button '新規登録'
           # トップページに遷移し、「登録完了のフラッシュメッセージ」が表示されているか検証
           expect(page).to have_current_path(new_user_registration_path)
-          expect(page).to have_selector('.alert-error', text: 'ニックネームを入力してください')
+          expect(page).to have_selector('.alert-error', text: 'ユーザー名を入力してください')
           # 登録したユーザーで認証済みかどうか検証(ログアウトボタンが表示されているか確認)
           expect(page).to have_link('ログイン')
           expect(page).to have_link('新規登録')
@@ -89,6 +89,7 @@ RSpec.describe "Users", type: :system do
   describe "認証後" do
     before do
       @user = create(:user)
+      sign_in(@user)
     end
     describe "editアクション" do
       it "マイページの編集ボタンを押すと、編集ページに遷移する" do
@@ -110,6 +111,7 @@ RSpec.describe "Users", type: :system do
           fill_in 'ユーザー名', with: '例え太郎'
           fill_in 'メールアドレス', with: 'tatoe@example.com'
           fill_in '好き・得意ジャンル', with: 'プログラミング Rails RUNTEQ'
+          fill_in '本人確認のため、パスワード入力をお願いします', with: @user.password
           # 変更ボタンを押す
           click_button '変更'
           # マイページに遷移しているか検証
@@ -130,20 +132,22 @@ RSpec.describe "Users", type: :system do
           visit(edit_user_registration_path(@user))
           # ユーザー名を空白にする
           fill_in 'ユーザー名', with: ''
+          fill_in '本人確認のため、パスワード入力をお願いします', with: @user.password
           # 変更ボタンを押す
           click_button '変更'
           # 編集ページに遷移するか検証
           expect(page).to have_current_path(edit_user_registration_path(@user))
           # ユーザー名を入力していないというフラッシュメッセージを出力しているか検証
-          expect(page).to have_selector('.alert-error', text: 'ユーザー名を入力してください。')
+          expect(page).to have_selector('.alert-error', text: 'ユーザー名を入力してください')
           # メールアドレスを空白にする
           fill_in 'メールアドレス', with: ''
+          fill_in '本人確認のため、パスワード入力をお願いします', with: @user.password
           # 変更ボタンを押す
           click_button '変更'
           # 編集ページに遷移するか検証
           expect(page).to have_current_path(edit_user_registration_path(@user))
           # メールアドレスを入力していないというフラッシュメッセージを出力しているか検証
-          expect(page).to have_selector('.alert-error', text: 'メールアドレスを入力してください。')
+          expect(page).to have_selector('.alert-error', text: 'メールアドレスを入力してください')
         end
       end
     end
