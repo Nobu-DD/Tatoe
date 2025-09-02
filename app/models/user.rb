@@ -39,7 +39,11 @@ class User < ApplicationRecord
 
   # ジャンル新規登録
   def assign_genres
-    return if genre_names.blank?
+    # userインスタンスのgenre_names属性に値が格納されていない場合、早期リターンを返す。(ここから改善予定)
+    if genre_names.blank?
+      self.genres = []
+      return
+    end
 
     names = genre_names.split(/[[:space:],、\/]|　+/).reject(&:blank?).uniq
     self.genres = names.map { |name| Genre.find_or_create_by(name: name) }

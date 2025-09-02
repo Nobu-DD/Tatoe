@@ -36,7 +36,10 @@ class Topic < ApplicationRecord
 
   # ジャンル新規登録
   def assign_genres
-    return if genre_names.blank?
+    if genre_names.blank?
+      self.genres = []
+      return
+    end
 
     names = genre_names.split(/[[:space:],、\/]|　+/).reject(&:blank?).uniq
     self.genres = names.map { |name| Genre.find_or_create_by(name: name) }

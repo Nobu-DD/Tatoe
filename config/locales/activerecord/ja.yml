@@ -13,6 +13,7 @@ ja:
         password: パスワード
         password_confirmation: 確認用パスワード
         avatar: アイコン写真
+        current_password: 登録しているパスワード
       topic:
         title: お題タイトル
         description: お題の説明

@@ -129,17 +129,20 @@ RSpec.describe "Users", type: :system do
           # ユーザーにジャンルを3個登録しておく
           visit(edit_user_registration_path(@user))
           fill_in '好き・得意ジャンル', with: 'プログラミング Rails RUNTEQ'
+          fill_in '本人確認のため、パスワード入力をお願いします', with: @user.password
           click_button '変更'
           visit(edit_user_registration_path(@user))
           # 好き・得意ジャンルの内2つ消去して入力
           fill_in '好き・得意ジャンル', with: 'プログラミング'
+          fill_in '本人確認のため、パスワード入力をお願いします', with: @user.password
           # 変更ボタンを押す
           click_button '変更'
           # マイページに遷移しているか検証
           expect(page).to have_current_path(mypage_path)
           # ユーザーのmygenreに消去したジャンルが存在していないか検証
-          after_user = User.includes(:genres).find(@topics[0].id)
+          after_user = User.includes(:genres).find(@user.id)
           after_genres = after_user.genres.map(&:name)
+          expect(after_genres).to include("プログラミング")
           expect(after_genres).to_not include("Rails", "RUNTEQ")
         end
       end
