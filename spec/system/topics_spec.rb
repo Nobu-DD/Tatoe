@@ -149,6 +149,25 @@ RSpec.describe "Topics", type: :system do
         actual_hints = after_topic.hints.map(&:body)
         expect(actual_hints.sort).to eq(expected_hints.sort)
       end
+      it 'ジャンルを少なくした時、DBから削除されている' do
+        sign_in(@user)
+        visit(edit_topic_path(@topics[0]))
+        # お題にジャンルを3個登録しておく
+        fill_in 'お題ジャンル', with: 'web開発 例え バトラン'
+        click_button 'お題を作成'
+        # お題編集ページに遷移
+        visit(edit_topic_path(@topics[0]))
+        # お題ジャンルの内2つ消去して入力
+        fill_in 'お題ジャンル', with: 'web開発'
+        # お題を作成ボタンを押す
+        click_button 'お題を作成'
+        # お題詳細ページに遷移しているか検証
+        expect(page).to have_current_path(topic_path(@topics[0]))
+        # topicsのtopic_genresに消去したジャンルが存在していないか検証
+        after_topic = Topic.includes(:genres).find(@topics[0].id)
+        after_genres = after_topic.genres.map(&:name)
+        expect(after_genres).to_not include("例え", "バトラン")
+      end
     end
     context '異常系' do
       it 'お題が入力されていないと、エラーメッセージが表示される' do
