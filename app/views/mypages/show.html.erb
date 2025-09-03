@@ -74,43 +74,59 @@
 
         <div class=" rounded-2xl border bg-card text-card-foreground shadow-sm bg-white border-0">
           <div class="p-0">
-            <%= link_to "#", class: "flex items-center justify-between p-4 hover:bg-gray-50 rounded-t-2xl" do %>
-            <div class="flex items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-[#A0D8EF] mr-3">
-                <line x1="8" x2="21" y1="6" y2="6" />
-                <line x1="8" x2="21" y1="12" y2="12" />
-                <line x1="8" x2="21" y1="18" y2="18" />
-                <line x1="3" x2="3.01" y1="6" y2="6" />
-                <line x1="3" x2="3.01" y1="12" y2="12" />
-                <line x1="3" x2="3.01" y1="18" y2="18" />
-              </svg>
-              <div>
-                <div class="font-medium text-gray-800">投稿したお題</div>
-                <div class="text-sm text-gray-500">件のお題</div>
+            <div data-controller="dropdown">
+              <button data-action="dropdown#toggle click@window->dropdown#hide" class=" flex items-center justify-between p-4 hover:bg-gray-50 rounded-t-2xl w-full">
+                <div class="flex items-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-[#A0D8EF] mr-3">
+                    <line x1="8" x2="21" y1="6" y2="6" />
+                    <line x1="8" x2="21" y1="12" y2="12" />
+                    <line x1="8" x2="21" y1="18" y2="18" />
+                    <line x1="3" x2="3.01" y1="6" y2="6" />
+                    <line x1="3" x2="3.01" y1="12" y2="12" />
+                    <line x1="3" x2="3.01" y1="18" y2="18" />
+                  </svg>
+                  <div>
+                    <div class="font-medium text-gray-800">投稿したお題</div>
+                    <div class="text-sm text-gray-500"><%=@user.topics.count %>件のお題</div>
+                  </div>
+                </div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-gray-400">
+                  <path d="m9 18 6-6-6-6" />
+                </svg>
+              </button>
+              <div data-dropdown-target="menu">
+                <% if @user.topics.present? %>
+                <%= render partial: "topics/topic", collection: @user.topics %>
+                <% else %>
+                <p>まだお題は投稿していません。</p>
+                <% end %>
               </div>
             </div>
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-gray-400">
-              <path d="m9 18 6-6-6-6" />
-            </svg>
-            <% end %>
-
             <div class="border-t border-gray-100"></div>
-
-            <%= link_to "#", class: "flex items-center justify-between p-4 hover:bg-gray-50" do %>
-            <div class="flex items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-green-600 mr-3">
-                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-              </svg>
-              <div>
-                <div class="font-medium text-gray-800">投稿した例え</div>
-                <div class="text-sm text-gray-500">件の例え</div>
+            <div data-controller="dropdown">
+              <button type="button" data-action="dropdown#toggle click@window->dropdown#hide" class="flex items-center justify-between p-4 hover:bg-gray-50 w-full">
+                <div class="flex items-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-green-600 mr-3">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                  </svg>
+                  <div>
+                    <div class="font-medium text-gray-800">投稿した例え</div>
+                    <div class="text-sm text-gray-500"><%= @user.answers.count%>件の例え
+                    </div>
+                  </div>
+                </div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-gray-400">
+                  <path d="m9 18 6-6-6-6" />
+                </svg>
+              </button>
+              <div data-dropdown-target="menu">
+                <% if @user.answers.present? %>
+                <%= render "topics/answer", answers: @user.answers %>
+                <% else %>
+                <p>まだ回答は投稿していません。</p>
+                <% end %>
               </div>
             </div>
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-gray-400">
-              <path d="m9 18 6-6-6-6" />
-            </svg>
-            <% end %>
-
             <div class="border-t border-gray-100"></div>
 
             <%= link_to "#", class: "flex items-center justify-between p-4 hover:bg-gray-50 rounded-b-2xl" do %>
