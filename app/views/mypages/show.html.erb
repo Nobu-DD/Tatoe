@@ -96,7 +96,7 @@
               </button>
               <div data-dropdown-target="menu">
                 <% if @user.topics.present? %>
-                <%= render partial: "topics/topic", collection: @user.topics %>
+                <%= render partial: "topic", collection: @user.topics %>
                 <% else %>
                 <p>まだお題は投稿していません。</p>
                 <% end %>
@@ -121,7 +121,7 @@
               </button>
               <div data-dropdown-target="menu">
                 <% if @user.answers.present? %>
-                <%= render "topics/answer", answers: @user.answers %>
+                <%= render "answer", answers: @user.answers %>
                 <% else %>
                 <p>まだ回答は投稿していません。</p>
                 <% end %>
