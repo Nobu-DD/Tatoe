@@ -25,6 +25,18 @@ class Users::RegistrationsController < Devise::RegistrationsController
     super
   end
 
+  def edit_password
+  end
+
+  def update_password
+    if current_user.update_with_password(password_update_params)
+      bypass_sign_in(current_user, scope: :user)
+      flash[:notice] = t("devise.passwords.user.updated")
+      redirect_to mypage_path
+    else
+      render :edit_password, status: :unprocessable_entity
+    end
+  end
   # DELETE /resource
   # def destroy
   #   super
@@ -60,6 +72,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
     mypage_path
   end
 
+  def password_update_params
+    params.require(:user).permit(:current_password, :password, :password_confirmation)
+  end
   # The path used after sign up for inactive accounts.
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)

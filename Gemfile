@@ -73,6 +73,8 @@ group :development, :test do
   gem "rspec-rails", "~> 7.0.0"
 
   gem "factory_bot_rails"
+
+  gem "letter_opener_web"
 end
 
 group :development do
