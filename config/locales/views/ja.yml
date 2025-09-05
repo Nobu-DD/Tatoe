@@ -20,6 +20,7 @@ ja:
     passwords:
       user:
         updated: パスワードを変更しました。
+        send_instructions: 再設定用メールを送信しました。
   topic:
     create:
       success: お題を投稿しました。
