@@ -17,6 +17,9 @@ ja:
       user:
         signed_up: 新規登録が完了しました。
         updated: ユーザー情報を変更しました。
+    passwords:
+      user:
+        updated: パスワードを変更しました。
   topic:
     create:
       success: お題を投稿しました。

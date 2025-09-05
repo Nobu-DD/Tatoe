@@ -28,6 +28,10 @@ ja:
         end_at: 終了日時
     errors:
       models:
+        user:
+          attributes:
+            email:
+              not_found: 入力されたメールアドレスは存在しません。
         genre:
           attributes:
             name:
