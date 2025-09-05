@@ -28,8 +28,19 @@ ja:
         end_at: 終了日時
     errors:
       models:
+        user:
+          attributes:
+            email:
+              not_found: 入力されたメールアドレスは存在しません。
+            password:
+              blank: を入力してください。
+            current_password:
+              invalid: が違います。
+              blank: を入力してください。
+            password_confirmation:
+              confirmation: と%{attribute}の入力が一致しません。
         genre:
           attributes:
             name:
-              blank: "を入力してください。"
-              too_long: "は%{count}文字以内で入力してください。"
+              blank: を入力してください。
+              too_long: は%{count}文字以内で入力してください。
