@@ -14,6 +14,8 @@ class User < ApplicationRecord
   has_many :answer_reactions, dependent: :destroy
   has_many :reactions, through: :answer_reactions
 
+  mount_uploader :avatar, AvatarUploader
+
   attr_accessor :genre_names
 
   def own?(object)
@@ -29,7 +31,6 @@ class User < ApplicationRecord
   end
 
   def answer_reaction?(answer, reaction)
-    # 間違っている可能性有り。マイページ追加時に確認
     answer_reactions.include?(answer: answer, reaction: reaction)
   end
 
