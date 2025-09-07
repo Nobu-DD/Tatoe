@@ -46,7 +46,7 @@ gem "rails-i18n", "~> 7.0.0"
 
 gem "aws-sdk-s3", require: false
 
-gem "carrierwave", '~> 3.0'
+gem "carrierwave", "~> 3.0"
 
 gem "fog-aws"
 
