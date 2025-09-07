@@ -2,7 +2,18 @@
   <% answers.each do |answer| %>
   <div class="bg-white p-4 rounded-xl shadow-sm answer-item">
     <div class="flex justify-between items-center mb-2">
-      <span class="text-sm text-gray-700"><%= answer.user.name %></span>
+      <div class="flex items-center space-x-2">
+        <div class="relative">
+          <div class="relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full">
+            <% if answer.user.avatar.present? %>
+            <%= image_tag answer.user.avatar.url, alt: "プロフィール画像", class: "aspect-square h-full w-full" %>
+            <% else %>
+            <span class="flex h-full w-full items-center justify-center rounded-full bg-[#E0F2FE] text-[#0369A1] text-2xl"><%= answer.user[:name][0] %></span>
+            <% end %>
+          </div>
+        </div>
+        <span class="text-lg text-gray-700"><%= answer.user.name %></span>
+      </div>
       <span class="text-xs text-gray-500"><%= l answer.published_at %></span>
     </div>
     <div class="bg-gray-50 rounded-xl p-3 mb-3">
