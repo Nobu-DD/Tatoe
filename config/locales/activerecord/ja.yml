@@ -31,7 +31,7 @@ ja:
         user:
           attributes:
             email:
-              not_found: 入力されたメールアドレスは存在しません。
+              not_found: は存在しません。
             password:
               blank: を入力してください。
             current_password:
