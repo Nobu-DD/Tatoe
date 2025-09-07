@@ -12,7 +12,7 @@ ja:
         email: メールアドレス
         password: パスワード
         password_confirmation: 確認用パスワード
-        avatar: アイコン写真
+        avatar: アバター
         current_password: 登録しているパスワード
       topic:
         title: お題タイトル
