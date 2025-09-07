@@ -4,5 +4,8 @@
 
 import { application } from "./application"
 
+import AvatarUploadController from "./avatar_upload_controller"
+application.register("avatar-upload", AvatarUploadController)
+
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)

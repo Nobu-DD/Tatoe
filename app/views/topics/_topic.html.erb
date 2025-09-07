@@ -9,10 +9,19 @@
         </div>
         <span class="text-xs text-gray-500 published-at"><%= l topic.published_at %></span>
       </div>
-      <h2 class="text-sm font-medium text-gray-800 mb-2 topic-title"><%= topic.title %></h2>
+      <h2 class="text-base font-medium text-gray-800 mb-2 topic-title"><%= topic.title %></h2>
       <div class="flex justify-between text-xs text-gray-500">
         <div class="flex items-center space-x-2">
-          <p class="user-name"><%= topic.user.name %></p>
+          <div class="relative">
+            <div class="relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full">
+              <% if topic.user.avatar.present? %>
+              <%= image_tag topic.user.avatar.url, alt: "プロフィール画像", class: "aspect-square h-full w-full" %>
+              <% else %>
+              <span class="flex h-full w-full items-center justify-center rounded-full bg-[#E0F2FE] text-[#0369A1] text-2xl"><%= topic.user[:name][0] %></span>
+              <% end %>
+            </div>
+          </div>
+          <p class="user-name text-lg"><%= topic.user.name %></p>
         </div>
         <div class="flex items-center space-x-1">
           <svg class="w-4 h-4 text-red-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
