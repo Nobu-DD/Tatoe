@@ -1,9 +1,7 @@
 class GeminiApiService
-  def initialize(system_instruction,text)
-    # geminiapiに与える役割を渡す
-    @system_instruction = system_instruction
+  def initialize(genre)
     # ユーザーが入力したプロントの文字列を渡す引数
-    @text = text
+    @genre = genre
   end
 
   def run
@@ -38,13 +36,13 @@ class GeminiApiService
     {
       systemInstruction: {
         parts: [{
-          text: @system_instruction
+          text: "あなたは、ユーザーから与えられたジャンルに関する、ユニークで面白い「例え」のお題を生成する専門家です。ジャンルを提示するので、一般的な例えではなく、意外性があり、思考を深めるようなお題を1行で生成してください。"
         }],
         role: "model"
       },
       contents: [{
         parts: [{
-          text: @text
+          text: @genre
         }],
         role: "user"
       }],

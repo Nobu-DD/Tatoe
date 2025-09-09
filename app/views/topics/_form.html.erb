@@ -1,11 +1,14 @@
-<%= form_with model: topic do |f| %>
+<%= form_with model: topic, data: { controller: "gemini" } do |f| %>
 <%= render 'shared/error_messages', object: f.object %>
-
-<!-- タイトル -->
 <div class="mb-5">
+  <input data-gemini-target="genre" type="text">
+  <button type="button" data-action="click->gemini#output">AI出力</button>
+</div>
+<!-- タイトル -->
+<div class=" mb-5">
   <%= f.label :title, "お題タイトル", class: "block text-base font-medium text-gray-700" %>
   <span class="text-sm pl-2 opacity-50">例:Tatoeをあなたの「得意ジャンル」で例えると？</span>
-  <%= f.text_area :title, autofocus: true, class: "textarea textarea-info text-base w-full rounded-xl border-gray-200 mt-1", placeholder: "" %>
+  <%= f.text_area :title, autofocus: true, class: "textarea textarea-info text-base w-full rounded-xl border-gray-200 mt-1", data: { gemini_target: "title" } %>
 </div>
 
 <!-- お題の説明 -->
@@ -36,4 +39,3 @@
 <!-- 送信ボタン -->
 <%= f.submit "お題を作成", class: "w-full bg-[#A0D8EF] hover:bg-[#7CC7E8] text-white py-4 text-lg font-semibold rounded-xl shadow-lg" %>
 <% end %>
-</div>

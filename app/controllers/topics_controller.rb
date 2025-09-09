@@ -45,6 +45,13 @@ class TopicsController < ApplicationController
     redirect_to topics_path, notice: t("topic.deleted.success")
   end
 
+  def generate_ai
+    genre = params[:genre]
+    response = GeminiApiService.new(genre).run
+
+    render json: { text: response }
+  end
+
   private
 
   def topic_params
