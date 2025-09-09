@@ -2,6 +2,9 @@
 <%= render 'shared/error_messages', object: f.object %>
 <div class="mb-5">
   <input data-gemini-target="genre" type="text">
+  <span>に関する内容を</span>
+  <input data-gemini-target="compare" type="text">
+  <span>で例えてみる</span>
   <button type="button" data-action="click->gemini#output">AI出力</button>
 </div>
 <!-- タイトル -->

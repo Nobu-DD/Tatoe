@@ -1,7 +1,8 @@
 class GeminiApiService
-  def initialize(genre)
+  def initialize(request)
     # ユーザーが入力したプロントの文字列を渡す引数
-    @genre = genre
+    @genre = request[:genre]
+    @compare = request[:compare]
   end
 
   def run
@@ -36,14 +37,13 @@ class GeminiApiService
     {
       systemInstruction: {
         parts: [{
-          text: "あなたは、ユーザーから与えられたジャンルに関連する、ユニークな「例え」の問いかけを生成する専門家です。ジャンルを提示するので、ユーザーの想像力を刺激し、議論を深めるような、面白くて意外性のあるお題を1つ提案してください。"
+          text: "あなたは、ユーザーから与えられたジャンルに関連する、ユニークな「例え」の問いかけを生成する専門家です。ジャンルを提示するので、ユーザーの想像力を刺激し、議論を深めるような、面白くて意外性のあるお題を1つ提案してください。出力は、問いかけの文章のみにしてください。"
         }],
         role: "model"
       },
       contents: [{
         parts: [{
           text: <<~PROMPT
-          以下のフォーマットに従って、お題を生成してください。ジャンルは#{@genre}です。
           #{@genre}の[キーワード]を[キーワード]で例えると？
           PROMPT
         }],
