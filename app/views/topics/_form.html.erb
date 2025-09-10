@@ -1,4 +1,7 @@
 <%= form_with model: topic, data: { controller: "gemini" } do |f| %>
+<div class="bg-cyan-300 opacity-25 w-full h-full fixed z-30 top-0 left-0">
+  <span class="loading loading-spinner text-info z-35 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1/4"></span>
+</div>
 <%= render 'shared/error_messages', object: f.object %>
 <div class="mb-5">
   <div class="flex justify-between mb-3">
