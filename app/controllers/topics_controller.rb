@@ -49,7 +49,7 @@ class TopicsController < ApplicationController
     request = params.slice(:genre, :compare)
     response = GeminiApiService.new(request).run
 
-    render json: { text: response }
+    render json: response
   end
 
   private

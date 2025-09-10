@@ -37,14 +37,14 @@ class GeminiApiService
     {
       systemInstruction: {
         parts: [{
-          text: "あなたは、ユーザーから与えられた2つの要素(ジャンルと例えの分野)を組み合わせて、ユニークな「例え」の問いかけを生成する専門家です。ユーザーの想像力を刺激し、議論を深めるような、面白くて意外性のある問いかけを1つ提案してください。出力は、問いかけの文章のみにしてください。なお、入力されていない要素があった場合、指定しているフォーマットを参考にして、自由に作成してください"
+          text: "あなたは、ユーザーから与えられた2つの要素(ジャンルと例えの分野)を組み合わせて、ユニークな「例え」の問いかけを生成する専門家です。ユーザーの想像力を刺激し、議論を深めるような、面白くて意外性のある問いかけを1つ提案してください。出力は、厳密に指定されたJSONスキーマに従ってください。なお、入力されていない要素があった場合、指定しているフォーマットを参考にして、自由に作成してください"
         }],
         role: "model"
       },
       contents: [{
         parts: [{
           text: <<~PROMPT
-          以下のフォーマットに従って出力してください。
+          まずは以下のフォーマットに従ってtitleを出力してください。
 
           入力:
           ジャンル: 競馬
@@ -65,11 +65,37 @@ class GeminiApiService
           例えてほしい内容: #{@compare}
 
           出力:
-          [キーワード]の[キーワード]を[キーワード]で例えると？
+          title: [キーワード]の[キーワード]を[キーワード]で例えると？
+          description: 生成した:titleの意図を簡潔に説明してください。少し柔らかい表現で出力してください。
+          genres: ユーザーが提示した「#{@genre}」と「#{@compare}」の2つのキーワードと、:titleに関連したジャンル名を配列として5つ以内に含めてください。
+          hints: :titleに対して例えやすくなるように、ヒントを3つ箇条書きで提供してください。1つのヒントにつき30文字前後で出力してください。
           PROMPT
         }],
         role: "user"
       }],
+      generationConfig: {
+        responseMimeType: "application/json",
+        responseSchema: {
+          type: "object",
+          properties: {
+            title: { type: "string" },
+            description: { type: "string" },
+            genres: {
+              type: "array",
+              items: { type: "string" }
+            },
+            hints: {
+              type: "object",
+              properties: {
+                hint_1: { type: "string" },
+                hint_2: { type: "string" },
+                hint_3: { type: "string" }
+              }
+            }
+          },
+          required: ["title", "description", "genres", "hints"]
+        }
+      }
     }.to_json
   end
 end

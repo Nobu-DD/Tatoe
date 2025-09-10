@@ -27,14 +27,14 @@
 <div class="mb-5">
   <%= f.label :description, "お題の説明 (任意)", class: "block text-base font-medium text-gray-700" %>
   <span class="text-sm pl-2 opacity-50">例：知らない趣味や考え方を、ちょっとだけ理解できるアプリ「Tatoe」。あなたの得意な分野で、わかりやすく例えてみましょう！</span>
-  <%= f.text_area :description, class: "textarea textarea-info text-base w-full rounded-xl border-gray-200 mt-1", placeholder: "" %>
+  <%= f.text_area :description, class: "textarea textarea-info text-base w-full rounded-xl border-gray-200 mt-1", data: { gemini_target: "description" } %>
 </div>
 
 <!-- ジャンル選択 -->
 <div class="mb-5">
   <%= f.label :genre_names, "お題ジャンル(区切りはスペース カンマ、スラッシュ/)", class: "block text-base font-medium text-gray-700" %>
   <span class="text-sm pl-2 opacity-50">例：Tatoe お題 例え　RUNTEQ,プログラミング,スクール　Ruby/MySQL/React など</span>
-  <%= f.text_field :genre_names, class: "input input-info text-base w-full rounded-xl border-gray-200 mt-1", placeholder: "" %>
+  <%= f.text_field :genre_names, class: "input input-info text-base w-full rounded-xl border-gray-200 mt-1", data: { gemini_target: "genres" } %>
 </div>
 
 <!-- ヒント -->
@@ -43,7 +43,7 @@
   <span class="text-sm pl-2 opacity-50">例:コミュニケーションのきっかけになる<br>　　知らなかったことが少し身近に感じるように<br>　　理解を深める学習ツールとしても使える</span>
   <% @topic.hints.each_with_index do |hint,i| %>
   <%= f.fields_for :hints, hint do |f| %>
-  <%= f.text_field :body, placeholder: ["ヒント1", "ヒント2", "ヒント3"][i], class: "input input-info text-base w-full mb-2 rounded-xl border-gray-200" %>
+  <%= f.text_field :body, placeholder: ["ヒント1", "ヒント2", "ヒント3"][i], class: "input input-info text-base w-full mb-2 rounded-xl border-gray-200", data: { gemini_target: "hint_#{i+1}" } %>
   <% end %>
   <% end %>
 </div>

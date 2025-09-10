@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="gemini"
 export default class extends Controller {
-  static targets = ["genre", "title", "compare"]
+  static targets = ["genre", "compare", "title", "description", "genres", "hint_1", "hint_2", "hint_3"]
 
   output() {
     // ユーザーが入力された文字列(AIにわたす)
@@ -22,7 +22,13 @@ export default class extends Controller {
     })
       .then(response => response.json())
       .then(data => {
-        this.titleTarget.value = data.text
+        console.log(data);
+        this.titleTarget.value = data["title"];
+        this.descriptionTarget.value = data["description"];
+        this.genresTarget.value = data["genres"].join(" ");
+        this.hint_1Target.value = data["hints"]["hint_1"];
+        this.hint_2Target.value = data["hints"]["hint_2"];
+        this.hint_3Target.value = data["hints"]["hint_3"];
     })
   }
 }
