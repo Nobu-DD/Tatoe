@@ -10,7 +10,12 @@ class GeminiApiService
     http_request[:request].body = request_body
     response = http_request[:http].request(http_request[:request])
 
-    raise "Gemini: response is not success" unless response.is_a?(Net::HTTPResponse)
+    # unless response.is_a?(Net::HTTPResponse)
+    #   return {
+    #     success: false,
+    #     error: "AI生成に失敗しました。しばらくしたらもう一度お試しください"
+    #   }
+    # end
     parsed_response = JSON.parse(response.body)
     text_content = parsed_response.dig("candidates", 0, "content", "parts", 0, "text")
     return text_content

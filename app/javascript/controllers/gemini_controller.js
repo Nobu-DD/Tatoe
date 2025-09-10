@@ -21,16 +21,19 @@ export default class extends Controller {
         compare: compare
       })
     })
-      .then(response => response.json())
-      .then(data => {
-        console.log(data);
-        this.titleTarget.value = data["title"];
-        this.descriptionTarget.value = data["description"];
-        this.genresTarget.value = data["genres"].join(" ");
-        this.hint_1Target.value = data["hints"]["hint_1"];
-        this.hint_2Target.value = data["hints"]["hint_2"];
-        this.hint_3Target.value = data["hints"]["hint_3"];
-        this.buttonTarget.innerHTML = "AI出力"
-      })
+    .then(response => response.json())
+    .then(data => {
+      this.titleTarget.value = data["title"];
+      this.descriptionTarget.value = data["description"];
+      this.genresTarget.value = data["genres"].join(" ");
+      this.hint_1Target.value = data["hints"]["hint_1"];
+      this.hint_2Target.value = data["hints"]["hint_2"];
+      this.hint_3Target.value = data["hints"]["hint_3"];
+      this.buttonTarget.innerHTML = "AI出力"
+    })
+    .catch(() => {
+      alert("AI生成に失敗しました。時間を置いてもう一度お試しください。");
+      this.buttonTarget.innerHTML = "AI出力";
+    });
   }
 }
