@@ -1,11 +1,20 @@
 <%= form_with model: topic, data: { controller: "gemini" } do |f| %>
 <%= render 'shared/error_messages', object: f.object %>
 <div class="mb-5">
-  <input data-gemini-target="genre" type="text">
+  <div class="flex justify-between mb-3">
+    <div>
+      <p class="text-lg">AIお題出力</p>
+      <span class="text-sm opacity-50">例:野球に関する内容をIT用語で例えてみる<br>
+        　 乗馬に関する内容をプログラミングで例えてみる</span>
+    </div>
+    <div class="flex items-center">
+      <button type="button" data-action="click->gemini#output" class="bg-[#A0D8EF] hover:bg-[#7CC7E8] text-white px-5 py-3 text-lg font-semibold rounded-xl shadow-lg">AI出力</button>
+    </div>
+  </div>
+  <input data-gemini-target="genre" type="text" class="input input-info text-base w-35 rounded-xl border-gray-200" placeholder="お題ジャンル">
   <span>に関する内容を</span>
-  <input data-gemini-target="compare" type="text">
+  <input data-gemini-target="compare" type="text" class="input input-info text-base w-35 rounded-xl border-gray-200" placeholder="例える範囲">
   <span>で例えてみる</span>
-  <button type="button" data-action="click->gemini#output">AI出力</button>
 </div>
 <!-- タイトル -->
 <div class=" mb-5">
