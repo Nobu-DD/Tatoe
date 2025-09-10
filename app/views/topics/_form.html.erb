@@ -1,7 +1,4 @@
 <%= form_with model: topic, data: { controller: "gemini" } do |f| %>
-<div class="bg-cyan-300 opacity-25 w-full h-full fixed z-30 top-0 left-0">
-  <span class="loading loading-spinner text-info z-35 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1/4"></span>
-</div>
 <%= render 'shared/error_messages', object: f.object %>
 <div class="mb-5">
   <div class="flex justify-between mb-3">
@@ -11,7 +8,7 @@
         　 乗馬に関する内容をプログラミングで例えてみる</span>
     </div>
     <div class="flex items-center">
-      <button type="button" data-action="click->gemini#output" class="bg-[#A0D8EF] hover:bg-[#7CC7E8] text-white px-5 py-3 text-lg font-semibold rounded-xl shadow-lg">AI出力</button>
+      <button type="button" data-action="click->gemini#output" data-gemini-target="button" class="bg-[#A0D8EF] hover:bg-[#7CC7E8] text-white px-5 py-3 text-lg font-semibold rounded-xl shadow-lg">AI出力</button>
     </div>
   </div>
   <input data-gemini-target="genre" type="text" class="input input-info text-base w-35 rounded-xl border-gray-200" placeholder="お題ジャンル">
