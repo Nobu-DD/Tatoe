@@ -11,7 +11,7 @@
           <h3 class="text-center text-lg font-semibold text-gray-800 tracking-tight">プロフィール</h3>
         </div>
         <div class="p-6 pt-0 space-y-6">
-          <div class="flex flex-col items-center space-y-3">
+          <div class="flex flex-col items-center space-y-3" data-controller="avatar-upload">
             <div class="relative">
               <div class="relative flex h-20 w-20 shrink-0 overflow-hidden rounded-full">
                 <% if @user.avatar.present? %>
@@ -20,7 +20,7 @@
                 <span class="flex h-full w-full items-center justify-center rounded-full bg-[#E0F2FE] text-[#0369A1] text-2xl"><%= @user[:name][0] %></span>
                 <% end %>
               </div>
-              <%= form_with url: mypage_path, method: :patch, data: { controller: "avatar-upload" } do |f| %>
+              <%= form_with url: mypage_path, method: :patch, data: { "avatar_upload_target": "form" } do |f| %>
               <label class="absolute -bottom-1 -right-1 bg-[#A0D8EF] hover:bg-[#7CC7E8] text-white p-2 rounded-full cursor-pointer shadow-lg">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4">
                   <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z" />
@@ -30,7 +30,7 @@
               </label>
               <% end %>
             </div>
-            <span class="text-sm text-gray-500 mb-1">画像をタップして変更</span>
+            <span class="text-sm text-gray-500 mb-1" data-avatar-upload-target="revision">画像をタップして変更</span>
             <span class="text-sm text-gray-500 mb-3">登録可能ファイル jpg jpeg png</span>
             <% if @user.avatar.present?%>
             <%= button_to "アバターリセット", mypage_path, method: :delete, data: { turbo_method: :delete, turbo_confirm: "アバターをリセットしますか？"}, class: "btn btn-error" %>
