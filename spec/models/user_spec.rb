@@ -33,7 +33,7 @@ RSpec.describe "User", type: :model do
         # 作成したモデルインスタンスがバリデーションエラーになってくれるか確認
         expect(@user).to be_invalid
         # エラーメッセージの内容が[]であること
-        expect(@user.errors[:password]).to eq([ "を入力してください" ])
+        expect(@user.errors[:password]).to eq([ "を入力してください。" ])
       end
       it '確認用パスワードが未入力、またはパスワードと確認用が不一致' do
         # パスワードが入力されていないuserモデルインスタンスを作成する
@@ -42,13 +42,13 @@ RSpec.describe "User", type: :model do
         # 作成したモデルインスタンスがバリデーションエラーになってくれるか確認
         expect(@user).to be_invalid
         # エラーメッセージの内容が[]であること
-        expect(@user.errors[:password_confirmation]).to eq([ "とパスワードの入力が一致しません" ])
+        expect(@user.errors[:password_confirmation]).to eq([ "とパスワードの入力が一致しません。" ])
       end
       it 'パスワードと確認用パスワードが不一致' do
         @user.password = "password"
         @user.password_confirmation = "password2"
         expect(@user).to be_invalid
-        expect(@user.errors[:password_confirmation]).to eq([ "とパスワードの入力が一致しません" ])
+        expect(@user.errors[:password_confirmation]).to eq([ "とパスワードの入力が一致しません。" ])
       end
     end
   end
