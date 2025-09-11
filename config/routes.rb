@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   resources :topics, only: %i[index new create show edit update destroy] do
+    post :generate_ai, on: :collection
     resources :answers, only: %i[new create edit update destroy] do
       resource :answer_reactions, only: %i[create destroy]
     end
