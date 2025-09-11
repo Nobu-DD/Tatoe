@@ -135,7 +135,7 @@ RSpec.describe "Topics", type: :system do
         expected_hints = [ "コミュニケーションのきっかけ", "知らなかったことを学ぶことが出来る", "理解を深めることも可能" ]
         fill_in 'お題タイトル', with: 'Tatoeを別のアプリで例えると？'
         fill_in 'お題の説明', with: 'Tatoeとは一体なんなんでしょうか？他の分野で例えましょう！'
-        fill_in 'お題ジャンル', with: 'web開発 例え バトラン'
+        fill_in 'お題ジャンル(区切りはスペース カンマ、スラッシュ/)', with: 'web開発 例え バトラン'
         fill_in 'ヒント1', with: 'コミュニケーションのきっかけ'
         fill_in 'ヒント2', with: '知らなかったことを学ぶことが出来る'
         fill_in 'ヒント3', with: '理解を深めることも可能'
