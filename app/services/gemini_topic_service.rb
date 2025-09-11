@@ -1,4 +1,4 @@
-class GeminiApiService
+class GeminiTopicService
   def initialize(request)
     # ユーザーが入力したプロントの文字列を渡す引数
     @genre = request[:genre]
