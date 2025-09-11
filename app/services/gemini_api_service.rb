@@ -18,7 +18,8 @@ class GeminiApiService
     # end
     parsed_response = JSON.parse(response.body)
     text_content = parsed_response.dig("candidates", 0, "content", "parts", 0, "text")
-    return text_content
+
+    text_content
   end
 
   private
@@ -41,13 +42,13 @@ class GeminiApiService
   def request_body
     {
       systemInstruction: {
-        parts: [{
+        parts: [ {
           text: "あなたは、ユーザーから与えられた2つの要素(ジャンルと例えの分野)を組み合わせて、ユニークな「例え」の問いかけを生成する専門家です。ユーザーの想像力を刺激し、議論を深めるような、面白くて意外性のある問いかけを1つ提案してください。出力は、厳密に指定されたJSONスキーマに従ってください。なお、入力されていない要素があった場合、指定しているフォーマットを参考にして、自由に作成してください"
-        }],
+        } ],
         role: "model"
       },
-      contents: [{
-        parts: [{
+      contents: [ {
+        parts: [ {
           text: <<~PROMPT
           まずは以下のフォーマットに従ってtitleを出力してください。
 
@@ -75,9 +76,9 @@ class GeminiApiService
           genres: ユーザーが提示した「#{@genre}」と「#{@compare}」の2つのキーワードと、:titleに関連したジャンル名を配列として5つ以内に含めてください。
           hints: :titleに対して例えやすくなるように、ヒントを3つ箇条書きで提供してください。1つのヒントにつき30文字前後で出力してください。
           PROMPT
-        }],
+        } ],
         role: "user"
-      }],
+      } ],
       generationConfig: {
         responseMimeType: "application/json",
         responseSchema: {
@@ -98,7 +99,7 @@ class GeminiApiService
               }
             }
           },
-          required: ["title", "description", "genres", "hints"]
+          required: [ "title", "description", "genres", "hints" ]
         }
       }
     }.to_json
