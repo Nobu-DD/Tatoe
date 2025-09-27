@@ -1,21 +1,14 @@
-class GeminiTopicService
-  def initialize(request)
+class GeminiGenerationService
+  def initialize(type, params = {})
     # ユーザーが入力したプロントの文字列を渡す引数
-    @genre = request[:genre]
-    @compare = request[:compare]
+    @type = type
+    @params = params
   end
 
   def run
     http_request = prepare_http_request
     http_request[:request].body = request_body
     response = http_request[:http].request(http_request[:request])
-
-    # unless response.is_a?(Net::HTTPResponse)
-    #   return {
-    #     success: false,
-    #     error: "AI生成に失敗しました。しばらくしたらもう一度お試しください"
-    #   }
-    # end
     parsed_response = JSON.parse(response.body)
     text_content = parsed_response.dig("candidates", 0, "content", "parts", 0, "text")
 
@@ -40,6 +33,13 @@ class GeminiTopicService
   end
 
   def request_body
+    case @type
+    when :topic then topic_request_body
+    when :answer then answer_request_body
+    end
+  end
+
+  def topic_request_body
     {
       systemInstruction: {
         parts: [ {
@@ -67,13 +67,13 @@ class GeminiTopicService
           手芸の刺繍を土方の業務で例えると？
 
           入力:
-          ジャンル: #{@genre}
-          例えてほしい内容: #{@compare}
+          ジャンル: #{@params[:genre]}
+          例えてほしい内容: #{@params[:compare]}
 
           出力:
           title: [キーワード]の[キーワード]を[キーワード]で例えると？
           description: 生成した:titleの意図を簡潔に説明してください。少し柔らかい表現で出力してください。
-          genres: ユーザーが提示した「#{@genre}」と「#{@compare}」の2つのキーワードと、:titleに関連したジャンル名を配列として5つ以内に含めてください。
+          genres: ユーザーが提示した「#{@params[:genre]}」と「#{@params[:compare]}」の2つのキーワードと、:titleに関連したジャンル名を配列として5つ以内に含めてください。
           hints: :titleに対して例えやすくなるように、ヒントを3つ箇条書きで提供してください。1つのヒントにつき30文字前後で出力してください。
           PROMPT
         } ],
