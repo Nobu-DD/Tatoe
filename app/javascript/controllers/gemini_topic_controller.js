@@ -1,6 +1,6 @@
 import { Controller } from "@hotwired/stimulus"
 
-// Connects to data-controller="gemini"
+// Connects to data-controller="gemini_topic"
 export default class extends Controller {
   static targets = ["genre", "compare", "title", "description", "genres", "hint_1", "hint_2", "hint_3", "button"]
 
