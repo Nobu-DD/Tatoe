@@ -106,16 +106,16 @@ class GeminiGenerationService
 
   def answer_request_body
     topic = @params[:topic]
-    hints_text = topic[:hints].present? ? topic[:hints].join('、') : "ヒントなし"
+    hints_text = topic[:hints].present? ? topic[:hints].join("、") : "ヒントなし"
   {
     systemInstruction: {
-      parts: [{
+      parts: [ {
         text: "あなたは、指定したお題に対してユニークな「例え」を生み出すことが出来る専門家です。お題に対して単体、もしくは複数の「例えるテーマ」を与えるので、誰もがその例えを見た時に「わかりやすい！」「面白い例え！」と思わせるような例えを理由も含めて提案してください。出力は、厳密に指定されたJSONスキーマに従ってください。なお、「例えるテーマ」が与えられなかった場合、指定しているフォーマットを参考にして、自由に作成してください。"
-      }],
+      } ],
       role: "model"
     },
-    contents: [{
-      parts: [{
+    contents: [ {
+      parts: [ {
         text: <<~PROMPT
         まずは以下のフォーマットに従ってbodyとreasonを出力してください。
 
@@ -137,9 +137,9 @@ class GeminiGenerationService
         body: 例えるテーマを元に例えを生成してください。何も書かれていない場合、自由に例えてみてください。文字数は20文字前後でまとめてください。
         reason: なぜその例え方をしたのか、理由を50文字前後で説明してください。
         PROMPT
-      }],
+      } ],
       role: "user"
-    }],
+    } ],
 
     generationConfig: {
       responseMimeType: "application/json",
@@ -150,7 +150,7 @@ class GeminiGenerationService
           reason: { type: "string" }
         },
         required: [ "body", "reason" ]
-      },
+      }
     }
   }.to_json
   end
