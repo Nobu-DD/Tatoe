@@ -11,7 +11,7 @@ class GeminiGenerationService
     response = http_request[:http].request(http_request[:request])
     parsed_response = JSON.parse(response.body)
     text_content = parsed_response.dig("candidates", 0, "content", "parts", 0, "text")
-
+    binding.pry
     text_content
   end
 
@@ -106,6 +106,8 @@ class GeminiGenerationService
   end
 
   def answer_request_body
+    topic = @params[:topic]
+    hints_text = topic[:hints].present? ? topic[:hints].join('、') : "ヒントなし"
   {
     systemInstruction: {
       parts: [{
@@ -128,9 +130,9 @@ class GeminiGenerationService
         reason: 高校生という限られた年齢のみ甲子園の資格が得られる。そして高校生同士という世代が近い者たちが日本一を目指して試合に取り組む姿が日本ダービーに似ているなと感じました。
 
         入力:
-        お題タイトル: #{@params[:topic].title}
-        お題の説明: #{@params[:topic].description}
-        例えを出すヒント: #{@params[:topic].hints[0].body}、#{@params[:topic].hints[1].body}、#{@params[:topic].hints[2].body}
+        お題タイトル: #{topic[:title]}
+        お題の説明: #{topic[:description]}
+        例えを出すヒント: #{hints_text}
         例えるテーマ: #{@params[:theme]}
         出力:
         body: 例えるテーマを元に例えを生成してください。何も書かれていない場合、自由に例えてみてください。

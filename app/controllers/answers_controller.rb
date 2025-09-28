@@ -1,6 +1,6 @@
 class AnswersController < ApplicationController
   def new
-    @topic = Topic.includes(:user, :genres, :hints, :answers).find(params[:topic_id])
+    @topic = Topic.includes(:user, :genres, :hints, :answers).find(params[:topic_id]).decorate
     @answer = @topic.answers.build
   end
 
