@@ -104,4 +104,53 @@ class GeminiGenerationService
       }
     }.to_json
   end
+
+  def answer_request_body
+  {
+    systemInstruction: {
+      parts: [{
+        text: "あなたは、指定したお題に対してユニークな「例え」を生み出すことが出来る専門家です。お題に対して単体、もしくは複数の「例えるテーマ」を与えるので、誰もがその例えを見た時に「わかりやすい！」「面白い例え！」と思わせるような例えを理由も含めて提案してください。出力は、厳密に指定されたJSONスキーマに従ってください。なお、「例えるテーマ」が与えられなかった場合、指定しているフォーマットを参考にして、自由に作成してください。"
+      }],
+      role: "model"
+    },
+    contents: [{
+      parts: [{
+        text: <<~PROMPT
+        まずは以下のフォーマットに従ってbodyとreasonを出力してください。
+
+        入力例:
+        お題タイトル: 競馬の日本ダービーを他のスポーツで例えると？
+        お題の説明: 若駒達の頂点を決めるレース、日本ダービー。競馬初心者でもわかりやすい例えを考えてみましょう！
+        例えを出すヒント: 一生に一回しか出られない、3歳という若い馬齢の時、同世代でトップを決めるレース
+        例えるテーマ: 野球
+        出力例:
+        body: 高校野球の甲子園決勝
+        reason: 高校生という限られた年齢のみ甲子園の資格が得られる。そして高校生同士という世代が近い者たちが日本一を目指して試合に取り組む姿が日本ダービーに似ているなと感じました。
+
+        入力:
+        お題タイトル: #{@params[:topic].title}
+        お題の説明: #{@params[:topic].description}
+        例えを出すヒント: #{@params[:topic].hints[0].body}、#{@params[:topic].hints[1].body}、#{@params[:topic].hints[2].body}
+        例えるテーマ: #{@params[:theme]}
+        出力:
+        body: 例えるテーマを元に例えを生成してください。何も書かれていない場合、自由に例えてみてください。
+        reason: なぜその例え方をしたのか、理由を50文字前後で説明してください。
+        PROMPT
+      }],
+      role: "user"
+    }],
+
+    generationConfig: {
+      responseMimeType: "application/json",
+      responseSchema: {
+        type: "object",
+        properties: {
+          body: { type: "string" },
+          reason: { type: "string" }
+        }
+      },
+      required: [ "body", "reason" ]
+    }
+  }.to_json
+  end
 end

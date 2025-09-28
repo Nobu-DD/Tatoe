@@ -35,6 +35,12 @@ class AnswersController < ApplicationController
     redirect_to topic_path(id: answer.topic_id), notice: t("answer.deleted.success")
   end
 
+  def generate_ai
+    request_params = params.slice(:theme, :topic)
+    response = GeminiGenerationService.new(:answer, request_params).run
+    render json: response
+  end
+
   private
 
   def answer_params

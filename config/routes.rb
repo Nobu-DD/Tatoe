@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   resources :topics, only: %i[index new create show edit update destroy] do
     post :generate_ai, on: :collection
     resources :answers, only: %i[new create edit update destroy] do
+      post :generate_ai, on: :collection
       resource :answer_reactions, only: %i[create destroy]
     end
   end
