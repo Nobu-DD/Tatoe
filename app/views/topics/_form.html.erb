@@ -1,5 +1,6 @@
-<%= form_with model: topic, data: { controller: "gemini" } do |f| %>
+<%= form_with model: topic, data: { controller: "topic" } do |f| %>
 <%= render 'shared/error_messages', object: f.object %>
+<!-- AIお題出力 -->
 <div class="mb-5">
   <div class="flex justify-between mb-3">
     <div>
@@ -8,33 +9,33 @@
         　 乗馬に関する内容をプログラミングで例えてみる</span>
     </div>
     <div class="flex items-center">
-      <button type="button" data-action="click->gemini#output" data-gemini-target="button" class="bg-[#A0D8EF] hover:bg-[#7CC7E8] text-white px-5 py-3 text-lg font-semibold rounded-xl shadow-lg">AI出力</button>
+      <button type="button" data-action="click->topic#output" data-topic-target="button" class="bg-[#A0D8EF] hover:bg-[#7CC7E8] text-white px-5 py-3 text-lg font-semibold rounded-xl shadow-lg">AI出力</button>
     </div>
   </div>
-  <input data-gemini-target="genre" type="text" class="input input-info text-base w-35 rounded-xl border-gray-200" placeholder="お題ジャンル">
+  <input data-topic-target="genre" type="text" class="input input-info text-base w-35 rounded-xl border-gray-200" placeholder="お題ジャンル">
   <span>に関する内容を</span>
-  <input data-gemini-target="compare" type="text" class="input input-info text-base w-35 rounded-xl border-gray-200" placeholder="例える範囲">
+  <input data-topic-target="compare" type="text" class="input input-info text-base w-35 rounded-xl border-gray-200" placeholder="例える範囲">
   <span>で例えてみる</span>
 </div>
 <!-- タイトル -->
 <div class=" mb-5">
   <%= f.label :title, "お題タイトル", class: "block text-base font-medium text-gray-700" %>
   <span class="text-sm pl-2 opacity-50">例:Tatoeをあなたの「得意ジャンル」で例えると？</span>
-  <%= f.text_area :title, autofocus: true, class: "textarea textarea-info text-base w-full rounded-xl border-gray-200 mt-1", data: { gemini_target: "title" } %>
+  <%= f.text_area :title, autofocus: true, class: "textarea textarea-info text-base w-full rounded-xl border-gray-200 mt-1", data: { topic_target: "title" } %>
 </div>
 
 <!-- お題の説明 -->
 <div class="mb-5">
   <%= f.label :description, "お題の説明 (任意)", class: "block text-base font-medium text-gray-700" %>
   <span class="text-sm pl-2 opacity-50">例：知らない趣味や考え方を、ちょっとだけ理解できるアプリ「Tatoe」。あなたの得意な分野で、わかりやすく例えてみましょう！</span>
-  <%= f.text_area :description, class: "textarea textarea-info text-base w-full rounded-xl border-gray-200 mt-1", data: { gemini_target: "description" } %>
+  <%= f.text_area :description, class: "textarea textarea-info text-base w-full rounded-xl border-gray-200 mt-1", data: { topic_target: "description" } %>
 </div>
 
 <!-- ジャンル選択 -->
 <div class="mb-5">
   <%= f.label :genre_names, "お題ジャンル(区切りはスペース カンマ、スラッシュ/)", class: "block text-base font-medium text-gray-700" %>
   <span class="text-sm pl-2 opacity-50">例：Tatoe お題 例え　RUNTEQ,プログラミング,スクール　Ruby/MySQL/React など</span>
-  <%= f.text_field :genre_names, class: "input input-info text-base w-full rounded-xl border-gray-200 mt-1", data: { gemini_target: "genres" } %>
+  <%= f.text_field :genre_names, class: "input input-info text-base w-full rounded-xl border-gray-200 mt-1", data: { topic_target: "genres" } %>
 </div>
 
 <!-- ヒント -->
@@ -43,7 +44,7 @@
   <span class="text-sm pl-2 opacity-50">例:コミュニケーションのきっかけになる<br>　　知らなかったことが少し身近に感じるように<br>　　理解を深める学習ツールとしても使える</span>
   <% @topic.hints.each_with_index do |hint,i| %>
   <%= f.fields_for :hints, hint do |f| %>
-  <%= f.text_field :body, placeholder: ["ヒント1", "ヒント2", "ヒント3"][i], class: "input input-info text-base w-full mb-2 rounded-xl border-gray-200", data: { gemini_target: "hint_#{i+1}" } %>
+  <%= f.text_field :body, placeholder: ["ヒント1", "ヒント2", "ヒント3"][i], class: "input input-info text-base w-full mb-2 rounded-xl border-gray-200", data: { topic_target: "hint_#{i+1}" } %>
   <% end %>
   <% end %>
 </div>

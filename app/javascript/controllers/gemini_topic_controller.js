@@ -1,6 +1,6 @@
 import { Controller } from "@hotwired/stimulus"
 
-// Connects to data-controller="gemini"
+// Connects to data-controller="gemini_topic"
 export default class extends Controller {
   static targets = ["genre", "compare", "title", "description", "genres", "hint_1", "hint_2", "hint_3", "button"]
 
@@ -13,7 +13,7 @@ export default class extends Controller {
     fetch("generate_ai", {
       method: "POST",
       headers: {
-        "content-Type": "application/json",
+        "Content-Type": "application/json",
         "X-CSRF-Token": document.head.querySelector("meta[name=csrf-token]")?.content
       },
       body: JSON.stringify({
@@ -31,8 +31,9 @@ export default class extends Controller {
       this.hint_3Target.value = data["hints"]["hint_3"];
       this.buttonTarget.innerHTML = "AI出力"
     })
-    .catch(() => {
-      alert("AI生成に失敗しました。時間を置いてもう一度お試しください。");
+      .catch((error) => {
+        alert("AI生成に失敗しました。時間を置いてもう一度お試しください。");
+        console.error(error);
       this.buttonTarget.innerHTML = "AI出力";
     });
   }
