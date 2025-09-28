@@ -7,8 +7,8 @@ import { application } from "./application"
 import AvatarUploadController from "./avatar_upload_controller"
 application.register("avatar-upload", AvatarUploadController)
 
-import GeminiController from "./gemini_controller"
-application.register("gemini", GeminiController)
+import GeminiTopicController from "./gemini_topic_controller"
+application.register("topic", GeminiTopicController)
 
-import HelloController from "./hello_controller"
-application.register("hello", HelloController)
+import GeminiAnswerController from "./gemini_answer_controller"
+application.register("answer", GeminiAnswerController)

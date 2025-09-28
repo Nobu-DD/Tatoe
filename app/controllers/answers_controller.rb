@@ -1,6 +1,6 @@
 class AnswersController < ApplicationController
   def new
-    @topic = Topic.includes(:user, :genres, :hints, :answers).find(params[:topic_id])
+    @topic = Topic.includes(:user, :genres, :hints, :answers).find(params[:topic_id]).decorate
     @answer = @topic.answers.build
   end
 
@@ -33,6 +33,12 @@ class AnswersController < ApplicationController
     answer = current_user.answers.find(params[:id])
     answer.destroy!
     redirect_to topic_path(id: answer.topic_id), notice: t("answer.deleted.success")
+  end
+
+  def generate_ai
+    request_params = params.slice(:theme, :topic)
+    response = GeminiGenerationService.new(:answer, request_params).run
+    render json: response
   end
 
   private

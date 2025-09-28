@@ -46,8 +46,8 @@ class TopicsController < ApplicationController
   end
 
   def generate_ai
-    request = params.slice(:genre, :compare)
-    response = GeminiApiService.new(request).run
+    request_params = params.slice(:genre, :compare)
+    response = GeminiGenerationService.new(:topic, request_params).run
     render json: response
   end
 
