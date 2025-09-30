@@ -20,7 +20,7 @@ class TopicsController < ApplicationController
   end
 
   def show
-    @topic = Topic.includes(:user, :genres, :hints, :answers).find(params[:id])
+    @topic = Topic.includes(:user, :genres, :hints, :answers).find(params[:id]).decorate
     @answers = @topic.answers.order(created_at: :desc)
     @reactions = Reaction.all
   end
