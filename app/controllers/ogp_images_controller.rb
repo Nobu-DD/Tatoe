@@ -1,4 +1,5 @@
 class OgpImagesController < ApplicationController
+  skip_before_action :authenticate_user!, only: %i[show_topic]
   def show_topic
     # topic = Topic.find(params[:id])
     topic = Topic.find(params[:id])
