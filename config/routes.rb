@@ -16,12 +16,15 @@ Rails.application.routes.draw do
 
   resources :topics, only: %i[index new create show edit update destroy] do
     post :generate_ai, on: :collection
+    get :ogp_image, on: :member, to: "ogp_images#show_topic"
     resources :answers, only: %i[new create edit update destroy] do
       post :generate_ai, on: :collection
       resource :answer_reactions, only: %i[create destroy]
     end
   end
   resource :mypage, only: %i[show update destroy]
+
+  # get "images", on: :member, to: "images#ogp"
   # Render dynamic PWA files from app/views/pwa/*
   get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
