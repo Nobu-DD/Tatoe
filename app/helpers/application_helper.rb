@@ -8,7 +8,7 @@ module ApplicationHelper
         title: page_title,
         description: "Tatoeは普段接点のない趣味や文化、職業などを、ユーザー同士で“例え”を使って共感を生むアプリです。",
         type: "website",
-        image: image_url("Tatoe_OGP"),
+        image: image_url("Tatoe_OGP.png"),
         url: request.original_url,
         locale: "ja-JP"
       },
