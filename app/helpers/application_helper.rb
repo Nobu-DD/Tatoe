@@ -14,7 +14,8 @@ module ApplicationHelper
       },
       twitter: {
         card: "summary_large_image",
-        site: "@nobu1362622"
+        site: "@nobu1362622",
+        image: image_url("Tatoe_OGP.png")
       }
     }
   end
