@@ -1,7 +1,13 @@
 class AnswersController < ApplicationController
   def new
-    @topic = Topic.includes(:user, :genres, :hints, :answers).find(params[:topic_id]).decorate
+    @topic = Topic.includes(:user, :genres, :hints, :answers).find(params[:topic_id])
     @answer = @topic.answers.build
+  end
+
+  def show
+    answer = Answer.includes(:user, :comments).find(params[:answer_id])
+    @comments = answer.comments.order(published_at: :desc)
+    @new_comment = answer.comments.build
   end
 
   def create
