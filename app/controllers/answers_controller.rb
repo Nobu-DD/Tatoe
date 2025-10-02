@@ -5,9 +5,9 @@ class AnswersController < ApplicationController
   end
 
   def show
-    answer = Answer.includes(:user, :comments).find(params[:answer_id])
-    @comments = answer.comments.order(published_at: :desc)
-    @new_comment = answer.comments.build
+    @answer = Answer.includes(:user, :comments, :topic, :reactions).find(params[:id])
+    @comments = @answer.comments.order(published_at: :desc)
+    @new_comment = @answer.comments.build
   end
 
   def create

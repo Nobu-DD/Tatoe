@@ -1,0 +1,33 @@
+<% content_for(:title, @answer.body) %>
+<div class="px-4 py-10">
+  <div class="bg-white shadow-lg rounded-2xl w-full py-8 px-4 space-y-6">
+    <div class="text-center mb-5">
+      <h2 class=" text-2xl font-bold text-gray-800">例え詳細</h2>
+    </div>
+    <!-- お題タイトルとジャンル -->
+    <div>
+    </div>
+    <!-- 例え情報(アバター、ユーザー名、公開日付) -->
+    <div>
+    </div>
+    <!-- 例え本文(例え、説明文) -->
+    <div>
+    </div>
+    <!-- 例えリアクション -->
+    <div>
+    </div>
+    <!-- コメント入力フォーム(できればstimulus使用して動的に動作) -->
+    <div>
+    </div>
+    <!-- コメントタイトル(件数も表示) -->
+    <div>
+    </div>
+    <!-- 並び替えボタン -->
+    <div>
+    </div>
+    <!-- コメントコンポーネント -->
+    <div>
+      <%= render 'comment', comment: @comments%>
+    </div>
+  </div>
+</div>
