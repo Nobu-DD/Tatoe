@@ -5,7 +5,8 @@ class AnswersController < ApplicationController
   end
 
   def show
-    @answer = Answer.includes(:user, :comments, :topic, :reactions).find(params[:id])
+    @topic = Topic.includes(:genres).find(params[:topic_id])
+    @answer = Answer.includes(:user, :comments, :reactions).find(params[:id])
     @comments = @answer.comments.order(published_at: :desc)
     @new_comment = @answer.comments.build
   end

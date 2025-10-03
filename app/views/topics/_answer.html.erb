@@ -5,11 +5,7 @@
       <div class="flex items-center space-x-2">
         <div class="relative">
           <div class="relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full">
-            <% if answer.user.avatar.present? %>
-            <%= image_tag answer.user.avatar.url, alt: "プロフィール画像", class: "aspect-square h-full w-full" %>
-            <% else %>
-            <span class="flex h-full w-full items-center justify-center rounded-full bg-[#E0F2FE] text-[#0369A1] text-2xl"><%= answer.user[:name][0] %></span>
-            <% end %>
+            <%= answer.user.decorate.avatar_display? %>
           </div>
         </div>
         <span class="text-lg text-gray-700"><%= answer.user.name %></span>
@@ -24,7 +20,7 @@
     </div>
     <div class="flex justify-end">
       <div>
-        <%= button_to topic_answer_path(answer.id), method: :get, class: "btn btn-outline btn-accent rounded-xl" do%>
+        <%= button_to topic_answer_path(@topic,answer), method: :get, class: "btn btn-outline btn-accent rounded-xl" do%>
         <span>コメント欄</span>
         <% end %>
       </div>

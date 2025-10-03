@@ -6,9 +6,24 @@
     </div>
     <!-- お題タイトルとジャンル -->
     <div>
+      <div class="flex mb-3">
+        <% @topic.genres.each do |genre| %>
+        <span class="bg-[#E0F2FE] text-[#0369A1] text-xs px-2 py-1 rounded-full mr-1"><%= genre.name %></span>
+        <% end %>
+      </div>
+      <div class="divide-y-2 divide-gray-200">
+        <h2 class="text-xl font-medium text-gray-400 text-opacity-20 mb-3 pb-3"><%= @answer.topic.title %><h2>
+      </div>
     </div>
     <!-- 例え情報(アバター、ユーザー名、公開日付) -->
     <div>
+      <!-- アバター、ユーザー名 -->
+      <div>
+
+      </div>
+      <!-- 公開日付 -->
+      <div>
+      </div>
     </div>
     <!-- 例え本文(例え、説明文) -->
     <div>
