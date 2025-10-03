@@ -1,4 +1,5 @@
 class AnswersController < ApplicationController
+  skip_before_action :authenticate_user!, only: %i[show]
   def new
     @topic = Topic.includes(:user, :genres, :hints, :answers).find(params[:topic_id])
     @answer = @topic.answers.build
@@ -7,6 +8,7 @@ class AnswersController < ApplicationController
   def show
     @topic = Topic.includes(:genres).find(params[:topic_id])
     @answer = Answer.includes(:user, :comments, :reactions).find(params[:id])
+    @reactions = Reaction.all
     @comments = @answer.comments.order(published_at: :desc)
     @new_comment = @answer.comments.build
   end

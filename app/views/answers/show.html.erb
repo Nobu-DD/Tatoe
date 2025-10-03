@@ -16,24 +16,62 @@
       </div>
     </div>
     <!-- 例え情報(アバター、ユーザー名、公開日付) -->
-    <div>
+    <div class="flex justify-between">
       <!-- アバター、ユーザー名 -->
-      <div>
-
+      <div class="flex items-center space-x-2">
+        <div class="relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full">
+          <%= @answer.user.decorate.avatar_display? %>
+        </div>
+        <span class="text-lg text-gray-700"><%= @answer.user.name %></span>
       </div>
       <!-- 公開日付 -->
       <div>
+        <span><%= l @answer.published_at %></span>
       </div>
     </div>
     <!-- 例え本文(例え、説明文) -->
-    <div>
+    <div class="bg-gray-50 rounded-xl p-3 mb-3">
+      <p class="text-gray-800 font-medium mb-2">💡 <%= @answer.body %></p>
+      <% if @answer.reason.present? %>
+      <p class="text-sm text-gray-600"><%= simple_format(@answer.reason) %></p>
+      <% end %>
     </div>
     <!-- 例えリアクション -->
-    <div>
+    <div class="flex justify-end">
+      <% if user_signed_in? %>
+      <% @reactions.each do |reaction| %>
+      <% if current_user.answer_reactions.exists?(answer_id: @answer.id, reaction_id: reaction.id) %>
+      <%= render "answer_reactions/unanswer_reaction", answer: @answer, reaction: reaction %>
+      <% else %>
+      <%= render "answer_reactions/answer_reaction", answer: @answer, reaction: reaction %>
+      <% end %>
+      <% end %>
+      <% end %>
     </div>
-    <!-- コメント入力フォーム(できればstimulus使用して動的に動作) -->
-    <div>
+    <!-- コメント入力フォーム(stimulus使用して動的に動作) -->
+    <!-- サインイン時、入力フォームのボタン表示 -->
+    <% if user_signed_in? %>
+    <div data-controller="comment">
+      <button type="button" data-action="click->comment#form" data-comment-target="form_button" class="w-full bg-[#A0D8EF] hover:bg-[#7CC7E8] text-white py-3 rounded-xl font-semibold">コメントを投稿</button>
+      <div>
+        <%= form_with model: @new_comment do |f| %>
+        <%= f.label :body, "コメント", class: "block text-base font-medium text-gray-700" %>
+        <%= f.text_area :body, class: "textarea textarea-info text-base w-full rounded-xl border-gray-200 mt-1", data: { comment_target: "body" } %>
+        <%= f.submit "コメントを投稿", class: "w-full bg-[#A0D8EF] hover:bg-[#7CC7E8] text-white py-4 text-lg font-semibold rounded-xl shadow-lg" %>
+        <% end %>
+      </div>
     </div>
+    <% else %>
+    <%= link_to new_user_session_path, class: "w-full bg-[#A0D8EF] hover:bg-[#7CC7E8] text-white py-4 text-lg font-medium rounded-2xl shadow-lg flex flex-col items-center" do %>
+    <div class="flex items-center justify-center">
+      <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+      </svg>
+      <span class="text-xl">コメント投稿にはログインが必要です</span>
+    </div>
+    <span class="text-sm">※ログイン画面に進みます</span>
+    <% end %>
+    <% end %>
     <!-- コメントタイトル(件数も表示) -->
     <div>
     </div>
@@ -42,7 +80,9 @@
     </div>
     <!-- コメントコンポーネント -->
     <div>
-      <%= render 'comment', comment: @comments%>
+      <%= turbo_stream.prepend "comments" do %>
+      <%= render 'comment', comments: @comments%>
+      <% end %>
     </div>
   </div>
 </div>

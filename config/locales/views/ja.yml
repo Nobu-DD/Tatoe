@@ -3,6 +3,7 @@ ja:
     formats:
       default: "%Y/%m/%d %H:%M:%S"
       pickup: "%m/%d %H:%M:%S"
+      short: "%H/%M"
   devise:
     failure:
       unauthenticated: ログインが必要です。
