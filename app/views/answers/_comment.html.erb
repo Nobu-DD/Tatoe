@@ -11,7 +11,9 @@
       <div class="chat-header">
         <%= comment.user.name %>
       </div>
-      <div class="chat-bubble">comment.body</div>
+      <div class="chat-bubble chat-bubble-info">
+        <%= comment.body %>
+      </div>
       <%= comment.decorate.comment_posting_time %>
     </div>
     <% else %>
@@ -24,9 +26,12 @@
       <div class="chat-header">
         <%= comment.user.name %>
       </div>
-      <div class="chat-bubble">comment.body</div>
+      <div class="chat-bubble chat-bubble-accent">
+        <%= comment.body %>
+      </div>
       <%= comment.decorate.comment_posting_time %>
     </div>
+    <% end %>
     <% end %>
   </div>
 </div>

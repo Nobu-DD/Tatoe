@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     resources :answers, only: %i[new show create edit update destroy] do
       post :generate_ai, on: :collection
       resource :answer_reactions, only: %i[create destroy]
+      resources :comments, only: %i[create]
     end
   end
   resource :mypage, only: %i[show update destroy]
