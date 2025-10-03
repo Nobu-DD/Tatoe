@@ -12,7 +12,7 @@
         <% end %>
       </div>
       <div class="divide-y-2 divide-gray-200">
-        <h2 class="text-xl font-medium text-gray-400 text-opacity-20 mb-3 pb-3"><%= @answer.topic.title %><h2>
+        <h2 class="text-xl font-medium text-gray-500 mb-3 pb-3"><%= @answer.topic.title %><h2>
       </div>
     </div>
     <!-- 例え情報(アバター、ユーザー名、公開日付) -->
@@ -52,12 +52,12 @@
     <!-- サインイン時、入力フォームのボタン表示 -->
     <% if user_signed_in? %>
     <div data-controller="comment">
-      <button type="button" data-action="click->comment#form" data-comment-target="form_button" class="w-full bg-[#A0D8EF] hover:bg-[#7CC7E8] text-white py-3 rounded-xl font-semibold">コメントを投稿</button>
-      <div>
+      <button type="button" data-action="click->comment#appear" data-comment-target="form_button" class="w-full bg-[#A0D8EF] hover:bg-[#7CC7E8] text-white py-3 rounded-xl font-semibold">コメント投稿</button>
+      <div data-comment-target="form" class="mt-5 hidden">
         <%= form_with model: [@topic, @answer, @new_comment], method: :post do |f| %>
         <%= render 'shared/error_messages', object: f.object %>
         <%= f.label :body, "コメント", class: "block text-base font-medium text-gray-700" %>
-        <%= f.text_area :body, class: "textarea textarea-info text-base w-full rounded-xl border-gray-200 mt-1", data: { comment_target: "body" } %>
+        <%= f.text_area :body, class: "textarea textarea-info text-base w-full rounded-xl border-gray-200 mt-1 mb-5", data: { comment_target: "body" } %>
         <%= f.submit "コメントを投稿", class: "w-full bg-[#A0D8EF] hover:bg-[#7CC7E8] text-white py-4 text-lg font-semibold rounded-xl shadow-lg" %>
         <% end %>
       </div>
