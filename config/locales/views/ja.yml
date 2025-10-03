@@ -42,6 +42,9 @@ ja:
       failure: 例え内容に不備があります。
     deleted:
       success: 例えを削除しました。
+  comment:
+    create:
+      success: コメントを投稿しました。
   errors:
     messages:
         extension_allowlist_error: を登録できる拡張子はjpg jpeg pngのみとなります。

@@ -3,6 +3,7 @@ ja:
     models:
       user: ユーザー
       topic: お題
+      comment: コメント
       genre: ジャンル
       answer: 例え
       pickup: ピックアップ
@@ -19,6 +20,9 @@ ja:
         description: お題の説明
         published_at: 公開日時
         genres: ジャンル
+      comment:
+        body: コメント
+        published_at: 公開日時
       genre:
         name: お題ジャンル
       answer:

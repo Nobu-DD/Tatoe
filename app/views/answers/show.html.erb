@@ -55,6 +55,7 @@
       <button type="button" data-action="click->comment#form" data-comment-target="form_button" class="w-full bg-[#A0D8EF] hover:bg-[#7CC7E8] text-white py-3 rounded-xl font-semibold">コメントを投稿</button>
       <div>
         <%= form_with model: [@topic, @answer, @new_comment], method: :post do |f| %>
+        <%= render 'shared/error_messages', object: f.object %>
         <%= f.label :body, "コメント", class: "block text-base font-medium text-gray-700" %>
         <%= f.text_area :body, class: "textarea textarea-info text-base w-full rounded-xl border-gray-200 mt-1", data: { comment_target: "body" } %>
         <%= f.submit "コメントを投稿", class: "w-full bg-[#A0D8EF] hover:bg-[#7CC7E8] text-white py-4 text-lg font-semibold rounded-xl shadow-lg" %>
@@ -80,7 +81,7 @@
     </div>
     <!-- コメントコンポーネント -->
     <div>
-      <%= render 'comment', comments: @comments%>
+      <%= render 'answers/comment', comments: @comments%>
     </div>
   </div>
 </div>

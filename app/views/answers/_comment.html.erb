@@ -12,7 +12,7 @@
         <%= comment.user.name %>
       </div>
       <div class="chat-bubble chat-bubble-info">
-        <%= comment.body %>
+        <%= simple_format(comment.body) %>
       </div>
       <%= comment.decorate.comment_posting_time %>
     </div>
