@@ -1,0 +1,33 @@
+<% comments.each do |comment| %>
+<% if comment.user_id == current_user.id %>
+<div class="chat chat-end">
+  <div class="chat-image avatar">
+    <div class="w-10 rounded-full">
+      <%= comment.user.decorate.avatar_display? %>
+    </div>
+  </div>
+  <div class="chat-header">
+    <%= comment.user.name %>
+  </div>
+  <div class="chat-bubble chat-bubble-info">
+    <%= simple_format(comment.body) %>
+  </div>
+  <%= comment.decorate.comment_posting_time %>
+</div>
+<% else %>
+<div class="chat chat-start">
+  <div class="chat-image avatar">
+    <div class="w-10 rounded-full">
+      <%= comment.user.decorate.avatar_display? %>
+    </div>
+  </div>
+  <div class="chat-header">
+    <%= comment.user.name %>
+  </div>
+  <div class="chat-bubble chat-bubble-accent">
+    <%= comment.body %>
+  </div>
+  <%= comment.decorate.comment_posting_time %>
+</div>
+<% end %>
+<% end %>

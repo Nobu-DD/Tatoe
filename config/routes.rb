@@ -17,9 +17,10 @@ Rails.application.routes.draw do
   resources :topics, only: %i[index new create show edit update destroy] do
     post :generate_ai, on: :collection
     get :ogp_image, on: :member, to: "ogp_images#show_topic"
-    resources :answers, only: %i[new create edit update destroy] do
+    resources :answers, only: %i[new show create edit update destroy] do
       post :generate_ai, on: :collection
       resource :answer_reactions, only: %i[create destroy]
+      resources :comments, only: %i[create]
     end
   end
   resource :mypage, only: %i[show update destroy]

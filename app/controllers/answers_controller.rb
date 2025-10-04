@@ -1,7 +1,17 @@
 class AnswersController < ApplicationController
+  skip_before_action :authenticate_user!, only: %i[show]
   def new
-    @topic = Topic.includes(:user, :genres, :hints, :answers).find(params[:topic_id]).decorate
+    @topic = Topic.includes(:user, :genres, :hints, :answers).find(params[:topic_id])
     @answer = @topic.answers.build
+  end
+
+  def show
+    @topic = Topic.includes(:genres).find(params[:topic_id])
+    @answer = Answer.includes(:user, :comments, :reactions).find(params[:id])
+    @reactions = Reaction.all
+    @sort_by = params[:sort] == "asc" ? "asc" : "desc"
+    @comments = @answer.comments.order(published_at: @sort_by).page(params[:page]).per(10)
+    @new_comment = @answer.comments.build
   end
 
   def create

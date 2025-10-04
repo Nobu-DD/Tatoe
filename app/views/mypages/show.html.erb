@@ -15,11 +15,7 @@
           <div class="flex flex-col items-center space-y-3" data-controller="avatar-upload">
             <div class="relative">
               <div class="relative flex h-20 w-20 shrink-0 overflow-hidden rounded-full">
-                <% if @user.avatar.present? %>
-                <%= image_tag @user.avatar.url, alt: "プロフィール画像", class: "aspect-square h-full w-full" %>
-                <% else %>
-                <span class="flex h-full w-full items-center justify-center rounded-full bg-[#E0F2FE] text-[#0369A1] text-2xl"><%= @user[:name][0] %></span>
-                <% end %>
+                <%= @user.decorate.avatar_display? %>
               </div>
               <%= form_with url: mypage_path, method: :patch, data: { "avatar_upload_target": "form" } do |f| %>
               <label class="absolute -bottom-1 -right-1 bg-[#A0D8EF] hover:bg-[#7CC7E8] text-white p-2 rounded-full cursor-pointer shadow-lg">
