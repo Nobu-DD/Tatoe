@@ -1,0 +1,2 @@
+<%= link_to "新しい順", topic_answer_path(@topic, @answer, sort: :desc), class: (sort_by == "desc" ? "btn btn-info pointer-events-none" : "btn btn-dash btn-info"), data: { turbo_frame: "comments_list" } %>
+<%= link_to "古い順", topic_answer_path(@topic, @answer, sort: :asc), class: (sort_by == "asc" ? "btn btn-info pointer-events-none" : "btn btn-dash btn-info"), data: { turbo_frame: "comments_list" } %>

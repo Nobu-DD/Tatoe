@@ -14,11 +14,7 @@
         <div class="flex items-center space-x-2">
           <div class="relative">
             <div class="relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full">
-              <% if topic.user.avatar.present? %>
-              <%= image_tag topic.user.avatar.url, alt: "プロフィール画像", class: "aspect-square h-full w-full" %>
-              <% else %>
-              <span class="flex h-full w-full items-center justify-center rounded-full bg-[#E0F2FE] text-[#0369A1] text-2xl"><%= topic.user[:name][0] %></span>
-              <% end %>
+              <%= topic.user.decorate.avatar_display? %>
             </div>
           </div>
           <p class="user-name text-lg"><%= topic.user.name %></p>

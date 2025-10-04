@@ -9,6 +9,7 @@ class User < ApplicationRecord
 
   has_many :topics, dependent: :destroy
   has_many :answers, dependent: :destroy
+  has_many :comments, dependent: :destroy
   has_many :my_genres, dependent: :destroy
   has_many :genres, through: :my_genres
   has_many :answer_reactions, dependent: :destroy
