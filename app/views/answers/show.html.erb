@@ -1,4 +1,5 @@
 <% content_for(:title, @answer.body) %>
+<% set_meta_tags("turbo-refresh-scroll": "preserve") %>
 <div class="px-4 py-10">
   <div class="bg-white shadow-lg rounded-2xl w-full py-8 px-4 space-y-6">
     <div class="text-center mb-5">
@@ -52,15 +53,15 @@
     <!-- サインイン時、入力フォームのボタン表示 -->
     <% if user_signed_in? %>
     <div data-controller="comment">
+      <%= form_with model: [@topic, @answer, @new_comment], method: :post do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
       <button type="button" data-action="click->comment#appear" data-comment-target="form_button" class="w-full bg-[#A0D8EF] hover:bg-[#7CC7E8] text-white py-3 rounded-xl font-semibold">コメント投稿</button>
       <div data-comment-target="form" class="mt-5 hidden">
-        <%= form_with model: [@topic, @answer, @new_comment], method: :post do |f| %>
-        <%= render 'shared/error_messages', object: f.object %>
         <%= f.label :body, "コメント", class: "block text-base font-medium text-gray-700" %>
         <%= f.text_area :body, class: "textarea textarea-info text-base w-full rounded-xl border-gray-200 mt-1 mb-5", data: { comment_target: "body" } %>
         <%= f.submit "コメントを投稿", class: "w-full bg-[#A0D8EF] hover:bg-[#7CC7E8] text-white py-4 text-lg font-semibold rounded-xl shadow-lg" %>
-        <% end %>
       </div>
+      <% end %>
     </div>
     <% else %>
     <%= link_to new_user_session_path, class: "w-full bg-[#A0D8EF] hover:bg-[#7CC7E8] text-white py-4 text-lg font-medium rounded-2xl shadow-lg flex flex-col items-center" do %>
