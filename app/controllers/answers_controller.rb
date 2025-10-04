@@ -10,7 +10,7 @@ class AnswersController < ApplicationController
     @answer = Answer.includes(:user, :comments, :reactions).find(params[:id])
     @reactions = Reaction.all
     @sort_by = params[:sort] == "asc" ? "asc" : "desc"
-    @comments = @answer.comments.order(published_at: @sort_by)
+    @comments = @answer.comments.order(published_at: @sort_by).page(params[:page]).per(10)
     @new_comment = @answer.comments.build
   end
 
