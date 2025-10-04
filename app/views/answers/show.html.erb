@@ -3,7 +3,7 @@
 <div class="px-4 py-10">
   <div class="bg-white shadow-lg rounded-2xl w-full py-8 px-4 space-y-6">
     <div class="text-center mb-5">
-      <h2 class=" text-2xl font-bold text-gray-800">例え詳細</h2>
+      <h2 class="text-2xl font-bold text-gray-800">例え詳細</h2>
     </div>
     <!-- お題タイトルとジャンル -->
     <div>
@@ -75,14 +75,20 @@
     <% end %>
     <% end %>
     <!-- コメントタイトル(件数も表示) -->
-    <div>
+    <%= turbo_frame_tag "comments_list" do %>
+    <div class="flex justify-between items-center mb-5">
+      <h2 class="text-2xl font-bold text-gray-800 ml-5">コメント</h2>
+      <span class="text-gray-500">
+        <%= "#{@comments.length}件" %>
     </div>
     <!-- 並び替えボタン -->
-    <div>
+    <div class="flex justify-end space-x-2">
+      <%= render 'answers/sort_buttons', sort_by: @sort_by %>
     </div>
     <!-- コメントコンポーネント -->
     <div>
       <%= render 'answers/comment', comments: @comments%>
     </div>
+    <% end %>
   </div>
 </div>

@@ -16,21 +16,21 @@ class CommentDecorator < Draper::Decorator
         class: "chat-footer opacity-50"
       )
     elsif time_difference < 7.day
-      diff_days = (today.to_i / SECONDS_PER_HOUR - posted_time.to_i / SECONDS_PER_HOUR) / HOURS_PER_DAY
+      diff_days = (today.to_i / seconds_per_hour - posted_time.to_i / seconds_per_hour) / hours_per_day
       h.content_tag(
         :div,
         "#{diff_days}日前",
         class: "chat-footer opacity-50"
       )
     elsif time_difference < 1.year
-      diff_months = (today.year - posted_time.year) * NUMBER_OF_MONTHS + today.month - posted_time.month - (today.day >= posted_time.day ? 0 : 1)
+      diff_months = (today.year - posted_time.year) * number_of_months + today.month - posted_time.month - (today.day >= posted_time.day ? 0 : 1)
       h.content_tag(
         :div,
         "#{diff_months}か月前",
         class: "chat-footer opacity-50"
       )
     else
-      diff_years = (today.year - posted_time.year) * NUMBER_OF_MONTHS + today.month - posted_time.month - (today.day >= posted_time.day ? 0 : 1) / NUMBER_OF_MONTHS
+      diff_years = (today.year - posted_time.year) * number_of_months + today.month - posted_time.month - (today.day >= posted_time.day ? 0 : 1) / number_of_months
       h.content_tag(
         :div,
         "#{diff_years}年前",

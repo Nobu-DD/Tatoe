@@ -9,7 +9,8 @@ class AnswersController < ApplicationController
     @topic = Topic.includes(:genres).find(params[:topic_id])
     @answer = Answer.includes(:user, :comments, :reactions).find(params[:id])
     @reactions = Reaction.all
-    @comments = @answer.comments.order(published_at: :desc)
+    @sort_by = params[:sort] == "asc" ? "asc" : "desc"
+    @comments = @answer.comments.order(published_at: @sort_by)
     @new_comment = @answer.comments.build
   end
 
