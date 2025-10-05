@@ -12,7 +12,7 @@ class UserDecorator < Draper::Decorator
       h.content_tag(
         :span,
         object[:name][0],
-        class: "flex h-full w-full items-center justify-center rounded-full bg-[#E0F2FE] text-[#0369A1] text-2xl"
+        class: "flex h-full w-full items-center justify-center bg-[#E0F2FE] text-[#0369A1] text-2xl"
       )
     end
   end

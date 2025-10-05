@@ -3,11 +3,11 @@
   <div class="bg-white p-4 rounded-xl shadow-sm answer-item">
     <%= link_to topic_path(answer.topic) do %>
     <div class="">
-      <div class="flex justify-between">
-        <div class="flex">
+      <div class="flex justify-between items-center mb-2">
+        <div class="flex space-x-1">
           <% if answer.topic.genres.present? %>
           <% answer.topic.genres.each do |genre|%>
-          <span class="bg-[#E0F2FE] text-[#0369A1] text-xs px-2 py-1 rounded-full mr-1"><%= genre.name %></span>
+          <span class="text-xs px-2 py-1 rounded-full bg-[#E0F2FE] text-[#0369A1]"><%= genre.name %></span>
           <% end %>
           <% else %>
           <p class="text-[#0369A1]">ジャンル未設定</p>
