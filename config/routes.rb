@@ -19,6 +19,7 @@ Rails.application.routes.draw do
     get :ogp_image, on: :member, to: "ogp_images#show_topic"
     resources :answers, only: %i[new show create edit update destroy] do
       post :generate_ai, on: :collection
+      get :ogp_image, on: :member, to: "ogp_images#show_answer"
       resource :answer_reactions, only: %i[create destroy]
       resources :comments, only: %i[create]
     end
