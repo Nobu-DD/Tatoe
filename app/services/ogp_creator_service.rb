@@ -38,6 +38,20 @@ class OgpCreatorService
     end
   end
 
+  def self.x_share_encode(object)
+    if object.is_a?(Topic)
+      message = "お題を投稿しました！例えてみてください！"
+      url = "https://tatoe.net/topics/#{object.id}"
+      genres = object.genres.limit(5).map { |genre| "##{genre.name}" }.join(" ")
+    else
+      message = "例えを投稿しました！コメントをしてみましょう！"
+      url = "https://tatoe.net/topics/#{object.topic_id}/answers/#{object.id}"
+      genres = object.topic.genres.limit(5).map { |genre| "##{genre.name}" }.join(" ")
+    end
+    encode_text = URI.encode_www_form_component("#{message} #{genres}")
+    "https://twitter.com/share?text=#{encode_text}&url=#{url}"
+  end
+
   private
 
   def self.prepare_head_text(text)

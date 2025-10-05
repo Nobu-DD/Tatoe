@@ -1,53 +1,68 @@
-<div class="space-y-4">
-  <% answers.each do |answer| %>
-  <div class="bg-white p-4 rounded-xl shadow-sm answer-item">
-    <div class="flex justify-between items-center mb-2">
-      <div class="flex items-center space-x-2">
-        <div class="relative">
-          <div class="relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full">
-            <%= answer.user.decorate.avatar_display? %>
-          </div>
+<% answers.each do |answer| %>
+<div class="bg-white p-4 rounded-xl shadow-sm answer-item">
+  <!-- 例え投稿ユーザー -->
+  <div class="flex justify-between items-center mb-2">
+    <div class="flex items-center space-x-2">
+      <div class="relative">
+        <div class="relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full">
+          <%= answer.user.decorate.avatar_display? %>
         </div>
-        <span class="text-lg text-gray-700"><%= answer.user.name %></span>
       </div>
-      <span class="text-xs text-gray-500"><%= l answer.published_at %></span>
+      <span class="text-lg text-gray-700"><%= answer.user.name %></span>
     </div>
-    <div class="bg-gray-50 rounded-xl p-3 mb-3">
-      <p class="text-gray-800 font-medium mb-2">💡 <%= answer.body %></p>
-      <% if answer.reason.present? %>
-      <p class="text-sm text-gray-600"><%= simple_format(answer.reason) %></p>
-      <% end %>
-    </div>
-    <div class="flex justify-end">
-      <div>
-        <%= button_to topic_answer_path(@topic,answer), method: :get, class: "btn btn-outline btn-accent rounded-xl mr-2" do%>
-        <span>コメント欄</span>
-        <% end %>
-      </div>
-      <% if current_user && current_user.own?(answer) %>
-      <div class="flex">
-        <%= button_to edit_topic_answer_path(topic_id: answer.topic_id, id: answer.id), method: :get, class: "btn btn-outline btn-info rounded-xl mr-2" do %>
-        <span>編集</span>
-        <% end %>
-        <%= button_to topic_answer_path(topic_id: answer.topic_id, id: answer.id),  method: :delete, data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？"}, class: "btn btn-outline btn-error rounded-xl" do %>
-        <span>削除</span>
-        <% end %>
-      </div>
-      <% else %>
-      <div class="flex">
-        <% if user_signed_in? %>
-        <% reactions.each do |reaction| %>
-        <% if current_user.answer_reactions.exists?(answer_id: answer.id, reaction_id: reaction.id) %>
-        <%= render "answer_reactions/unanswer_reaction", answer: answer, reaction: reaction %>
-        <% else %>
-        <%= render "answer_reactions/answer_reaction", answer: answer, reaction: reaction %>
-        <% end %>
-        <% end %>
-        <% end %>
-      </div>
-      <% end %>
-      <%# ここにコメント数記述%>
-    </div>
+    <span class="text-xs text-gray-500"><%= l answer.published_at %></span>
   </div>
-  <% end %>
+  <!-- 例え内容 -->
+  <div class="bg-gray-50 rounded-xl p-3 mb-3">
+    <p class="text-gray-800 font-medium mb-2">💡 <%= answer.body %></p>
+    <% if answer.reason.present? %>
+    <p class="text-sm text-gray-600"><%= simple_format(answer.reason) %></p>
+    <% end %>
+  </div>
+  <!-- ボタン(コメント欄、Xシェア、編集、削除) -->
+  <div class="flex justify-end space-x-2">
+    <!-- コメントボタン -->
+    <div>
+      <%= button_to topic_answer_path(@topic,answer), method: :get, class: "btn btn-outline btn-accent rounded-xl" do%>
+      <span>コメント欄</span>
+      <% end %>
+    </div>
+    <!-- Xシェアボタン -->
+    <div>
+      <%= link_to OgpCreatorService.x_share_encode(answer), target: :_blank, rel: :noopener, class: "btn bg-black text-white border-black rounded-xl" do %>
+      <svg aria-label=" X logo" width="16" height="12" viewBox="0 0 300 271" xmlns="http://www.w3.org/2000/svg">
+        <path fill="currentColor" d="m236 0h46l-101 115 118 156h-92.6l-72.5-94.8-83 94.8h-46l107-123-113-148h94.9l65.5 86.6zm-16.1 244h25.5l-165-218h-27.4z" />
+      </svg>
+      シェア！
+      <% end %>
+    </div>
+    <!-- 本人の場合、編集・削除ボタン -->
+    <% if current_user && current_user.own?(answer) %>
+    <!-- 編集ボタン -->
+    <div>
+      <%= button_to edit_topic_answer_path(topic_id: answer.topic_id, id: answer.id), method: :get, class: "btn btn-outline btn-info rounded-xl" do %>
+      <span>編集</span>
+      <% end %>
+    </div>
+    <!-- 削除ボタン -->
+    <div>
+      <%= button_to topic_answer_path(topic_id: answer.topic_id, id: answer.id),  method: :delete, data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？"}, class: "btn btn-outline btn-error rounded-xl" do %>
+      <span>削除</span>
+      <% end %>
+    </div>
+    <!-- 本人以外の場合 -->
+    <% else %>
+    <!-- サインインしている場合、リアクションボタン -->
+    <% if user_signed_in? %>
+    <% reactions.each do |reaction| %>
+    <% if current_user.answer_reactions.exists?(answer_id: answer.id, reaction_id: reaction.id) %>
+    <%= render "answer_reactions/unanswer_reaction", answer: answer, reaction: reaction %>
+    <% else %>
+    <%= render "answer_reactions/answer_reaction", answer: answer, reaction: reaction %>
+    <% end %>
+    <% end %>
+    <% end %>
+    <% end %>
+  </div>
 </div>
+<% end %>
