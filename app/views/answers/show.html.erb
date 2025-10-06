@@ -88,12 +88,16 @@
       <% end %>
     </div>
     <% else %>
-    <%= link_to new_user_session_path, class: "w-full bg-[#A0D8EF] hover:bg-[#7CC7E8] text-white py-4 text-lg font-medium rounded-2xl shadow-lg flex flex-col items-center" do %>
+    <%= link_to new_user_session_path(redirect_url: request.original_url), class: "w-full bg-[#A0D8EF] hover:bg-[#7CC7E8] text-white py-4 text-lg font-medium rounded-2xl shadow-lg flex flex-col items-center" do %>
     <div class="flex items-center justify-center">
-      <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
-      </svg>
-      <span class="text-xl">コメント投稿にはログインが必要です</span>
+      <div class="flex justify-center">
+        <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+        </svg>
+        <div class="flex flex-wrap">
+          <span class="text-xl">コメント投稿</span>
+        </div>
+      </div>
     </div>
     <span class="text-sm">※ログイン画面に進みます</span>
     <% end %>
