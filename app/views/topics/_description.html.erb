@@ -1,9 +1,13 @@
-<div class="bg-white px-4 py-6 border-b border-gray-100">
+<div class="bg-white px-2 py-6 border-b border-gray-100">
   <div class="mb-4">
     <div class="flex justify-between mb-3">
-      <div class="flex">
+      <div class="flex flex-wrap space-x-1 space-y-1">
+        <% if topic.genres.present? %>
         <% topic.genres.each do |genre|%>
         <span class="bg-[#E0F2FE] text-[#0369A1] text-xs px-2 py-1 rounded-full mr-1"><%= genre.name %></span>
+        <% end %>
+        <% else %>
+        <p class="text-[#0369A1]">ジャンル未設定</p>
         <% end %>
       </div>
       <div class="flex items-center space-x-3 text-sm text-gray-500">

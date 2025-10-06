@@ -2,7 +2,6 @@
               method: :delete,
               id: "unanswer_reaction_answer_#{answer.id}_reaction_#{reaction.id}",
               data: { turbo_method: :delete },
-              class: "btn rounded-xl" do %>
+              class: "btn rounded-xl #{reaction_color_class(reaction.name)}" do %>
 <%= render "answer_reactions/reaction_icons", reaction: reaction %>
-<%= reaction.name %>
 <% end %>

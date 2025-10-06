@@ -24,4 +24,17 @@ module ApplicationHelper
     base_title = "Tatoe - 例えでつながる共感アプリ"
     title.present? ? "#{title} | #{base_title}" : base_title
   end
+
+  def reaction_color_class(reaction_name)
+    case reaction_name
+    when "共感"
+      "bg-red-500 hover:bg-red-600 text-white"
+      # 赤い背景
+    when "納得"
+       "bg-blue-500 hover:bg-blue-600 text-white"
+       # 青い背景
+    when "爆笑"
+      "bg-yellow-500 hover:bg-yellow-600 text-white" # 黄色い背景
+    end
+  end
 end

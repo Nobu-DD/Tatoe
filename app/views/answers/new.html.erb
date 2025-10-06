@@ -1,19 +1,19 @@
 <% content_for(:title, "例え投稿") %>
-<div class="px-4 py-10">
-  <div class="bg-white shadow-lg rounded-2xl w-full py-8 px-4 space-y-6">
+<div class="pt-5 pb-15 px-2">
+  <div class="bg-white shadow-lg rounded-2xl w-full py-8 px-2 space-y-6">
     <div class="text-center mb-5">
       <h2 class=" text-2xl font-bold text-gray-800">例え投稿</h2>
     </div>
     <%= render 'topics/description', topic: @topic %>
-    <div class="px-4 py-6">
+    <div class="px-2 py-6">
       <%= form_with model: @answer, url: topic_answers_path, data: { controller: "answer", answer_topic_value: @topic.decorate.topic_json_data } do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
       <%= f.hidden_field :topic_id %>
       <div class="mb-5">
         <p class="text-lg">AI例え出力</p>
         <span class="text-sm opacity-50">例えてほしいジャンルを自由に入れてみましょう！</span>
-        <div>
-          <input data-answer-target="theme" type="text" class="input input-info text-base w-35 rounded-xl border-gray-200" placeholder="好きなジャンル">
+        <div class="flex items-center justify-between">
+          <input data-answer-target="theme" type="text" class="input input-info text-base w-auto rounded-xl border-gray-200" placeholder="好きなジャンル">
           <button type="button" data-action="click->answer#output" data-answer-target="button" class="bg-[#A0D8EF] hover:bg-[#7CC7E8] text-white px-5 py-3 text-lg font-semibold rounded-xl shadow-lg">AI生成</button>
         </div>
       </div>

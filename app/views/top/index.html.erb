@@ -1,65 +1,69 @@
-<section class="bg-gradient-to-br from-[#F0F9FF] to-[#E0F2FE] px-4 py-6">
-  <div class="text-center mb-6">
-    <h2 class="text-2xl font-bold text-gray-800 mb-2">
-      知らない趣味や文化を<br />
-      <span class="text-[#A0D8EF]">"たとえ"</span>でつなごう
-    </h2>
-    <p class="text-gray-600 text-sm">あなたの得意分野で例えて、新しい発見を共有しよう！</p>
-  </div>
-  <div class="mb-4">
-    <% if user_signed_in? %>
-    <%= link_to new_topic_path, class: "w-full bg-[#A0D8EF] hover:bg-[#7CC7E8] text-white py-4 text-lg font-medium rounded-2xl shadow-lg flex items-center justify-center" do %>
-    <div class="flex items-center justify-center">
-      <svg class="w-7 h-7 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
-      </svg>
-      <span class="text-2xl">お題を投稿！</span>
+<div class="pb-15">
+  <section class=" bg-gradient-to-br from-[#F0F9FF] to-[#E0F2FE] px-4 py-6">
+    <div class="text-center mb-6">
+      <h2 class="text-2xl font-bold text-gray-800 mb-2">
+        知らない趣味や文化を<br />
+        <span class="text-[#A0D8EF]">"たとえ"</span>でつなごう
+      </h2>
+      <p class="text-gray-600 text-sm">あなたの得意分野で例えて、新しい発見を共有しよう！</p>
     </div>
-    <% end %>
-    <% else %>
-    <%= link_to new_topic_path, class: "w-full bg-[#A0D8EF] hover:bg-[#7CC7E8] text-white py-4 text-lg font-medium rounded-2xl shadow-lg flex flex-col items-center" do %>
-    <div class="flex items-center justify-center">
-      <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
-      </svg>
-      <span class="text-xl">お題を投稿！</span>
+    <div class="mb-4">
+      <% if user_signed_in? %>
+      <%= link_to new_topic_path, class: "w-full bg-[#A0D8EF] hover:bg-[#7CC7E8] text-white py-4 text-lg font-medium rounded-2xl shadow-lg flex items-center justify-center" do %>
+      <div class="flex items-center justify-center">
+        <svg class="w-7 h-7 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+        </svg>
+        <span class="text-2xl">お題を投稿！</span>
+      </div>
+      <% end %>
+      <% else %>
+      <%= link_to new_topic_path, class: "w-full bg-[#A0D8EF] hover:bg-[#7CC7E8] text-white py-4 text-lg font-medium rounded-2xl shadow-lg flex flex-col items-center" do %>
+      <div class="flex items-center justify-center">
+        <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+        </svg>
+        <span class="text-xl">お題を投稿！</span>
+      </div>
+      <span class="text-sm">※ログイン画面に進みます</span>
+      <% end %>
+      <% end %>
     </div>
-    <span class="text-sm">※ログイン画面に進みます</span>
-    <% end %>
-    <% end %>
-  </div>
 
-  <div class=" flex space-x-2">
-    <%= link_to topics_path, class: "flex flex-1 rounded-xl border border-[#A0D8EF] text-[#0369A1] bg-white px-3 py-2 text-sm font-medium items-center justify-center" do %>
-    <svg class="w-4 h-4 mr-1 inline-block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M11 18a7 7 0 100-14 7 7 0 000 14z" />
-    </svg>
-    <span>お題を探す</span>
-    <% end %>
-
-    <button class="flex-1 rounded-xl border border-[#A0D8EF] text-[#0369A1] bg-white px-3 py-2 text-sm font-medium cursor-not-allowed opacity-35" disabled>
+    <div class=" flex space-x-2">
+      <%= link_to topics_path, class: "flex flex-1 rounded-xl border border-[#A0D8EF] text-[#0369A1] bg-white px-3 py-2 text-sm font-medium items-center justify-center" do %>
       <svg class="w-4 h-4 mr-1 inline-block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M12 2a10 10 0 100 20 10 10 0 000-20z" />
+        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M11 18a7 7 0 100-14 7 7 0 000 14z" />
       </svg>
-      アプリの使い方(未実装)
-    </button>
-  </div>
-</section>
-<section class="px-4 py-6">
-  <div class="flex items-center mb-4">
-    <div class="flex items-center bg-gradient-to-r from-orange-500 to-red-500 text-white px-3 py-1 rounded-full mr-3">
-      <span class="text-sm font-bold">PICKUP</span>
+      <span>お題を探す</span>
+      <% end %>
+
+      <button class="flex-1 rounded-xl border border-[#A0D8EF] text-[#0369A1] bg-white px-3 py-2 text-sm font-medium cursor-not-allowed opacity-35" disabled>
+        <svg class="w-4 h-4 mr-1 inline-block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M12 2a10 10 0 100 20 10 10 0 000-20z" />
+        </svg>
+        アプリの使い方(未実装)
+      </button>
     </div>
-    <h3 class="text-lg font-bold text-gray-800">ピックアップ！</h3>
-  </div>
-  <%= render 'topics/pickups', topics: @pickup_topics %>
-</section>
-<section class="px-4 py-6">
-  <div class="flex items-center mb-4">
-    <svg class="w-5 h-5 text-gray-500 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M11 18a7 7 0 100-14 7 7 0 000 14z" />
-    </svg>
-    <h3 class="text-lg font-bold text-gray-800">最近のお題</h3>
-  </div>
-  <%= render @topics %>
-</section>
+  </section>
+  <section class="px-4 py-6">
+    <div class="flex items-center mb-4">
+      <div class="flex items-center bg-gradient-to-r from-orange-500 to-red-500 text-white px-3 py-1 rounded-full mr-3">
+        <span class="text-sm font-bold">PICKUP</span>
+      </div>
+      <h3 class="text-lg font-bold text-gray-800">ピックアップ！</h3>
+    </div>
+    <%= render 'topics/pickups', topics: @pickup_topics %>
+  </section>
+  <section class="px-4 py-6">
+    <div class="flex items-center mb-4">
+      <svg class="w-5 h-5 text-gray-500 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M11 18a7 7 0 100-14 7 7 0 000 14z" />
+      </svg>
+      <h3 class="text-lg font-bold text-gray-800">最近のお題</h3>
+    </div>
+    <div class="space-y-3">
+      <%= render @topics %>
+    </div>
+  </section>
+</div>
