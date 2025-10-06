@@ -1,5 +1,5 @@
 <% comments.each do |comment| %>
-<% if comment.user_id == current_user.id %>
+<% if comment.user_id == current_user&.id %>
 <div class="chat chat-end">
   <div class="chat-image avatar">
     <div class="w-10 rounded-full">
