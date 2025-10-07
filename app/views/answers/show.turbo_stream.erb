@@ -1,0 +1,11 @@
+<%= turbo_stream.append "all-comments-page" do %>
+  <%= render 'answers/comment', comments: @comments%>
+<% end%>
+<% if path_to_next_page(@comments).present? %>
+  <%= turbo_stream.replace "comments-page-#{@comments.current_page}" do %>
+    <%= turbo_frame_tag "comments-page-#{@comments.next_page}", loading: :lazy, src: topic_answer_path(@topic, @answer, format: :turbo_stream, page: @comments.next_page)  %>
+  <% end %>
+<% else %>
+  <%= turbo_stream.remove "loading_indicator" %>
+  <%= turbo_stream.remove "comments-page-#{@comments.current_page}" %>
+<% end%>
