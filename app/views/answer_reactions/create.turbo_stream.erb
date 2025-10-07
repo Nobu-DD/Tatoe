@@ -1,3 +1,6 @@
 <%= turbo_stream.replace "answer_reaction_answer_#{@answer.id}_reaction_#{@reaction.id}" do %>
   <%= render "answer_reactions/unanswer_reaction", answer: @answer, reaction: @reaction %>
 <% end %>
+<%= turbo_stream.update "reaction_count_answer_#{@answer.id}_reaction_#{@reaction.id}" do %>
+  <span id=<%="reaction_count_answer_#{@answer.id}_reaction_#{@reaction.id}"%>><%= @answer.answer_reactions.where(reaction: @reaction).count %></span>
+<% end %>

@@ -8,14 +8,15 @@
         </div>
         <span class="text-lg text-gray-700"><%= answer.user.name %></span>
       </div>
-      <!-- 公開日付 -->
+      <!-- 公開日付、リアクション数 -->
       <div>
         <div class="mb-1"><%= l answer.published_at %></div>
+        <!-- リアクション数 -->
         <div class="flex justify-end space-x-3">
           <% @reactions.each do |reaction| %>
-          <div class="flex">
+          <div class="flex space-x-1">
             <%= render "shared/reaction_icons", reaction: reaction %>
-            <%= reaction.answers.count %>
+            <span id=<%="reaction_count_answer_#{answer.id}_reaction_#{reaction.id}"%>><%= answer.answer_reactions.where(reaction: reaction).count %></span>
           </div>
           <% end %>
         </div>
