@@ -1,0 +1,6 @@
+<%= turbo_stream.replace dom_id(@comment) do %>
+<div class="flex justify-end py-2 mr-13">
+  <div role="alert" class="alert alert-error w-55 flex justify-center">
+    <p><%= notice %></p>
+  </div>
+<% end %>

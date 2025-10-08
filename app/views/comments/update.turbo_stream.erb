@@ -1,16 +1,24 @@
 <% if flash[:notice] %>
-<%= turbo_stream.update "comment_#{@comment.id}_flash" do %>
-  <div role="alert" class="alert alert-info mb-2">
-    <%= notice %>
-  </div>
-<% end %>
-<%= turbo_stream.update dom_id(@comment) do %>
-  <%= render partial: 'answers/comment', object: @comment %>
-<% end %>
-  <% elsif flash[:alert] %>
-  <%= turbo_stream.update "comment_#{@comment.id}_flash" do %>
-  <div role="alert" class="alert alert-error mb-2">
-    <%= alert %>
-  </div>
+  <%= turbo_stream.update dom_id(@comment) do %>
+    <%= render partial: 'answers/comment', object: @comment %>
+  <% end %>
+  <%= turbo_stream.replace "comment_#{@comment.id}_flash" do %>
+    <div id=<%="comment_#{@comment.id}_flash"%> class="mt-3">
+      <div class="flex justify-end mr-13">
+        <div role="alert" class="alert alert-info w-64 flex justify-center py-2">
+          <%= "下記の#{notice}" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% elsif flash[:alert] %>
+  <%= turbo_stream.replace "comment_#{@comment.id}_flash" do %>
+    <div id=<%="comment_#{@comment.id}_flash"%> class="my-3">
+      <div class="flex justify-center">
+        <div role="alert" class="alert alert-error flex justify-center py-2">
+          <%= alert %>
+        </div>
+      </div>
+    </div>
   <% end %>
 <% end %>

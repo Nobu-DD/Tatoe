@@ -28,8 +28,15 @@ class CommentsController < ApplicationController
     if @comment.update(comment_params)
       flash.now.notice = t("comment.update.success")
     else
-      flash.now[:alert] = t("comment.update.failure")
+      flash.now.alert = t("comment.update.failure")
     end
+  end
+
+  def destroy
+    @comment = current_user.comments.find(params[:id])
+    @comment[:answer_id] = params[:answer_id]
+    @comment.destroy!
+    flash.now[:notice] = t("comment.deleted.success")
   end
 
   private

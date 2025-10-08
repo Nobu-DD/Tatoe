@@ -1,23 +1,22 @@
 <% if comment.user_id == current_user&.id %>
+<%= turbo_frame_tag dom_id(comment) do %>
 <div id=<%="comment_#{comment.id}_flash"%>></div>
-<%= turbo_frame_tag dom_id(comment) do %> <div class=" chat chat-end">
+<div class="chat chat-end">
   <div class="chat-image avatar">
     <div class="w-10 rounded-full">
       <%= comment.user.decorate.avatar_display? %>
     </div>
   </div>
-  <div class="chat-header">
-    <%= comment.user.name %>
+  <div class="chat-header space-x-2">
+    <span><%= comment.user.name %></span>
+    <span><%= comment.decorate.comment_posting_time %></span>
   </div>
-  <div class="chat-bubble chat-bubble-info mb-1">
+  <div class="chat-bubble chat-bubble-success mb-1">
     <%= simple_format(comment.body) %>
   </div>
-  <div class="flex justify-between space-x-2">
-    <div>
-      <%= link_to "編集", edit_topic_answer_comment_path(@topic, @answer, comment), class: "btn btn-outline btn-info btn-xs" %>
-      <!-- ここに削除ボタン追加予定 -->
-    </div>
-    <%= comment.decorate.comment_posting_time %>
+  <div class="flex space-x-2 my-1">
+    <%= button_to "編集", edit_topic_answer_comment_path(@topic, @answer, comment), method: :get, class: "btn btn-outline btn-info btn-sm" %>
+    <%= button_to "削除", topic_answer_comment_path(@topic, @answer, comment), method: :delete, data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？"}, class: "btn btn-outline btn-error btn-sm"  %>
   </div>
 </div>
 <% end %>

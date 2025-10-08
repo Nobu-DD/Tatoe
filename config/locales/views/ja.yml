@@ -48,6 +48,8 @@ ja:
     update:
       success: コメントを更新しました。
       failure: 未入力、もしくは文字数オーバーです。100文字以下で入力してください。
+    deleted:
+      success: コメントを削除しました。
   errors:
     messages:
         extension_allowlist_error: を登録できる拡張子はjpg jpeg pngのみとなります。
