@@ -16,7 +16,7 @@
   </div>
   <div class="flex space-x-2 my-1">
     <%= button_to "編集", edit_topic_answer_comment_path(@topic, @answer, comment), method: :get, class: "btn btn-outline btn-info btn-sm" %>
-    <%= button_to "削除", topic_answer_comment_path(@topic, @answer, comment), method: :delete, data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？"}, class: "btn btn-outline btn-error btn-sm"  %>
+    <%= button_to "削除", topic_answer_comment_path(@topic, @answer, comment), method: :delete, data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？", turbo_submits_with: "削除中..."}, class: "btn btn-outline btn-error btn-sm"  %>
   </div>
 </div>
 <% end %>

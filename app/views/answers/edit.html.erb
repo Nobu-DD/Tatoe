@@ -35,7 +35,7 @@
         <%= f.label :reason, "理由・説明(任意)", class: "block text-sm font-medium text-gray-700 mb-3" %>
         <%= f.text_area :reason, class: "textarea textarea-info text-base w-full rounded-xl border-gray-200", placeholder: "例えた理由を教えて下さい" %>
       </div>
-      <%= f.submit "更新", class: "w-full bg-[#A0D8EF] hover:bg-[#7CC7E8] text-white py-4 text-lg font-semibold rounded-xl shadow-lg" %>
+      <%= f.submit "更新", class: "w-full bg-[#A0D8EF] hover:bg-[#7CC7E8] text-white py-4 text-lg font-semibold rounded-xl shadow-lg", data: { turbo_submits_with: "更新中..." } %>
     </div>
   </div>
 </div>

@@ -22,12 +22,12 @@
     <!-- コメント入力フォーム(stimulus使用して動的に動作) -->
     <!-- サインイン時、入力フォームのボタン表示 -->
     <% if user_signed_in? %>
-    <div class="mb-5">
-      <%= form_with model: [@topic, @answer, @new_comment], method: :post, data: {turbo: "false"} do |f| %>
-      <%= render 'shared/error_messages', object: f.object %>
+    <div id="comment_form" class="mb-5">
+      <%= form_with model: [@topic, @answer, @new_comment], method: :post do |f| %>
+      <div id="comment_form_flash"></div>
       <%= f.label :body, "コメント", class: "block text-base font-bold text-gray-700 mb-2" %>
       <%= f.text_area :body, id: "form_text_area", class: "textarea textarea-info text-base w-full rounded-xl border-gray-200 mt-1 mb-5" %>
-      <%= f.submit "コメントを投稿", class: "w-full bg-[#A0D8EF] hover:bg-[#7CC7E8] text-white py-4 text-lg font-semibold rounded-xl shadow-lg" %>
+      <%= f.submit "コメントを投稿", class: "w-full bg-[#A0D8EF] hover:bg-[#7CC7E8] text-white py-4 text-lg font-semibold rounded-xl shadow-lg", data: {turbo_submits_with: "投稿中..."} %>
       <% end %>
     </div>
     <% else %>
@@ -45,33 +45,14 @@
     <span class="text-sm">※ログイン画面に進みます</span>
     <% end %>
     <% end %>
-    <!-- コメントタイトル(件数も表示) -->
+    <!-- コメント画面-->
     <%= turbo_frame_tag "comments_list" do %>
     <div class="flex justify-between items-center mb-5">
       <h2 class="text-2xl font-bold text-gray-800 ml-2">コメント</h2>
       <span class="text-gray-500">
         <%= "#{@comments.total_count}件" %>
     </div>
-    <!-- 並び替えボタン -->
-    <div class="flex justify-end space-x-2">
-      <%= render 'answers/sort_buttons', sort_by: @sort_by %>
-    </div>
-    <!-- コメントコンポーネント -->
-    <div class="bg-white py-6 border-b border-gray-100">
-      <div class="mb-4">
-        <div id="all-comments-page">
-          <%= render partial: 'answers/comment', collection: @comments %>
-        </div>
-      </div>
-      <% if path_to_next_page(@comments).present?%>
-      <div id="loading_indicator">
-        <div class="text-center pb-20" id=<%="loading_indicator_#{@comments.next_page}"%>>
-          <span class="loading loading-spinner text-info loading-xl"></span>
-        </div>
-      </div>
-      <%= turbo_frame_tag "comments-page-#{@comments.next_page}", loading: :lazy, src: topic_answer_path(@topic, @answer, format: :turbo_stream, page: @comments.next_page)  %>
-      <% end %>
-    </div>
+    <%= render "comments/comment_section" %>
     <% end %>
   </div>
 </div>

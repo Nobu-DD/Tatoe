@@ -1,0 +1,33 @@
+<% if flash[:notice] %>
+<%= turbo_stream.update "comment_form" do %>
+  <%= form_with model: [@topic, @answer, @new_comment], method: :post do |f| %>
+    <div id="comment_form_flash"></div>
+    <%= f.label :body, "コメント", class: "block text-base font-bold text-gray-700 mb-2" %>
+    <%= f.text_area :body, id: "form_text_area", class: "textarea textarea-info text-base w-full rounded-xl border-gray-200 mt-1 mb-5" %>
+    <%= f.submit "コメントを投稿", class: "w-full bg-[#A0D8EF] hover:bg-[#7CC7E8] text-white py-4 text-lg font-semibold rounded-xl shadow-lg", data: {turbo_submits_with: "投稿中..."} %>
+    <% end %>
+<% end %>
+<%= turbo_stream.update "comment_form_flash" do %>
+  <div role="alert" class="alert alert-info mb-2">
+    <%= notice %>
+  </div>
+<% end %>
+<%= turbo_stream.update "comments_list" do %>
+  <div class="flex justify-between items-center mb-5">
+    <h2 class="text-2xl font-bold text-gray-800 ml-2">コメント</h2>
+      <span class="text-gray-500">
+    <%= "#{@comments.total_count}件" %>
+  </div>
+    <%= render "comments/comment_section" %>
+<% end %>
+<% elsif flash[:alert] %>
+<%= turbo_stream.update "comment_form_flash" do %>
+  <div role="alert" class="alert alert-error mb-3" id="error_message">
+    <ul class="mb-0">
+      <% @comment.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+<% end %>

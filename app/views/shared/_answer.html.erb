@@ -1,6 +1,5 @@
 <%= turbo_frame_tag dom_id(answer) do %>
 <div class="mb-4">
-  <div id=<%="answer_#{answer.id}_flash"%>></div>
   <div class="bg-white py-4 px-2 rounded-xl shadow-sm answer-item space-y-2">
     <div class="flex justify-between">
       <!-- アバター、ユーザー名 -->
@@ -24,6 +23,7 @@
       </div>
     </div>
     <!-- 例え本文(例え、説明文) -->
+    <div id=<%="answer_#{answer.id}_flash"%>></div>
     <div class="bg-gray-50 rounded-xl p-3 mb-3">
       <p class="text-gray-800 font-medium mb-2">💡 <%= answer.body %></p>
       <% if answer.reason.present? %>
@@ -31,7 +31,7 @@
       <% end %>
       <% if local_assigns[:comment_button] %>
       <div class="flex justify-end mt-2">
-        <%= button_to topic_answer_path(@topic,answer), method: :get, class: "btn btn-outline btn-accent rounded-xl" do%>
+        <%= button_to topic_answer_path(@topic,answer), method: :get, data: { turbo_frame: "_top" } , class: "btn btn-outline btn-accent rounded-xl" do%>
         <span>コメント欄</span>
         <% end %>
       </div>
@@ -46,7 +46,7 @@
         <span>編集</span>
         <% end %>
         <!-- 削除ボタン -->
-        <%= button_to topic_answer_path(@topic, answer),  method: :delete, data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？"}, class: "btn btn-outline btn-error rounded-xl" do %>
+        <%= button_to topic_answer_path(@topic, answer),  method: :delete, data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？", turbo_submits_with: "削除中..."}, class: "btn btn-outline btn-error rounded-xl" do %>
         <span>削除</span>
         <% end %>
       </div>

@@ -1,0 +1,20 @@
+<!-- 並び替えボタン -->
+<div class="flex justify-end space-x-2">
+  <%= render 'answers/sort_buttons', sort_by: @sort_by %>
+</div>
+<!-- コメントコンポーネント -->
+<div class="bg-white py-6 border-b border-gray-100">
+  <div class="mb-4">
+    <div id="all-comments-page">
+      <%= render partial: 'answers/comment', collection: @comments %>
+    </div>
+  </div>
+  <% if path_to_next_page(@comments).present?%>
+  <div id="loading_indicator">
+    <div class="text-center pb-20" id=<%="loading_indicator_#{@comments.next_page}"%>>
+      <span class="loading loading-spinner text-info loading-xl"></span>
+    </div>
+  </div>
+  <%= turbo_frame_tag "comments-page-#{@comments.next_page}", loading: :lazy, src: topic_answer_path(@topic, @answer, format: :turbo_stream, page: @comments.next_page)  %>
+  <% end %>
+</div>
