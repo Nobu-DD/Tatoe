@@ -28,7 +28,7 @@
       <% if answer.reason.present? %>
       <p class="text-sm text-gray-600"><%= simple_format(answer.reason) %></p>
       <% end %>
-      <% if current_page?(controller: "topics", action: "show") %>
+      <% if local_assigns[:comment_button] %>
       <div class="flex justify-end">
         <%= button_to topic_answer_path(@topic,answer), method: :get, class: "btn btn-outline btn-accent rounded-xl" do%>
         <span>コメント欄</span>

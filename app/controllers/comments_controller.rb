@@ -5,7 +5,8 @@ class CommentsController < ApplicationController
     @topic = Topic.find(params[:topic_id])
     @answer = @new_comment.answer
     @reactions = Reaction.all
-    @comments = @answer.comments.order(published_at: :desc)
+    @sort_by = "desc"
+    @comments = @answer.comments.order(published_at: @sort_by).page(1).per(10)
     if @new_comment.save
       redirect_to topic_answer_path(@topic, @answer), notice: t("comment.create.success")
     else

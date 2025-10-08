@@ -17,8 +17,9 @@ class AnswersController < ApplicationController
   def create
     @answer = current_user.answers.build(answer_params)
     @topic = Topic.includes(:user, :genres, :hints, :answers).find(params[:topic_id])
+    @reactions = Reaction.all
     if @answer.save
-      redirect_to @topic, notice: t("answer.create.success")
+      flash.now.notice = t("answer.create.success")
     else
       render :new, status: :unprocessable_entity, notice: t("spots.create.failure")
     end
