@@ -1,0 +1,21 @@
+<%= turbo_frame_tag dom_id(@comment) do %>
+<%= form_with model: [@topic, @answer, @comment] do |f| %>
+<div class="chat chat-end">
+  <div class="chat-image avatar">
+    <div class="w-10 rounded-full">
+      <%= @comment.user.decorate.avatar_display? %>
+    </div>
+  </div>
+  <div class="chat-header">
+    <%= @comment.user.name %>
+  </div>
+  <div class="chat-bubble chat-bubble-info mb-1">
+    <%= f.text_field :body, class: "input input-info w-full" %>
+  </div>
+  <div class="flex space-x-2">
+    <%= f.submit "更新", class: "btn btn-outline btn-info btn-xs" %>
+    <%= @comment.decorate.comment_posting_time %>
+  </div>
+</div>
+<% end %>
+<% end %>

@@ -60,7 +60,7 @@
     <div class="bg-white py-6 border-b border-gray-100">
       <div class="mb-4">
         <div id="all-comments-page">
-          <%= render 'answers/comment', comments: @comments%>
+          <%= render partial: 'answers/comment', collection: @comments %>
         </div>
       </div>
       <% if path_to_next_page(@comments).present?%>

@@ -1,4 +1,10 @@
 class CommentsController < ApplicationController
+  def edit
+    @comment = Comment.includes(:user, :answer).find(params[:id])
+    @answer = @comment.answer
+    @topic = Topic.find(@answer.topic_id)
+  end
+
   def create
     @new_comment = current_user.comments.build(comment_params)
     @new_comment[:answer_id] = params[:answer_id]
@@ -11,6 +17,18 @@ class CommentsController < ApplicationController
       redirect_to topic_answer_path(@topic, @answer), notice: t("comment.create.success")
     else
       render "answers/show", status: :unprocessable_entity
+    end
+  end
+
+  def update
+    @comment = current_user.comments.find(params[:id])
+    @comment[:answer_id] = params[:answer_id]
+    @topic = Topic.find(params[:topic_id])
+    @answer = @comment.answer
+    if @comment.update(comment_params)
+      flash.now.notice = t("comment.update.success")
+    else
+      flash.now[:alert] = t("comment.update.failure")
     end
   end
 

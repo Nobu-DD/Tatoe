@@ -1,0 +1,16 @@
+<% if flash[:notice] %>
+<%= turbo_stream.update "comment_#{@comment.id}_flash" do %>
+  <div role="alert" class="alert alert-info mb-2">
+    <%= notice %>
+  </div>
+<% end %>
+<%= turbo_stream.update dom_id(@comment) do %>
+  <%= render partial: 'answers/comment', object: @comment %>
+<% end %>
+  <% elsif flash[:alert] %>
+  <%= turbo_stream.update "comment_#{@comment.id}_flash" do %>
+  <div role="alert" class="alert alert-error mb-2">
+    <%= alert %>
+  </div>
+  <% end %>
+<% end %>

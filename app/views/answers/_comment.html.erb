@@ -1,6 +1,6 @@
-<% comments.each do |comment| %>
 <% if comment.user_id == current_user&.id %>
-<div class="chat chat-end">
+<div id=<%="comment_#{comment.id}_flash"%>></div>
+<%= turbo_frame_tag dom_id(comment) do %> <div class=" chat chat-end">
   <div class="chat-image avatar">
     <div class="w-10 rounded-full">
       <%= comment.user.decorate.avatar_display? %>
@@ -9,11 +9,18 @@
   <div class="chat-header">
     <%= comment.user.name %>
   </div>
-  <div class="chat-bubble chat-bubble-info">
+  <div class="chat-bubble chat-bubble-info mb-1">
     <%= simple_format(comment.body) %>
   </div>
-  <%= comment.decorate.comment_posting_time %>
+  <div class="flex justify-between space-x-2">
+    <div>
+      <%= link_to "編集", edit_topic_answer_comment_path(@topic, @answer, comment), class: "btn btn-outline btn-info btn-xs" %>
+      <!-- ここに削除ボタン追加予定 -->
+    </div>
+    <%= comment.decorate.comment_posting_time %>
+  </div>
 </div>
+<% end %>
 <% else %>
 <div class="chat chat-start">
   <div class="chat-image avatar">
@@ -29,5 +36,4 @@
   </div>
   <%= comment.decorate.comment_posting_time %>
 </div>
-<% end %>
 <% end %>
