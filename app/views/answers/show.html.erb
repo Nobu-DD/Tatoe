@@ -8,9 +8,9 @@
     </div>
     <!-- お題タイトルとジャンル -->
     <div>
-      <div class="flex mb-3">
+      <div class="flex flex-wrap mb-3 space-x-1 space-y-1">
         <% @topic.genres.each do |genre| %>
-        <span class="bg-[#E0F2FE] text-[#0369A1] text-xs px-2 py-1 rounded-full mr-1"><%= genre.name %></span>
+        <span class="bg-[#E0F2FE] text-[#0369A1] text-xs px-2 py-1 rounded-full"><%= genre.name %></span>
         <% end %>
       </div>
       <div class="divide-y-2 divide-gray-200">
