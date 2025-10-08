@@ -1,4 +1,10 @@
 class CommentsController < ApplicationController
+  def show
+    @comment = Comment.includes(:user, :answer).find(params[:id])
+    @answer = @comment.answer
+    @topic = Topic.find(@answer.topic_id)
+  end
+
   def edit
     @comment = Comment.includes(:user, :answer).find(params[:id])
     @answer = @comment.answer
