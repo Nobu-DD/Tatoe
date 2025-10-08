@@ -1,11 +1,12 @@
+<%= turbo_frame_tag dom_id(answer) do %>
 <div class="mb-4">
+  <div id=<%="answer_#{answer.id}_flash"%>></div>
   <div class="bg-white py-4 px-2 rounded-xl shadow-sm answer-item space-y-2">
     <div class="flex justify-between">
       <!-- アバター、ユーザー名 -->
       <div class="flex items-center space-x-2">
         <div class="relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full">
-          <%= answer.user.decorate.avatar_display? %>
-        </div>
+          <%= answer.user.decorate.avatar_display? %> </div>
         <span class="text-lg text-gray-700"><%= answer.user.name %></span>
       </div>
       <!-- 公開日付、リアクション数 -->
@@ -29,7 +30,7 @@
       <p class="text-sm text-gray-600"><%= simple_format(answer.reason) %></p>
       <% end %>
       <% if local_assigns[:comment_button] %>
-      <div class="flex justify-end">
+      <div class="flex justify-end mt-2">
         <%= button_to topic_answer_path(@topic,answer), method: :get, class: "btn btn-outline btn-accent rounded-xl" do%>
         <span>コメント欄</span>
         <% end %>
@@ -41,11 +42,11 @@
       <% if current_user && current_user.own?(answer) %>
       <!-- 編集ボタン -->
       <div class="flex space-x-1 ml-2">
-        <%= button_to edit_topic_answer_path(topic_id: answer.topic_id, id: answer.id), method: :get, class: "btn btn-outline btn-info rounded-xl" do %>
+        <%= button_to edit_topic_answer_path(@topic, answer), method: :get, class: "btn btn-outline btn-info rounded-xl" do %>
         <span>編集</span>
         <% end %>
         <!-- 削除ボタン -->
-        <%= button_to topic_answer_path(topic_id: answer.topic_id, id: answer.id),  method: :delete, data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？"}, class: "btn btn-outline btn-error rounded-xl" do %>
+        <%= button_to topic_answer_path(@topic, answer),  method: :delete, data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？"}, class: "btn btn-outline btn-error rounded-xl" do %>
         <span>削除</span>
         <% end %>
       </div>
@@ -73,3 +74,4 @@
     </div>
   </div>
 </div>
+<% end %>

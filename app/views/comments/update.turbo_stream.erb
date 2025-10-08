@@ -1,5 +1,5 @@
 <% if flash[:notice] %>
-  <%= turbo_stream.update dom_id(@comment) do %>
+  <%= turbo_stream.replace dom_id(@comment) do %>
     <%= render partial: 'answers/comment', object: @comment %>
   <% end %>
   <%= turbo_stream.replace "comment_#{@comment.id}_flash" do %>
