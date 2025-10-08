@@ -14,9 +14,13 @@
 <% elsif flash[:alert] %>
   <%= turbo_stream.replace "comment_#{@comment.id}_flash" do %>
     <div id=<%="comment_#{@comment.id}_flash"%> class="my-3">
-      <div class="flex justify-center">
+      <div class="flex justify-end mr-13">
         <div role="alert" class="alert alert-error flex justify-center py-2">
-          <%= alert %>
+          <ul class="mb-0">
+            <% @comment.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
         </div>
       </div>
     </div>
