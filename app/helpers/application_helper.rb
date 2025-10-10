@@ -32,7 +32,7 @@ module ApplicationHelper
       # 赤い背景
     when "納得"
        "bg-blue-500 hover:bg-blue-600 text-white"
-       # 青い背景
+      # 青い背景
     when "爆笑"
       "bg-yellow-500 hover:bg-yellow-600 text-white" # 黄色い背景
     end
