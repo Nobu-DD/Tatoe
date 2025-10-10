@@ -1,0 +1,9 @@
+<%= turbo_stream.update "new_answer" do %>
+  <%= link_to "例えを投稿！", new_topic_answer_path(@topic), class: "block mt-4 w-full text-center bg-[#A0D8EF] hover:bg-[#7CC7E8] text-white font-medium text-xl px-4 py-2 rounded-xl" %>
+<% end %>
+<%= turbo_stream.replace "alert" do %>
+  <div role="alert" class="alert alert-info mb-2">
+    <%= notice %>
+  </div>
+  <%= render partial: "shared/answer", object: @answer, locals: { comment_button: true } %>
+<% end %>

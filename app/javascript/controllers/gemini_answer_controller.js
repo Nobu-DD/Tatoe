@@ -10,7 +10,7 @@ export default class extends Controller {
     const topic = this.topicValue;
     const theme = this.themeTarget.value;
     this.buttonTarget.innerHTML = `AI出力中...<span class="loading loading-spinner text-info ml-2"></span>`;
-    fetch("generate_ai", {
+    fetch("topics/answers/generate_ai", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

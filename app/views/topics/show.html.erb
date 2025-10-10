@@ -1,14 +1,18 @@
 <% content_for(:title, "#{@topic.title}") %>
 <% set_meta_tags(twitter: {image: ogp_image_topic_url(@topic)})  %>
-<div class="px-4 py-10">
-  <div class="bg-white shadow-lg rounded-2xl w-full py-8 px-4 space-y-6">
+<div class="pt-5 pb-15 px-2">
+  <div class="bg-white shadow-lg rounded-2xl w-full py-8 px-2 space-y-6">
     <div class="text-center mb-5">
       <h2 class=" text-2xl font-bold text-gray-800">お題詳細</h2>
     </div>
     <%= render 'description', topic: @topic %>
     <!-- Answers -->
     <% if user_signed_in? %>
+    <!-- ここからturbo処理 -->
+    <%= turbo_frame_tag "new_answer" do %>
     <%= link_to "例えを投稿！", new_topic_answer_path(@topic), class: "block mt-4 w-full text-center bg-[#A0D8EF] hover:bg-[#7CC7E8] text-white font-medium text-xl px-4 py-2 rounded-xl" %>
+    <% end %>
+    <!-- ここまで -->
     <% else %>
     <%= link_to new_topic_answer_path(@topic), class: "block mt-4 w-full text-center bg-[#A0D8EF] hover:bg-[#7CC7E8] text-white font-medium text-xl px-4 py-2 rounded-xl flex flex-col" do %>
     <div class="flex items-center justify-center">
@@ -20,22 +24,23 @@
     <span class=" text-sm">※ログイン画面に進みます</span>
     <% end %>
     <% end %>
-    <div class="px-2 py-6">
+    <div class="py-6">
       <h3 class="text-lg font-bold text-gray-800 mb-4">みんなの例え</h3>
-
       <% if @answers.any? %>
-      <div class="space-y-4">
-        <%= render "topics/answer", answers: @answers, reactions: @reactions %>
+      <div id="alert"></div>
+      <div id="topic_answers">
+        <%= render partial: "shared/answer", collection: @answers, locals: { comment_button: true } %>
       </div>
-      <% else %>
-      <div class="text-center py-12">
-        <svg class="w-12 h-12 text-gray-300 mx-auto mb-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M17 8h2a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2v-8a2 2 0 012-2h2m4-4h4m-4 4h4m-4 4h4" />
-        </svg>
-        <p class="text-gray-500">まだ例えが投稿されていません</p>
-        <p class="text-sm text-gray-400">最初の例えを投稿してみませんか？</p>
-      </div>
-      <% end %>
     </div>
+    <% else %>
+    <div class="text-center py-12">
+      <svg class="w-12 h-12 text-gray-300 mx-auto mb-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M17 8h2a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2v-8a2 2 0 012-2h2m4-4h4m-4 4h4m-4 4h4" />
+      </svg>
+      <p class="text-gray-500">まだ例えが投稿されていません</p>
+      <p class="text-sm text-gray-400">最初の例えを投稿してみませんか？</p>
+    </div>
+    <% end %>
   </div>
+</div>
 </div>

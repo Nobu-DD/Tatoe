@@ -17,8 +17,9 @@ class AnswersController < ApplicationController
   def create
     @answer = current_user.answers.build(answer_params)
     @topic = Topic.includes(:user, :genres, :hints, :answers).find(params[:topic_id])
+    @reactions = Reaction.all
     if @answer.save
-      redirect_to @topic, notice: t("answer.create.success")
+      flash.now.notice = t("answer.create.success")
     else
       render :new, status: :unprocessable_entity, notice: t("spots.create.failure")
     end
@@ -27,22 +28,24 @@ class AnswersController < ApplicationController
   def edit
     @topic = Topic.includes(:user, :genres, :hints, :answers).find(params[:topic_id])
     @answer = current_user.answers.find(params[:id])
+    @reactions = Reaction.all
   end
 
   def update
     @answer = current_user.answers.find(params[:id])
     @topic = Topic.includes(:user, :genres, :hints, :answers).find(params[:topic_id])
+    @reactions = Reaction.all
     if @answer.update(answer_params)
-      redirect_to @topic, notice: t("answer.update.success")
+      flash.now.notice = t("answer.update.success")
     else
-      render :edit, status: :unprocessable_entity, alert: t("answer.update.failure")
+      flash.now.alert = t("answer.update.failure")
     end
   end
 
   def destroy
-    answer = current_user.answers.find(params[:id])
-    answer.destroy!
-    redirect_to topic_path(id: answer.topic_id), notice: t("answer.deleted.success")
+    @answer = current_user.answers.find(params[:id])
+    @answer.destroy!
+    flash.now.notice = t("answer.deleted.success")
   end
 
   def generate_ai
