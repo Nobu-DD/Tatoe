@@ -20,14 +20,9 @@ class Users::SessionsController < Devise::SessionsController
 
   private
 
-  # 認証後のリダイレクト先を設定(topics/[:id]/newにアクセスしようとした時)
+  # 認証後のリダイレクト先を設定
   def set_custom_return_to
-    request_path = session[:user_return_to]
-
-    if request_path =~ /\/topics\/\d+\/answers\/new/
-      redirect_path = request_path.sub("/answers/new", "")
-      session[:user_return_to] = redirect_path
-    end
+    session[:user_return_to] = params[:redirect_path].present? ? params[:redirect_path] : return
   end
   # protected
 
