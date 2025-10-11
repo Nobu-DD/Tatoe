@@ -22,7 +22,8 @@ class Users::SessionsController < Devise::SessionsController
 
   # 認証後のリダイレクト先を設定
   def set_custom_return_to
-    session[:user_return_to] = params[:redirect_path].present? ? params[:redirect_path] : return
+    return unless params[:redirect_path].present?
+    session[:user_return_to] = params[:redirect_path]
   end
   # protected
 
