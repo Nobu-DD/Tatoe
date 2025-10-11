@@ -39,6 +39,7 @@
     </div>
     <!-- ボタン -->
     <div class="flex flex-wrap justify-end space-y-2">
+      <!-- 認証済みかつ、例えが自分投稿の場合 -->
       <% if current_user && current_user.own?(answer) %>
       <!-- 編集ボタン -->
       <div class="flex space-x-1 ml-2">
@@ -52,6 +53,7 @@
       </div>
       <!-- 本人以外の場合 -->
       <% else %>
+      <!-- 認証済みかどうか -->
       <% if user_signed_in? %>
       <div class="flex space-x-1 ml-2">
         <% @reactions.each do |reaction| %>
