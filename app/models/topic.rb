@@ -5,6 +5,7 @@ class Topic < ApplicationRecord
   validates :title, presence: true, length: { maximum: 255 }
   validates :description, length: { maximum: 255 }
   validates :published_at, presence: true
+  validate :genre_names_length
 
   has_many :hints, dependent: :destroy
   has_many :answers, dependent: :destroy
@@ -34,6 +35,8 @@ class Topic < ApplicationRecord
     %w[user genres hints]
   end
 
+  private
+
   # ジャンル新規登録
   def assign_genres
     if genre_names.blank?
@@ -43,5 +46,14 @@ class Topic < ApplicationRecord
 
     names = genre_names.split(/[[:space:],、\/]|　+/).reject(&:blank?).uniq
     self.genres = names.map { |name| Genre.find_or_create_by(name: name) }
+  end
+
+  def genre_names_length
+    return if genre_names.blank?
+    genre_names.split(/[[:space:],、\/]|　+/).reject(&:blank?).uniq.each do |genre|
+      if genre.strip.length > 15
+        errors.add(:genres, :too_long, count: 15)
+      end
+    end
   end
 end

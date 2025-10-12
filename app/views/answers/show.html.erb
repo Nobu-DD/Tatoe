@@ -19,7 +19,6 @@
     </div>
     <!-- 例え情報(アバター、ユーザー名、公開日付) -->
     <%= render "shared/answer", answer: @answer, locals: { comment_button: false } %>
-    <!-- コメント入力フォーム(stimulus使用して動的に動作) -->
     <!-- サインイン時、入力フォームのボタン表示 -->
     <% if user_signed_in? %>
     <div id="comment_form" class="mb-5">

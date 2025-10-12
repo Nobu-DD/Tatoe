@@ -47,4 +47,5 @@ ja:
           attributes:
             name:
               blank: を入力してください。
-              too_long: は%{count}文字以内で入力してください。
+              invalid: は不正な値です。
+              too_long: は1つ%{count}文字以内で入力してください。
