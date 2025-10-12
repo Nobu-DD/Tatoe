@@ -11,7 +11,7 @@
         <div id="alert" class="alert alert-info justify-center mb-2">
           <%= notice %>
         </div>
-        <%= render partial: "shared/answer", collection: @answers, locals: { comment_button: true } %>
+        <%= render partial: "shared/answer", object: @answer, locals: { comment_button: true } %>
       </div>
     <% end %>
   <% else %>
