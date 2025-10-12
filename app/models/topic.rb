@@ -12,6 +12,7 @@ class Topic < ApplicationRecord
   has_many :topic_genres, dependent: :destroy
   has_many :genres, through: :topic_genres
   has_many :pickups, dependent: :destroy
+  has_many :likes, as: :likeable
   belongs_to :user
 
   attr_accessor :genre_names
