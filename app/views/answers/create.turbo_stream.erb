@@ -16,13 +16,11 @@
     <% end %>
   <% else %>
     <%= turbo_stream.prepend "topic_answers" do %>
-      <div id="topic_answer">
+      <div id=<%="topic_answer_#{@answer.id}"%>>
         <div id="alert" class="alert alert-info justify-center mb-2">
           <%= notice %>
         </div>
-        <div>
-          <%= render partial: "shared/answer", object: @answer, locals: { comment_button: true } %>
-        </div>
+        <%= render partial: "shared/answer", object: @answer, locals: { comment_button: true } %>
       </div>
     <% end %>
   <% end %>
