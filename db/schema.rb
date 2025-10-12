@@ -69,7 +69,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_10_12_094345) do
     t.bigint "user_id"
     t.string "likeable_type"
     t.bigint "likeable_id"
-    t.datetime "published_at", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["likeable_type", "likeable_id"], name: "index_likes_on_likeable"
