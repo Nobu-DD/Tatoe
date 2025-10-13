@@ -1,3 +1,5 @@
+<%= turbo_frame_tag dom_id(topic) do %>
+<div id="<%="topic_#{topic.id}_flash"%>"></div>
 <div class="bg-white px-2 py-2 border-b border-gray-100">
   <div class="mb-4">
     <div class="flex flex-wrap space-x-1 space-y-1 mb-3">
@@ -12,7 +14,7 @@
 
     <h2 class="text-xl font-bold text-gray-800 mb-3 leading-relaxed"><%= topic.title %></h2>
 
-    <% if @topic.description.present? %>
+    <% if topic.description.present? %>
     <p class="text-gray-600 text-sm leading-relaxed"><%= simple_format(topic.description) %></p>
     <% end %>
 
@@ -62,3 +64,4 @@
     </div>
   </div>
 </div>
+<% end %>

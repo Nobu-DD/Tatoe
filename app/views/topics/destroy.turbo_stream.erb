@@ -1,8 +1,17 @@
-<%= turbo_stream.replace dom_id(@topic) do %>
-  <div role="alert" class="alert alert-error flex justify-center my-1">
-    <p><%= "「#{@topic.title}」を#{notice}" %></p>
+<% if @current_path == "/topics/#{@topic.id}" %>
+  <%= turbo_stream.update "topic_block" do %>
+  <div role="alert" class="alert alert-error flex justify-center mt-1 mb-3">
+    <span><%= "「#{@topic.title}」の削除が完了しました！" %></span>
   </div>
-<% end %>
-<%= turbo_stream.replace "topics_size" do %>
-  <span id="topics_size"><%=@topics.count %>件のお題</span>
+  <%= link_to "お題検索ページに戻る", topics_path, class: "btn btn-block" %>
+  <% end %>
+<% else %>
+  <%= turbo_stream.replace dom_id(@topic) do %>
+    <div role="alert" class="alert alert-error flex justify-center my-1">
+      <p><%= "「#{@topic.title}」を#{notice}" %></p>
+    </div>
+  <% end %>
+  <%= turbo_stream.replace "topics_size" do %>
+    <span id="topics_size"><%=@topics.count %>件のお題</span>
+  <% end %>
 <% end %>

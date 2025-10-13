@@ -1,6 +1,12 @@
 <% if flash[:notice] %>
-  <%= turbo_stream.replace dom_id(@topic) do %>
-    <%= render "topics/topic", topic: @topic %>
+  <% if @current_path == "/topics/#{@topic.id}/" %>
+    <%= turbo_stream.replace dom_id(@topic) do %>
+      <%= render "topics/description", topic: @topic %>
+    <% end %>
+  <% else %>
+    <%= turbo_stream.replace dom_id(@topic) do %>
+      <%= render "topics/topic", topic: @topic %>
+    <% end %>
   <% end %>
   <%= turbo_stream.update "topic_#{@topic.id}_flash" do %>
     <div id="alert" class="alert alert-info flex justify-center py-2 mb-3">

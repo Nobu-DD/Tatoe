@@ -31,6 +31,7 @@ class TopicsController < ApplicationController
   end
 
   def update
+    @current_path = URI.parse(request.referer).path
     @topic = current_user.topics.find(params[:id])
     if @topic.update(topic_params)
       flash.now.notice = t("topic.update.success")
@@ -40,6 +41,7 @@ class TopicsController < ApplicationController
   end
 
   def destroy
+    @current_path = URI.parse(request.referer).path
     @topic = current_user.topics.find(params[:id])
     @topic.destroy!
     @topics = current_user.topics
