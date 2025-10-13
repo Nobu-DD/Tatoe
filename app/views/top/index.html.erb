@@ -30,7 +30,7 @@
       <% end %>
     </div>
 
-    <div class=" flex space-x-2">
+    <div class="flex space-x-2">
       <%= link_to topics_path, class: "flex flex-1 rounded-xl border border-[#A0D8EF] text-[#0369A1] bg-white px-3 py-2 text-sm font-medium items-center justify-center" do %>
       <svg class="w-4 h-4 mr-1 inline-block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M11 18a7 7 0 100-14 7 7 0 000 14z" />
@@ -55,16 +55,23 @@
     </div>
     <%= render 'topics/pickups', topics: @pickup_topics %>
   </section>
+  <%= turbo_frame_tag "topics-list", autoscroll: true, data: { autoscroll_block: "start" } do %>
   <section class="px-4 py-6">
-    <div class="flex items-center mb-4">
-      <svg class="w-5 h-5 text-gray-500 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+    <div class="flex items-center mb-7">
+      <svg class="w-7 h-7 text-gray-500 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M11 18a7 7 0 100-14 7 7 0 000 14z" />
       </svg>
-      <h3 class="text-lg font-bold text-gray-800">最近のお題</h3>
+      <h3 class="text-2xl font-bold text-gray-800">最近のお題</h3>
+    </div>
+    <div class="flex justify-center mb-2">
+      <%= paginate @topics, window: 1 %>
     </div>
     <div class="space-y-3">
       <%= render @topics %>
-      <%= paginate @topics %>
+      <div class="flex justify-center">
+        <%= paginate @topics, window: 1 %>
+      </div>
     </div>
   </section>
+  <% end %>
 </div>
