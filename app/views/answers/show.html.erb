@@ -18,40 +18,41 @@
       </div>
     </div>
     <!-- 例え情報(アバター、ユーザー名、公開日付) -->
-    <%= render "shared/answer", answer: @answer, topic: @topic, locals: { comment_button: false } %>
-    <!-- サインイン時、入力フォームのボタン表示 -->
-    <% if user_signed_in? %>
-    <div id="comment_form" class="mb-5">
-      <%= form_with model: [@topic, @answer, @new_comment], method: :post do |f| %>
-      <div id="comment_form_flash"></div>
-      <%= f.label :body, "コメント", class: "block text-base font-bold text-gray-700 mb-2" %>
-      <%= f.text_area :body, id: "form_text_area", class: "textarea textarea-info text-base w-full rounded-xl border-gray-200 mt-1 mb-5" %>
-      <%= f.submit "コメントを投稿", class: "w-full bg-[#A0D8EF] hover:bg-[#7CC7E8] text-white py-4 text-lg font-semibold rounded-xl shadow-lg", data: {turbo_submits_with: "投稿中..."} %>
-      <% end %>
-    </div>
-    <% else %>
-    <%= link_to new_user_session_path(redirect_path: request.path), class: "w-full bg-[#A0D8EF] hover:bg-[#7CC7E8] text-white py-4 text-lg font-medium rounded-2xl shadow-lg flex flex-col items-center" do %>
-    <div class="flex items-center justify-center">
-      <div class="flex justify-center">
-        <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
-        </svg>
-        <div class="flex flex-wrap">
-          <span class="text-xl">コメント投稿</span>
+    <div id="answer_block">
+      <%= render "shared/answer", answer: @answer, topic: @topic, comment_button: false %>
+      <% if user_signed_in? %>
+      <div id="comment_form" class="mb-5">
+        <%= form_with model: [@topic, @answer, @new_comment], method: :post do |f| %>
+        <div id="comment_form_flash"></div>
+        <%= f.label :body, "コメント", class: "block text-base font-bold text-gray-700 mb-2" %>
+        <%= f.text_area :body, id: "form_text_area", class: "textarea textarea-info text-base w-full rounded-xl border-gray-200 mt-1 mb-5" %>
+        <%= f.submit "コメントを投稿", class: "w-full bg-[#A0D8EF] hover:bg-[#7CC7E8] text-white py-4 text-lg font-semibold rounded-xl shadow-lg", data: {turbo_submits_with: "投稿中..."} %>
+        <% end %>
+      </div>
+      <% else %>
+      <%= link_to new_user_session_path(redirect_path: request.path), class: "w-full bg-[#A0D8EF] hover:bg-[#7CC7E8] text-white py-4 text-lg font-medium rounded-2xl shadow-lg flex flex-col items-center" do %>
+      <div class="flex items-center justify-center">
+        <div class="flex justify-center">
+          <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+          </svg>
+          <div class="flex flex-wrap">
+            <span class="text-xl">コメント投稿</span>
+          </div>
         </div>
       </div>
+      <span class="text-sm">※ログイン画面に進みます</span>
+      <% end %>
+      <% end %>
+      <!-- コメント画面-->
+      <%= turbo_frame_tag "comments_list" do %>
+      <div class="flex justify-between items-center mb-5">
+        <h2 class="text-2xl font-bold text-gray-800 ml-2">コメント</h2>
+        <span class="text-gray-500">
+          <%= "#{@comments.total_count}件" %>
+      </div>
+      <%= render "comments/comment_section" %>
+      <% end %>
     </div>
-    <span class="text-sm">※ログイン画面に進みます</span>
-    <% end %>
-    <% end %>
-    <!-- コメント画面-->
-    <%= turbo_frame_tag "comments_list" do %>
-    <div class="flex justify-between items-center mb-5">
-      <h2 class="text-2xl font-bold text-gray-800 ml-2">コメント</h2>
-      <span class="text-gray-500">
-        <%= "#{@comments.total_count}件" %>
-    </div>
-    <%= render "comments/comment_section" %>
-    <% end %>
   </div>
 </div>
