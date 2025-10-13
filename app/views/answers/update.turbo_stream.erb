@@ -1,0 +1,20 @@
+<% if flash[:notice] %>
+  <%= turbo_stream.replace dom_id(@answer) do %>
+    <%= render partial: "shared/answer", object: @answer, locals: { comment_button: true } %>
+  <% end %>
+  <%= turbo_stream.update "answer_#{@answer.id}_flash" do %>
+    <div id="alert" class="alert alert-info flex justify-center py-2 mb-3">
+      <%= "下記の#{notice}" %>
+    </div>
+  <% end %>
+<% elsif flash[:alert] %>
+  <%= turbo_stream.replace "error_message" do %>
+    <div id="error_message" class="alert alert-error mb-3">
+      <ul>
+        <% @answer.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+<% end %>

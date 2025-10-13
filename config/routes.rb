@@ -21,10 +21,11 @@ Rails.application.routes.draw do
       post :generate_ai, on: :collection
       get :ogp_image, on: :member, to: "ogp_images#show_answer"
       resource :answer_reactions, only: %i[create destroy]
-      resources :comments, only: %i[create]
+      resources :comments, only: %i[show edit create update destroy]
     end
   end
   resource :mypage, only: %i[show update destroy]
+  resource :likes, only: %i[create destroy]
 
   # get "images", on: :member, to: "images#ogp"
   # Render dynamic PWA files from app/views/pwa/*

@@ -1,9 +1,9 @@
 class CommentDecorator < Draper::Decorator
   delegate_all
-
   def comment_posting_time
     number_of_months = 12
     seconds_per_hour = 3600
+    seconds_per_week = 604800
     hours_per_day = 24
 
     today = Time.current
@@ -20,6 +20,13 @@ class CommentDecorator < Draper::Decorator
       h.content_tag(
         :div,
         "#{diff_days}日前",
+        class: "chat-footer opacity-50"
+      )
+    elsif time_difference < 1.month
+      diff_weeks = ((today.to_f - posted_time.to_f) / seconds_per_week).ceil
+      h.content_tag(
+        :div,
+        "#{diff_weeks}週間前",
         class: "chat-footer opacity-50"
       )
     elsif time_difference < 1.year

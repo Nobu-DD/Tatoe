@@ -1,0 +1,30 @@
+<%= turbo_frame_tag dom_id(@comment) do %>
+<div class="border-y-1 border-gray-200 mt-2 mb-4"></div>
+<div class="chat chat-end">
+  <div class="chat-image avatar">
+    <div class="w-10 rounded-full">
+      <%= @comment.user.decorate.avatar_display? %>
+    </div>
+  </div>
+  <div class="chat-header">
+    <%= @comment.user.name %>
+  </div>
+  <div class="chat-bubble chat-bubble-success mb-1">
+    <%= simple_format(@comment.body) %>
+  </div>
+  <div class="flex space-x-2">
+    <%= @comment.decorate.comment_posting_time %>
+  </div>
+</div>
+<%= form_with model: [@topic, @answer, @comment] do |f| %>
+<div id=<%="comment_#{@comment.id}_flash"%>></div>
+<div class="flex justify-end mr-13 mb-2">
+  <%= f.text_area :body, class: "textarea textarea-info w-[90%] mt-1" %>
+</div>
+<div class="flex justify-end mr-13 space-x-2">
+  <%= f.submit "更新", class: "btn btn-outline btn-info btn-sm", data: { turbo_submits_with: "更新中..." } %>
+  <%=  link_to "戻る", topic_answer_comment_path(@topic, @answer, @comment), class: "btn btn-outline btn-success btn-sm" %>
+</div>
+<% end %>
+<div class="border-y-1 border-gray-200 my-3"></div>
+<% end %>

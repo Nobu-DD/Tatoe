@@ -1,0 +1,12 @@
+<%= turbo_stream.replace "#{@type}_like_#{@object.id}" do %>
+  <%= render "like", type: @type, object: @object %>
+<% end %>
+
+<%= turbo_stream.replace "#{@type}_#{@object.id}_size" do %>
+  <% case @type %>
+  <% when "Topic" %>
+    <span id="<%="#{@type}_#{@object.id}_size"%>", class="text-lg text-[#999999]"><%=@object.likes.size%></span>
+  <% when "Comment" %>
+    <span id="<%="#{@type}_#{@object.id}_size"%>", class="text-gray-400"><%=@object.likes.size%></span>
+  <% end %>
+<% end %>

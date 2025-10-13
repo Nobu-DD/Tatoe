@@ -1,0 +1,6 @@
+<%= button_to edit_topic_path(topic), method: :get, form_class: "w-1/2", class: "btn btn-outline btn-info w-full rounded-xl" do %>
+<span>編集</span>
+<% end %>
+<%= button_to topic_path(topic), method: :delete, data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？"}, form_class: "w-1/2", class: "btn btn-outline btn-error w-full rounded-xl" do %>
+<span>削除</span>
+<% end %>

@@ -1,8 +1,8 @@
 <div class="topic-item">
-  <div class=" space-y-4 mb-3">
+  <div class="space-y-4 mb-3">
     <%= link_to topic do %> <div class="bg-white p-4 rounded-xl shadow-sm hover:shadow-md transition">
       <div class="flex justify-between items-center mb-2">
-        <div class="flex space-x-1">
+        <div class="flex flex-wrap space-x-1 space-y-1">
           <% if topic.genres.present? %>
           <% topic.genres.each do |genre| %>
           <span class="text-xs px-2 py-1 rounded-full bg-[#E0F2FE] text-[#0369A1]"><%= genre.name %></span>
