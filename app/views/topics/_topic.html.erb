@@ -1,6 +1,6 @@
 <div class="bg-white rounded-xl shadow-sm transition">
   <div class="hover:shadow-md transition shadow-2xs rounded-t-lg p-3">
-    <%= link_to topic do %>
+    <%= link_to topic_path(topic), data: {turbo: false} do %>
     <div class="flex justify-between items-center mb-2">
       <div class="flex flex-wrap space-x-1 space-y-1">
         <% if topic.genres.present? %>
