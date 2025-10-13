@@ -43,14 +43,14 @@
       </div>
       <% else %>
       <% if user_signed_in? %>
-      <div class="">
+      <div class="flex items-center space-x-2">
         <% if current_user.likes.exists?(likeable_type: "Topic", likeable_id: topic.id) %>
         <%= render "likes/unlike", object: topic, type: "Topic" %>
         <% else %>
         <%= render "likes/like", object: topic, type: "Topic" %>
         <% end %>
         <% end %>
-        <span class="text-[#999999]"><%=topic.likes.size%></span>
+        <span id=<%="Topic_#{topic.id}_size"%> class="text-lg text-[#999999]"><%=topic.likes.size%></span>
       </div>
       <% end %>
     </div>

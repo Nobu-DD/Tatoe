@@ -1,3 +1,6 @@
 <%= turbo_stream.replace "#{@type}_like_#{@object.id}" do %>
   <%= render "unlike", type: @type, object: @object %>
 <% end %>
+<%= turbo_stream.replace "#{@type}_#{@object.id}_size" do %>
+  <span id=<%="#{@type}_#{@object.id}_size"%> class="text-lg text-[#999999]"><%=@object.likes.size%></span>
+  <% end %>
