@@ -1,0 +1,22 @@
+<% if flash[:notice] %>
+  <%= turbo_stream.replace dom_id(@topic) do %>
+    <%= render "topics/topic", topic: @topic %>
+  <% end %>
+  <%= turbo_stream.update "topic_#{@topic.id}_flash" do %>
+    <div id="alert" class="alert alert-info flex justify-center py-2 mb-3">
+      <%= "下記の#{notice}" %>
+    </div>
+  <% end %>
+<% elsif flash[:alert] %>
+  <%= turbo_stream.replace "topic_#{@topic.id}_flash" do %>
+    <div id="<%="topic_#{@topic.id}_flash"%>" class="my-3">
+        <div role="alert" class="alert alert-error flex justify-center py-2">
+          <ul class="mb-0">
+            <% @topic.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    </div>
+  <% end %>
+<% end %>

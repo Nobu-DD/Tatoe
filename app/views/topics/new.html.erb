@@ -4,7 +4,26 @@
     <div class="text-center mb-5">
       <h2 class=" text-2xl font-bold text-gray-800">お題を投稿</h2>
     </div>
-    <%= render 'form', topic: @topic %>
+    <div data-controller="topic">
+      <!-- AIお題出力 -->
+      <div class="mb-5">
+        <div class="flex justify-between mb-3">
+          <div>
+            <p class="text-lg">AIお題出力</p>
+            <span class="text-sm opacity-50">例:野球に関する内容をIT用語で例えてみる<br>
+              　 乗馬に関する内容をプログラミングで例えてみる</span>
+          </div>
+          <div class="flex items-center">
+            <button type="button" data-action="click->topic#output" data-topic-target="button" class="bg-[#A0D8EF] hover:bg-[#7CC7E8] text-white px-5 py-3 text-lg font-semibold rounded-xl shadow-lg">AI出力</button>
+          </div>
+        </div>
+        <input data-topic-target="genre" type="text" class="input input-info text-base w-35 rounded-xl border-gray-200" placeholder="お題ジャンル">
+        <span>に関する内容を</span>
+        <input data-topic-target="compare" type="text" class="input input-info text-base w-35 rounded-xl border-gray-200" placeholder="例える範囲">
+        <span>で例えてみる</span>
+      </div>
+      <%= render 'form', topic: @topic %>
+    </div>
 
     <!-- コツセクション -->
     <div class="mt-6 bg-gradient-to-r from-[#F0F9FF] to-[#E0F2FE] rounded-xl p-4 shadow-sm">

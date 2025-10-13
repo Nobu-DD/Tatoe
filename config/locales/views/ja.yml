@@ -33,10 +33,11 @@ ja:
       success: お題を更新しました。
       failure: お題内容に不備があります。
     deleted:
-      success: お題を削除しました。
+      success: 削除しました。
   answer:
     create:
       success: 例えを投稿しました。
+      failure: 例えの投稿に失敗しました。
     update:
       success: 例えを更新しました。
       failure: 例え内容に不備があります。

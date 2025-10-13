@@ -7,7 +7,7 @@
   <% end %>
   <% if @topic.answers.size == 1 %>
     <%= turbo_stream.replace "not_answer" do %>
-      <div id=<%="topic_answer_#{@answer.id}"%>>
+      <div id="<%="topic_answer_#{@answer.id}"%>">
         <div id="alert" class="alert alert-info justify-center mb-2">
           <%= notice %>
         </div>
@@ -16,7 +16,7 @@
     <% end %>
   <% else %>
     <%= turbo_stream.prepend "topic_answers" do %>
-      <div id=<%="topic_answer_#{@answer.id}"%>>
+      <div id="<%="topic_answer_#{@answer.id}"%>">
         <div id="alert" class="alert alert-info justify-center mb-2">
           <%= notice %>
         </div>
@@ -26,8 +26,8 @@
   <% end %>
 
 <% elsif flash[:alert] %>
-  <%= turbo_stream.replace "error_message" do %>
-    <div id="error_message" class="alert alert-error mb-3">
+  <%= turbo_stream.replace "answer_form_flash" do %>
+    <div id="answer_form_flash" class="alert alert-error mb-3">
       <ul>
         <% @answer.errors.full_messages.each do |msg| %>
           <li><%= msg %></li>

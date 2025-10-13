@@ -66,11 +66,10 @@
     <div class="flex justify-center mb-2">
       <%= render "shared/paginate", collection: @topics %>
     </div>
-    <div class="space-y-3">
-      <%= render partial: "topics/topic", collection: @topics %>
-      <div class="flex justify-center">
-        <%= render "shared/paginate", collection: @topics %>
-      </div>
+    <%= render partial: "topics/topic", collection: @topics %>
+    <div class="flex justify-center">
+      <%= render "shared/paginate", collection: @topics %>
+    </div>
   </section>
   <% end %>
 </div>

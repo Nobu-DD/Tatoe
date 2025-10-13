@@ -34,11 +34,10 @@
   <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
 </head>
 
-<body class="min-h-screen ">
-
+<body>
   <%= render 'shared/header' %>
-  <main class="bg-white h-screen">
-    <div class="w-full h-full pb-20 max-w-2xl mx-auto bg-[#FAFAFA]">
+  <main class="bg-white">
+    <div class="w-full h-full pb-5 max-w-2xl mx-auto bg-[#FAFAFA]">
       <% if flash[:notice] %>
       <div role="alert" class="alert alert-info">
         <%= notice %>

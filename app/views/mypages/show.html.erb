@@ -92,12 +92,14 @@
                 </svg>
                 <div>
                   <div class="font-medium text-gray-800">投稿したお題</div>
-                  <div class="text-sm text-gray-500"><%=@topics.count %>件のお題</div>
+                  <div class="text-sm text-gray-500">
+                    <span id="topics_size"><%=@topics.count %>件のお題</span>
+                  </div>
                 </div>
               </div>
               <div class="collapse-content">
                 <% if @topics.present? %>
-                <%= render partial: "topic", collection: @topics %>
+                <%= render partial: "topics/topic", collection: @topics %>
                 <% else %>
                 <p>まだお題は投稿していません。</p>
                 <% end %>

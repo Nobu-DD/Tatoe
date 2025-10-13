@@ -1,0 +1,8 @@
+<%= turbo_stream.replace dom_id(@topic) do %>
+  <div role="alert" class="alert alert-error flex justify-center my-1">
+    <p><%= "「#{@topic.title}」を#{notice}" %></p>
+  </div>
+<% end %>
+<%= turbo_stream.replace "topics_size" do %>
+  <span id="topics_size"><%=@topics.count %>件のお題</span>
+<% end %>
