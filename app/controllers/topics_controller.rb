@@ -21,7 +21,7 @@ class TopicsController < ApplicationController
 
   def show
     @topic = Topic.includes(:user, :genres, :hints, :answers).find(params[:id])
-    @answers = @topic.answers.order(created_at: :desc)
+    @answers = @topic.answers.order(created_at: :desc).page(params[:page]).per(10)
     @reactions = Reaction.all
   end
 

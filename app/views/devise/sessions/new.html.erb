@@ -5,7 +5,7 @@
       <h2 class=" text-2xl font-bold text-gray-800">ログイン</h2>
     </div>
 
-    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <%= form_with model: resource, as: resource_name, url: session_path(resource_name), data: {turbo: false} do |f| %>
     <div class="field mb-5">
       <%= f.label :email ,"メールアドレス", class: "block text-sm font-medium text-gray-700 mb-3" %>
       <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "input input-info text-base w-full rounded-xl border-gray-200", placeholder: "tatoe@example.com"%>

@@ -14,6 +14,7 @@ class User < ApplicationRecord
   has_many :genres, through: :my_genres
   has_many :answer_reactions, dependent: :destroy
   has_many :reactions, through: :answer_reactions
+  has_many :likes, dependent: :destroy
 
   mount_uploader :avatar, AvatarUploader
 

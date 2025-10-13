@@ -16,9 +16,9 @@ class AnswersController < ApplicationController
 
   def create
     @answer = current_user.answers.build(answer_params)
-    @topic = Topic.includes(:user, :genres, :hints, :answers).find(params[:topic_id])
     @reactions = Reaction.all
     if @answer.save
+      @topic = Topic.includes(:user, :genres, :hints, :answers).find(params[:topic_id])
       flash.now.notice = t("answer.create.success")
     else
       render :new, status: :unprocessable_entity, notice: t("spots.create.failure")
@@ -43,8 +43,10 @@ class AnswersController < ApplicationController
   end
 
   def destroy
+    binding.pry
     @answer = current_user.answers.find(params[:id])
     @answer.destroy!
+    @answers = Topic.includes(:answers).find(params[:topic_id]).answers
     flash.now.notice = t("answer.deleted.success")
   end
 

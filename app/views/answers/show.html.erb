@@ -19,7 +19,6 @@
     </div>
     <!-- 例え情報(アバター、ユーザー名、公開日付) -->
     <%= render "shared/answer", answer: @answer, locals: { comment_button: false } %>
-    <!-- コメント入力フォーム(stimulus使用して動的に動作) -->
     <!-- サインイン時、入力フォームのボタン表示 -->
     <% if user_signed_in? %>
     <div id="comment_form" class="mb-5">
@@ -31,7 +30,7 @@
       <% end %>
     </div>
     <% else %>
-    <%= link_to new_user_session_path(redirect_url: request.original_url), class: "w-full bg-[#A0D8EF] hover:bg-[#7CC7E8] text-white py-4 text-lg font-medium rounded-2xl shadow-lg flex flex-col items-center" do %>
+    <%= link_to new_user_session_path(redirect_path: request.path), class: "w-full bg-[#A0D8EF] hover:bg-[#7CC7E8] text-white py-4 text-lg font-medium rounded-2xl shadow-lg flex flex-col items-center" do %>
     <div class="flex items-center justify-center">
       <div class="flex justify-center">
         <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">

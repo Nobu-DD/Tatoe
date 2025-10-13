@@ -1,5 +1,19 @@
-<%= turbo_stream.replace dom_id(@answer) do %>
-  <div role="alert" class="alert alert-error flex justify-center">
-    <p><%= notice %></p>
+<%= turbo_stream.replace "topic_answer_#{@answer.id}" do %>
+  <div role="alert" class="alert alert-error flex justify-center my-1">
+    <p><%= "「#{@answer.body}」を#{notice}" %></p>
   </div>
+<% end %>
+<%= turbo_stream.replace "answers_size" do %>
+  <span id="answers_size" class="text-[#999999]"><%=@answers.size%></span>
+<% end %>
+<% if @answers.blank? %>
+  <%= turbo_stream.append "topic_answers" do %>
+    <div id="not_answer" class="text-center py-12">
+      <svg class="w-12 h-12 text-gray-300 mx-auto mb-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M17 8h2a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2v-8a2 2 0 012-2h2m4-4h4m-4 4h4m-4 4h4" />
+      </svg>
+      <p class="text-gray-500">まだ例えが投稿されていません</p>
+      <p class="text-sm text-gray-400">最初の例えを投稿してみませんか？</p>
+    </div>
+  <% end %>
 <% end %>

@@ -1,9 +1,10 @@
 class MypagesController < ApplicationController
+  before_action :set_user, only: %i[show update destroy]
+
   def show
-    @user = User.includes(:topics, :answers, :genres).find(current_user.id)
   end
+
   def update
-    @user = User.includes(:topics, :answers, :genres).find(current_user.id)
     if @user.update(avatar_params)
       redirect_to mypage_path, notice: "アバターを登録しました。"
     else
@@ -11,8 +12,8 @@ class MypagesController < ApplicationController
       render :show, status: :unprocessable_entity
     end
   end
+
   def destroy
-    @user = User.includes(:topics, :answers, :genres).find(current_user.id)
     @user.remove_avatar!
     if @user.save
       redirect_to mypage_path, notice: "アバターをリセットしました。"
@@ -23,6 +24,10 @@ class MypagesController < ApplicationController
   end
 
   private
+
+  def set_user
+    @user = User.includes(:topics, :answers, :genres).find(current_user.id)
+  end
 
   def avatar_params
     params.permit(:avatar)

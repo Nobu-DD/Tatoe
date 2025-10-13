@@ -41,7 +41,7 @@ ja:
       success: 例えを更新しました。
       failure: 例え内容に不備があります。
     deleted:
-      success: 例えを削除しました。
+      success: 削除しました。
   comment:
     create:
       success: コメントを投稿しました。
@@ -51,6 +51,13 @@ ja:
       failure: 未入力、もしくは文字数オーバーです。100文字以下で入力してください。
     deleted:
       success: コメントを削除しました。
+  views:
+    pagination:
+      first: 最初
+      previous: 前
+      truncate: ･･･
+      next: 次
+      last: 最後
   errors:
     messages:
         extension_allowlist_error: を登録できる拡張子はjpg jpeg pngのみとなります。
