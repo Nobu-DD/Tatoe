@@ -1,0 +1,3 @@
+<%= turbo_stream.replace "#{@type}_like_#{@object.id}" do %>
+  <%= render "like", type: @type, object: @object %>
+<% end %>
