@@ -43,7 +43,6 @@ class AnswersController < ApplicationController
   end
 
   def destroy
-    binding.pry
     @answer = current_user.answers.find(params[:id])
     @answer.destroy!
     @answers = Topic.includes(:answers).find(params[:topic_id]).answers

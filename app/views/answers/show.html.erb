@@ -18,7 +18,7 @@
       </div>
     </div>
     <!-- 例え情報(アバター、ユーザー名、公開日付) -->
-    <%= render "shared/answer", answer: @answer, locals: { comment_button: false } %>
+    <%= render "shared/answer", answer: @answer, topic: @topic, locals: { comment_button: false } %>
     <!-- サインイン時、入力フォームのボタン表示 -->
     <% if user_signed_in? %>
     <div id="comment_form" class="mb-5">

@@ -92,12 +92,12 @@
                 </svg>
                 <div>
                   <div class="font-medium text-gray-800">投稿したお題</div>
-                  <div class="text-sm text-gray-500"><%=@user.topics.count %>件のお題</div>
+                  <div class="text-sm text-gray-500"><%=@topics.count %>件のお題</div>
                 </div>
               </div>
               <div class="collapse-content">
-                <% if @user.topics.present? %>
-                <%= render partial: "topic", collection: @user.topics %>
+                <% if @topics.present? %>
+                <%= render partial: "topic", collection: @topics %>
                 <% else %>
                 <p>まだお題は投稿していません。</p>
                 <% end %>
@@ -112,19 +112,34 @@
                 </svg>
                 <div>
                   <div class="font-medium text-gray-800">投稿した例え</div>
-                  <div class="text-sm text-gray-500"><%= @user.answers.count%>件の例え
+                  <div class="text-sm text-gray-500"><%= @answers.count%>件の例え
                   </div>
                 </div>
               </div>
-              <div class="collapse-content">
-                <% if @user.answers.present? %>
-                <%= render "answer", answers: @user.answers %>
+              <div class="collapse-content space-y-2">
+                <% if @answers.present? %>
+                <%= @answers.each do |answer| %>
+                <div id="<%="topic_answer_#{answer.id}"%>" class="flex flex-wrap justify-between mt-2">
+                  <div class="flex items-center space-x-2 space-y-1 justify-end">
+                    <div class="h-8 w-8 overflow-hidden rounded-full">
+                      <% if answer.topic.user.avatar.present? %>
+                      <%= image_tag answer.topic.user.avatar.url, alt: "プロフィール画像", class: "aspect-square h-full w-full" %>
+                      <% else %>
+                      <span class=" flex h-full w-full items-center justify-center rounded-full bg-[#E0F2FE] text-[#0369A1] text-2xl"><%= answer.topic.user[:name][0] %></span>
+                      <% end %>
+                    </div>
+                    <span class="text-base text-gray-500"><%= answer.topic.user.name %></span>
+                  </div>
+                  <span class="text-gray-500"><%= answer.topic.title %></span>
+                  <%= render "shared/answer", answer: answer, topic: answer.topic, comment_button: true %>
+                </div>
+                <% end %>
                 <% else %>
                 <p>まだ回答は投稿していません。</p>
                 <% end %>
               </div>
             </div>
-            <div class=" border-t border-gray-100"></div>
+            <div class="border-t border-gray-100"></div>
 
             <%= link_to users_edit_password_path, class: "flex items-center justify-between p-4 hover:bg-gray-50 rounded-b-2xl" do %>
             <div class="flex items-center">

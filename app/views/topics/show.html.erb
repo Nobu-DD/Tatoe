@@ -41,7 +41,7 @@
         <% if @answers.any? %>
         <% @answers.each do |answer| %>
         <div id=<%="topic_answer_#{answer.id}"%>>
-          <%= render partial: "shared/answer", object: answer, locals: { comment_button: true } %>
+          <%= render "shared/answer", answer: answer, topic: @topic, locals: { comment_button: true } %>
         </div>
         <% end %>
         <% else %>
