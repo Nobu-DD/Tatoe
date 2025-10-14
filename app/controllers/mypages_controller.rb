@@ -2,6 +2,9 @@ class MypagesController < ApplicationController
   before_action :set_user, only: %i[show update destroy]
 
   def show
+    @reactions = Reaction.all
+    @topics = @user.topics
+    @answers = @user.answers
   end
 
   def update

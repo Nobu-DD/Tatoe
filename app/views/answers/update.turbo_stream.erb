@@ -1,6 +1,6 @@
 <% if flash[:notice] %>
   <%= turbo_stream.replace dom_id(@answer) do %>
-    <%= render partial: "shared/answer", object: @answer, locals: { comment_button: true } %>
+    <%= render "shared/answer", answer: @answer, topic: @topic, comment_button: true %>
   <% end %>
   <%= turbo_stream.update "answer_#{@answer.id}_flash" do %>
     <div id="alert" class="alert alert-info flex justify-center py-2 mb-3">

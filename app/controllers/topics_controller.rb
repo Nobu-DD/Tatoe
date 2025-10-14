@@ -2,7 +2,7 @@ class TopicsController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[index show]
   def index
     @q = Topic.ransack(params[:q])
-    @topics = @q.result(distinct: true).includes(:user, :genres, :hints).page(params[:page]).order("published_at desc")
+    @topics = @q.result(distinct: true).includes(:user, :genres, :hints).order("published_at desc").page(params[:page]).per(10)
   end
 
   def new
@@ -31,18 +31,21 @@ class TopicsController < ApplicationController
   end
 
   def update
+    @current_path = URI.parse(request.referer).path
     @topic = current_user.topics.find(params[:id])
     if @topic.update(topic_params)
-      redirect_to @topic, notice: t("topic.update.success")
+      flash.now.notice = t("topic.update.success")
     else
-      render :edit, status: :unprocessable_entity, alert: t("topic.create.failure")
+      flash.now.alert = t("topic.update.failure")
     end
   end
 
   def destroy
-    topic = current_user.topics.find(params[:id])
-    topic.destroy!
-    redirect_to topics_path, notice: t("topic.deleted.success")
+    @current_path = URI.parse(request.referer).path
+    @topic = current_user.topics.find(params[:id])
+    @topic.destroy!
+    @topics = current_user.topics
+    flash.now.notice = t("topic.deleted.success")
   end
 
   def generate_ai

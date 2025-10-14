@@ -29,9 +29,9 @@
       <% if answer.reason.present? %>
       <p class="text-sm text-gray-600"><%= simple_format(answer.reason) %></p>
       <% end %>
-      <% if local_assigns[:comment_button] %>
+      <% if comment_button %>
       <div class="flex justify-end mt-2">
-        <%= button_to topic_answer_path(@topic,answer), method: :get, data: { turbo_frame: "_top" } , class: "btn btn-outline btn-accent rounded-xl" do%>
+        <%= button_to topic_answer_path(topic,answer), method: :get, data: { turbo_frame: "_top" } , class: "btn btn-outline btn-accent rounded-xl" do%>
         <span><%= "#{answer.comments.size} コメント" %></span>
         <% end %>
       </div>
@@ -43,11 +43,11 @@
       <% if current_user && current_user.own?(answer) %>
       <!-- 編集ボタン -->
       <div class="flex space-x-1 ml-2">
-        <%= button_to edit_topic_answer_path(@topic, answer), method: :get, class: "btn btn-outline btn-info rounded-xl" do %>
+        <%= button_to edit_topic_answer_path(topic, answer), method: :get, class: "btn btn-outline btn-info rounded-xl" do %>
         <span>編集</span>
         <% end %>
         <!-- 削除ボタン -->
-        <%= button_to topic_answer_path(@topic, answer),  method: :delete, data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？", turbo_submits_with: "削除中..."}, class: "btn btn-outline btn-error rounded-xl" do %>
+        <%= button_to topic_answer_path(topic, answer),  method: :delete, data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？", turbo_submits_with: "削除中..."}, class: "btn btn-outline btn-error rounded-xl" do %>
         <span>削除</span>
         <% end %>
       </div>
