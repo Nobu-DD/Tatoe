@@ -21,7 +21,13 @@
 
     <!-- 結果一覧 -->
     <div class="space-y-3">
+      <div class="flex justify-center">
+        <%= render "shared/paginate", collection: @topics %>
+      </div>
       <%= render partial: "topic", collection: @topics %>
+      <div class="flex justify-center">
+        <%= render "shared/paginate", collection: @topics %>
+      </div>
     </div>
   </div>
 </div>

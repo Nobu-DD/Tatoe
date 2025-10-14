@@ -1,25 +1,7 @@
-<% content_for(:title, "お題編集") %>
-<div class="pt-5 pb-15 px-2">
+<%= turbo_frame_tag dom_id(@topic) do %>
+<div class="mb-4">
   <div class="bg-white shadow-lg rounded-2xl w-full py-8 px-4 space-y-6">
-    <div class="text-center mb-5">
-      <h2 class=" text-2xl font-bold text-gray-800">お題を編集</h2>
-    </div>
     <%= render 'form', topic: @topic %>
-
-    <!-- コツセクション -->
-    <div class="mt-6 bg-gradient-to-r from-[#F0F9FF] to-[#E0F2FE] rounded-xl p-4 shadow-sm">
-      <h3 class="font-semibold text-gray-800 mb-2 flex items-center">
-        <svg class="w-4 h-4 mr-2 text-[#A0D8EF]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M17 8h2a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V10a2 2 0 012-2h2m4-4h4m-4 4V4m0 4h4" />
-        </svg>
-        良いお題を作るコツ
-      </h3>
-      <ul class="text-sm text-gray-600 space-y-1">
-        <li>• 具体的で分かりやすいタイトルにしましょう</li>
-        <li>• ヒントは例えやすくなるような情報を入れましょう</li>
-        <li>• 複数のジャンルを選ぶと、より多くの人に見てもらえます</li>
-        <li>• AIを活用して、アイデアを膨らませてみましょう(未実装)</li>
-      </ul>
-    </div>
   </div>
 </div>
+<% end %>
