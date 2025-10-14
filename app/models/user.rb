@@ -58,5 +58,4 @@ class User < ApplicationRecord
   def self.ransackable_attributes(auth_object = nil)
     %w[name] + _ransackers.keys
   end
-
 end
