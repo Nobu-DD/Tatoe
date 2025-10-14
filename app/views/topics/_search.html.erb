@@ -1,0 +1,42 @@
+<div class=" bg-white p-4 rounded-xl shadow mb-6">
+  <span class="text-sm pl-2 opacity-50">※並び替え機能は後日実装予定</span>
+  <%= search_form_for q do |f| %>
+  <div class="mb-4 relative">
+    <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 z-40" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m0 0A7 7 0 1110 3a7 7 0 015 12z" />
+    </svg>
+    <%= f.search_field :title_or_description_or_genres_name_or_user_name_cont, placeholder: "タイトル、説明、投稿者、ジャンルを検索", class: "input input-info text-base pl-10 h-12 w-full rounded-xl border-gray-200 z-30" %>
+  </div>
+  <div class="flex justify-between">
+    <div>
+      <div>絞り込み</div>
+      <div>並び替えボタン</div>
+    </div>
+    <%= f.submit "検索", class: "w-20 bg-[#A0D8EF] hover:bg-[#7CC7E8] text-white py-3 rounded-xl font-semibold" %>
+  </div>
+  <!-- 詳細検索 -->
+  <div class="space-y-5">
+    <div>
+      <%= f.label :title_cont, "タイトル名", class: "block text-base font-medium text-gray-700" %>
+      <%= f.search_field :title_cont, class: "input input-info text-base w-full rounded-xl border-gray-200 mt-1" %>
+    </div>
+    <div>
+      <%= f.label :user_name_cont, "ユーザー名", class: "block text-base font-medium text-gray-700" %>
+      <%= f.search_field :user_name_cont, class: "input input-info text-base w-full rounded-xl border-gray-200 mt-1" %>
+    </div>
+    <div>
+      <%= f.label :genres_name_cont, "ジャンル", class: "block text-base font-medium text-gray-700" %>
+      <%= f.search_field :genres_name_cont, class: "input input-info text-base w-full rounded-xl border-gray-200 mt-1" %>
+    </div>
+    <div>
+      <%= f.label :published_at_cont, "投稿日時", class: "block text-base font-medium text-gray-700" %>
+      <div class="flex items-center space-x-2">
+        <%= f.date_field :published_at_gteq, class: "input input-info date text-base w-full rounded-xl border-gray-200 mt-1" %>
+        <span> 〜 </span>
+        <%= f.date_field :published_at_lteq, class: "input input-info date text-base w-full rounded-xl border-gray-200 mt-1" %>
+      </div>
+    </div>
+    <%= f.submit "検索", class: "w-full bg-[#A0D8EF] hover:bg-[#7CC7E8] text-white py-3 rounded-xl font-semibold" %>
+  </div>
+  <% end %>
+</div>
