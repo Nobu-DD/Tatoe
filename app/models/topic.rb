@@ -36,8 +36,6 @@ class Topic < ApplicationRecord
     %w[user genres hints]
   end
 
-  private
-
   # ジャンル新規登録
   def assign_genres
     if genre_names.blank?

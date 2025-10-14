@@ -51,4 +51,11 @@ class User < ApplicationRecord
     names = genre_names.split(/[[:space:],、\/]|　+/).reject(&:blank?).uniq
     self.genres = names.map { |name| Genre.find_or_create_by(name: name) }
   end
+
+  private
+
+  # Ransack
+  def self.ransackable_attributes(auth_object = nil)
+    %w[name] + _ransackers.keys
+  end
 end
