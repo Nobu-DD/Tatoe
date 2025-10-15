@@ -19,6 +19,17 @@ class Topic < ApplicationRecord
   accepts_nested_attributes_for :hints, allow_destroy: true
 
   scope :with_active_pickup, -> { joins(:pickups).merge(Pickup.active) }
+  scope :ransack_search, -> (query) {
+    return ransack(query) if query.blank?
+    search = {}
+    query.each do |key, value|
+      next search[key] = value if value.blank? || key.include?("published_at_")
+      value = value.split(/[[:space:],、\/]|　+/).reject(&:blank?).uniq
+      search[key] = value
+      puts search
+    end
+    ransack(search)
+  }
 
   # 編集ページにgenre_names
   def edit_genre_names_form
@@ -34,6 +45,10 @@ class Topic < ApplicationRecord
 
   def self.ransackable_associations(auth_object = nil)
     %w[user genres hints]
+  end
+
+  def self.ransackable_scopes(auth_object = nil)
+    %w[keywords]
   end
 
   # ジャンル新規登録
