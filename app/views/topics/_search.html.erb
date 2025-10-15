@@ -1,6 +1,6 @@
 <div class=" bg-white p-4 rounded-xl shadow mb-6">
   <span class="text-sm pl-2 opacity-50">※並び替え機能は後日実装予定</span>
-  <%= search_form_for q do |f| %>
+  <%= search_form_for q, data: { controller: "topics-search" } do |f| %>
   <div class="mb-4 relative">
     <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 z-40" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m0 0A7 7 0 1110 3a7 7 0 015 12z" />
@@ -9,10 +9,10 @@
   </div>
   <div class="flex justify-between mb-5">
     <div class="flex flex-wrap items-center space-x-2">
-      <div class="btn btn-outline btn-info rounded-xl">
+      <div class="btn btn-outline btn-info rounded-xl" data-action="click->topics-search#show_details" data-topics-search-target="details_bottom">
         <span>詳細検索</span>
         <div class="relative w-5">
-          <div class="absolute -top-[10px] inline-block box-border w-[13px] h-[13px] border-solid border-t-3 border-r-3 border-cyan-400 rotate-135"></div>
+          <div class="absolute -top-[10px] inline-block box-border w-[13px] h-[13px] border-solid border-t-3 border-r-3 border-cyan-400 rotate-135" data-topics-search-target="icon_arrow_bottom"></div>
         </div>
       </div>
       <div class="btn btn-outline btn-info rounded-xl">並び替え</div>
@@ -20,7 +20,7 @@
     <%= f.submit "検索", class: "w-20 bg-[#A0D8EF] hover:bg-[#7CC7E8] text-white py-3 rounded-xl font-semibold" %>
   </div>
   <!-- 詳細検索 -->
-  <div class="space-y-5">
+  <div class="space-y-5 hidden" data-topics-search-target="advanced_search">
     <div>
       <%= f.label :title_cont_any, "タイトル名", class: "block text-base font-medium text-gray-700" %>
       <%= f.search_field :title_cont_any, class: "input input-info text-base w-full rounded-xl border-gray-200 mt-1" %>
