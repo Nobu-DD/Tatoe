@@ -4,10 +4,10 @@
   <div class="hover:shadow-md transition shadow-2xs rounded-t-lg p-3">
     <%= link_to topic_path(topic), data: {turbo: false} do %>
     <div class="flex justify-between items-center mb-2">
-      <div class="flex flex-wrap space-x-1 space-y-1">
+      <div class="flex flex-wrap space-x-1">
         <% if topic.genres.present? %>
         <% topic.genres.each do |genre| %>
-        <span class="text-xs px-2 py-1 rounded-full bg-[#E0F2FE] text-[#0369A1]"><%= genre.name %></span>
+        <span class="text-xs px-2 py-1 mb-1 rounded-full bg-[#E0F2FE] text-[#0369A1]"><%= genre.name %></span>
         <% end %>
         <% else %>
         <p class="text-[#0369A1]">ジャンル未設定</p>

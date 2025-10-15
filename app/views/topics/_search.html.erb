@@ -7,10 +7,15 @@
     </svg>
     <%= f.search_field :title_or_description_or_genres_name_or_user_name_cont_any, placeholder: "タイトル、説明、投稿者、ジャンルを検索", class: "input input-info text-base pl-10 h-12 w-full rounded-xl border-gray-200 z-30" %>
   </div>
-  <div class="flex justify-between">
-    <div>
-      <div>絞り込み</div>
-      <div>並び替えボタン</div>
+  <div class="flex justify-between mb-5">
+    <div class="flex flex-wrap items-center space-x-2">
+      <div class="btn btn-outline btn-info rounded-xl">
+        <span>詳細検索</span>
+        <div class="relative w-5">
+          <div class="absolute -top-[10px] inline-block box-border w-[13px] h-[13px] border-solid border-t-3 border-r-3 border-cyan-400 rotate-135"></div>
+        </div>
+      </div>
+      <div class="btn btn-outline btn-info rounded-xl">並び替え</div>
     </div>
     <%= f.submit "検索", class: "w-20 bg-[#A0D8EF] hover:bg-[#7CC7E8] text-white py-3 rounded-xl font-semibold" %>
   </div>
