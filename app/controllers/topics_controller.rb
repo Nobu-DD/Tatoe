@@ -1,8 +1,10 @@
 class TopicsController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[index show]
   def index
+    # binding.pry
     @q = Topic.ransack_search(search_params)
-    @q.sorts = params[:q][:s].empty? ? "published_at desc" : params[:q][:s]
+    binding.pry
+    @q.sorts = params[:s].blank? ? "published_at desc" : params[:s]
     @topics = @q.result(distinct: true).includes(:user, :genres, :hints).page(params[:page]).per(10)
   end
 
