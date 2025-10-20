@@ -1,6 +1,6 @@
-<div class=" bg-white p-4 rounded-xl shadow mb-6">
+<div class="bg-white p-4 rounded-xl shadow mb-6" data-controller="topics-search">
   <span class="text-sm pl-2 opacity-50">※並び替え機能は後日実装予定</span>
-  <%= form_with url: topics_path, method: :get, data: { controller: "topics-search", turbo_frame: "search_topics" } do |f| %>
+  <%= form_with url: topics_path, method: :get, data: { turbo_frame: "search_topics" } do |f| %>
   <div class="mb-4 relative">
     <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 z-40" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m0 0A7 7 0 1110 3a7 7 0 015 12z" />
@@ -9,15 +9,15 @@
   </div>
   <div class="flex justify-between mb-5">
     <div class="flex flex-wrap items-center space-x-2">
-      <div class="btn btn-outline btn-info rounded-xl" data-action="click->topics-search#show_details" data-topics-search-target="details_bottom">
+      <div class="btn btn-outline btn-info rounded-xl" data-action="click->topics-search#show_details" data-topics-search-target="details_button">
         <span>詳細検索</span>
         <div class="relative w-5">
-          <div class="absolute -top-[10px] inline-block box-border w-[13px] h-[13px] border-solid border-t-3 border-r-3 border-cyan-400 rotate-135" data-topics-search-target="icon_arrow_bottom"></div>
+          <div class="absolute -top-[10px] inline-block box-border w-[13px] h-[13px] border-solid border-t-3 border-r-3 border-cyan-400 rotate-135" data-topics-search-target="icon_arrow_button"></div>
         </div>
       </div>
-      <%= f.select :s, [["投稿日時が新しい順", "published_at desc"], ["投稿日時が古い順", "published_at asc"], ["例え数が多い順", "answers_count desc"], ["例え数が少ない順", "answers_count asc"], ["いいね数が多い順", "likes_count desc"], ["いいね数が少ない順", "likes_count asc"]], class: "select" %>
+      <%= f.select :s, [["投稿日時が新しい順", "published_at desc"], ["投稿日時が古い順", "published_at asc"], ["例え数が多い順", "answers_count desc"], ["例え数が少ない順", "answers_count asc"], ["いいね数が多い順", "likes_count desc"], ["いいね数が少ない順", "likes_count asc"]], {}, { class: "select select-info w-50 rounded-xl text-info", data: { action: "change->topics-search#sort_change" } } %>
     </div>
-    <%= f.submit "検索", class: "w-20 bg-[#A0D8EF] hover:bg-[#7CC7E8] text-white py-3 rounded-xl font-semibold", data: {"turbo-submits-with": "検索中..." } %>
+    <%= f.submit "検索", class: "w-20 bg-[#A0D8EF] hover:bg-[#7CC7E8] text-white py-3 rounded-xl font-semibold", data: {"turbo-submits-with": "検索中...", "topics-search-target": "form_submit" } %>
   </div>
   <!-- 詳細検索 -->
   <div class="space-y-5 hidden" data-topics-search-target="advanced_search">
