@@ -6,5 +6,5 @@ class Comment < ApplicationRecord
 
   has_many :likes, as: :likeable
   belongs_to :user
-  belongs_to :answer
+  belongs_to :answer, counter_cache: :comments_count
 end

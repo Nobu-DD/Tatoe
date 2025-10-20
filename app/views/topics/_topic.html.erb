@@ -4,10 +4,10 @@
   <div class="hover:shadow-md transition shadow-2xs rounded-t-lg p-3">
     <%= link_to topic_path(topic), data: {turbo: false} do %>
     <div class="flex justify-between items-center mb-2">
-      <div class="flex flex-wrap space-x-1 space-y-1">
+      <div class="flex flex-wrap space-x-1">
         <% if topic.genres.present? %>
         <% topic.genres.each do |genre| %>
-        <span class="text-xs px-2 py-1 rounded-full bg-[#E0F2FE] text-[#0369A1]"><%= genre.name %></span>
+        <span class="text-xs px-2 py-1 mb-1 rounded-full bg-[#E0F2FE] text-[#0369A1]"><%= genre.name %></span>
         <% end %>
         <% else %>
         <p class="text-[#0369A1]">ジャンル未設定</p>
@@ -17,7 +17,7 @@
         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#999999">
           <path d="M240-400h480v-80H240v80Zm0-120h480v-80H240v80Zm0-120h480v-80H240v80ZM880-80 720-240H160q-33 0-56.5-23.5T80-320v-480q0-33 23.5-56.5T160-880h640q33 0 56.5 23.5T880-800v720ZM160-320h594l46 45v-525H160v480Zm0 0v-480 480Z" />
         </svg>
-        <span class="text-[#999999]"><%=topic.answers.size%></span>
+        <span class="text-[#999999]"><%=topic.answers_count%></span>
       </div>
     </div>
     <div>
