@@ -12,3 +12,6 @@ application.register("topic", GeminiTopicController)
 
 import GeminiAnswerController from "./gemini_answer_controller"
 application.register("answer", GeminiAnswerController)
+
+import TopicsSearchController from "./topics_search_controller"
+application.register("topics-search", TopicsSearchController)

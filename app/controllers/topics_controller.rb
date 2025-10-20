@@ -1,8 +1,9 @@
 class TopicsController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[index show]
   def index
-    @q = Topic.ransack(params[:q])
-    @topics = @q.result(distinct: true).includes(:user, :genres, :hints).order("published_at desc").page(params[:page]).per(10)
+    @q = Topic.ransack_search(search_params)
+    @q.sorts = params[:s].blank? ? "published_at desc" : params[:s]
+    @topics = @q.result(distinct: true).includes(:user, :genres, :hints).page(params[:page]).per(10)
   end
 
   def new
@@ -60,6 +61,14 @@ class TopicsController < ApplicationController
     params.require(:topic).permit(
       :title, :description, :genre_names,
       hints_attributes: [ :id, :body, :_destroy ]
+    )
+  end
+
+  def search_params
+    return params[:q] if params[:q].blank?
+
+    params.require(:q).permit(
+      :title_or_description_or_genres_name_or_user_name_cont_any, :title_cont_any, :user_name_cont_any, :genres_name_cont_any, :published_at_gteq, :published_at_lteq
     )
   end
 end

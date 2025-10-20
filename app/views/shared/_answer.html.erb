@@ -32,7 +32,7 @@
       <% if comment_button %>
       <div class="flex justify-end mt-2">
         <%= button_to topic_answer_path(topic,answer), method: :get, data: { turbo_frame: "_top" } , class: "btn btn-outline btn-accent rounded-xl" do%>
-        <span><%= "#{answer.comments.size} コメント" %></span>
+        <span><%= "#{answer.comments_count} コメント" %></span>
         <% end %>
       </div>
       <% end %>
