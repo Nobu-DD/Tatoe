@@ -1,0 +1,38 @@
+<% content_for(:title, "ランキング") %>
+<div class="pt-5 pb-15 px-2">
+  <div class="bg-white shadow-lg rounded-2xl w-full py-8 px-2">
+    <div class="text-center mb-5">
+      <h2 class=" text-2xl font-bold text-gray-800">ランキング</h2>
+    </div>
+    <!-- ランキング選択箇所 -->
+    <div>
+      <!-- ランキング対象 -->
+      <div></div>
+      <!-- 期間 -->
+      <div></div>
+      <!-- ランキング基準 -->
+      <div></div>
+    </div>
+    <!-- ランキング -->
+    <div>
+      <%= turbo_frame_tag "rankings" do %>
+      <!-- タイトル -->
+      <div class="flex justify-between">
+        <!-- お題ランキング -->
+        <div>
+          <!-- 基準マーク -->
+          <div></div>
+          <!-- タイトル -->
+          <span>お題ランキング</span>
+        </div>
+        <span>
+          <%="#{@topics.count}件"%>
+        </span>
+      </div>
+      <div>
+        <%= render partial: "element", collection: @topics %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>

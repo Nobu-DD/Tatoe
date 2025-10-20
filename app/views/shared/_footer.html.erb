@@ -23,8 +23,8 @@
       <% end %>
       <% end %>
 
-      <%= link_to '#', class: "flex-col h-auto py-2 px-3 #{controller_name == 'rankings' ? 'bg-[#A0D8EF] text-white' : 'text-gray-600'} rounded-xl flex items-center pointer-events-none opacity-25" do %>
-      <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f">
+      <%= link_to topics_index_rankings_path, class: "flex-col h-auto py-2 px-3 #{controller_name == 'rankings' ? 'bg-[#A0D8EF] text-white' : 'text-gray-600'} rounded-xl flex items-center" do %>
+      <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor">
         <path d="M160-200h160v-320H160v320Zm240 0h160v-560H400v560Zm240 0h160v-240H640v240ZM80-120v-480h240v-240h320v320h240v400H80Z" />
       </svg>
       <span class="text-xs">ランキング</span>

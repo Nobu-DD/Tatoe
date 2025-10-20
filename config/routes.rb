@@ -26,6 +26,12 @@ Rails.application.routes.draw do
   end
   resource :mypage, only: %i[show update destroy]
   resource :likes, only: %i[create destroy]
+  resources :rankings do
+    collection do
+      get :topics_index
+      get :answers_index
+    end
+  end
 
   # get "images", on: :member, to: "images#ogp"
   # Render dynamic PWA files from app/views/pwa/*
