@@ -10,4 +10,11 @@ class Answer < ApplicationRecord
   has_many :reactions, through: :answer_reactions
   belongs_to :user
   belongs_to :topic, counter_cache: :answers_count
+
+  private
+
+    # Ransack
+  def self.ransackable_attributes(auth_object = nil)
+    %w[comments_count] + _ransackers.keys
+  end
 end

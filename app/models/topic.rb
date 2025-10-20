@@ -40,15 +40,11 @@ class Topic < ApplicationRecord
 
   # Ransack
   def self.ransackable_attributes(auth_object = nil)
-    %w[title description published_at] + _ransackers.keys
+    %w[title description published_at answers_count] + _ransackers.keys
   end
 
   def self.ransackable_associations(auth_object = nil)
     %w[user genres hints]
-  end
-
-  def self.ransackable_scopes(auth_object = nil)
-    %w[keywords]
   end
 
   # ジャンル新規登録
