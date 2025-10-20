@@ -15,15 +15,7 @@
           <div class="absolute -top-[10px] inline-block box-border w-[13px] h-[13px] border-solid border-t-3 border-r-3 border-cyan-400 rotate-135" data-topics-search-target="icon_arrow_bottom"></div>
         </div>
       </div>
-      <%#<div class="btn btn-outline btn-info rounded-xl">並び替え
-    </div>%>
-      <%#<thead>
-        <tr>
-          <th><%= sort_link(s, :title, "お題タイトル") %><%#</th>
-      <th><%= sort_link(s, :published_at, "投稿日時") %><%#</th>
-      </tr>
-      </thead>%>
-      <%= f.select :s, [["投稿日時が新しい順", "published_at desc"], ["投稿日時が古い順", "published_at asc"], ["例え数が多い順", "answers_count desc"], ["例え数が少ない順", "answers_count asc"]], class: "select" %>
+      <%= f.select :s, [["投稿日時が新しい順", "published_at desc"], ["投稿日時が古い順", "published_at asc"], ["例え数が多い順", "answers_count desc"], ["例え数が少ない順", "answers_count asc"], ["いいね数が多い順", "likes_count desc"], ["いいね数が少ない順", "likes_count asc"]], class: "select" %>
     </div>
     <%= f.submit "検索", class: "w-20 bg-[#A0D8EF] hover:bg-[#7CC7E8] text-white py-3 rounded-xl font-semibold", data: {"turbo-submits-with": "検索中..." } %>
   </div>

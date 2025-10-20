@@ -40,7 +40,7 @@ class Topic < ApplicationRecord
 
   # Ransack
   def self.ransackable_attributes(auth_object = nil)
-    %w[title description published_at answers_count] + _ransackers.keys
+    %w[title description published_at answers_count likes_count] + _ransackers.keys
   end
 
   def self.ransackable_associations(auth_object = nil)
