@@ -19,7 +19,7 @@ class Topic < ApplicationRecord
   accepts_nested_attributes_for :hints, allow_destroy: true
 
   scope :with_active_pickup, -> { joins(:pickups).merge(Pickup.active) }
-  scope :ransack_search, -> (query) {
+  scope :ransack_search, ->(query) {
     return ransack(query) if query.blank?
     search = {}
     query.each do |key, value|

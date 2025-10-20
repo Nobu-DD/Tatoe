@@ -13,7 +13,7 @@ class Answer < ApplicationRecord
 
   private
 
-    # Ransack
+  # Ransack
   def self.ransackable_attributes(auth_object = nil)
     %w[comments_count] + _ransackers.keys
   end
