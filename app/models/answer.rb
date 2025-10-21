@@ -11,6 +11,11 @@ class Answer < ApplicationRecord
   belongs_to :user
   belongs_to :topic, counter_cache: :answers_count
 
+  # scope :ransack_search, ->(query) {
+  #   return ransack(query) if query.blank?
+  #   search = {}
+  # }
+
   private
 
   # Ransack

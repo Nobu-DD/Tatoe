@@ -8,6 +8,9 @@ class RankingsController < ApplicationController
   end
 
   def answers_index
+    @q = Answer.ransack(search_params)
+    @q.sorts = params[:s].blank? ? "reactions_count desc" : params[:s]
+    @answers = @q.result(distinct: true).includes(:user, :topic, :reactions, :comments)
   end
 
   private

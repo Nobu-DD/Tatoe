@@ -73,11 +73,11 @@
     <!-- タイトル -->
     <span class="text-2xl font-semibold">お題ランキング</span>
     <span>
-      <%="#{@topics.count}件"%>
+      <%="#{@answers.count}件"%>
     </span>
   </div>
   <div>
-    <%= render partial: "element", collection: @topics %>
+    <%= render partial: "answer", collection: @answers %>
   </div>
 </div>
 <% end %>
