@@ -12,15 +12,10 @@ class Answer < ApplicationRecord
   belongs_to :topic
   counter_culture :topic, column_name: "answers_count"
 
-  # scope :ransack_search, ->(query) {
-  #   return ransack(query) if query.blank?
-  #   search = {}
-  # }
-
   private
 
   # Ransack
   def self.ransackable_attributes(auth_object = nil)
-    %w[comments_count] + _ransackers.keys
+    %w[comments_count reactions_count empathy_count consent_count smile_count] + _ransackers.keys
   end
 end

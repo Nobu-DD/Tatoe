@@ -1,83 +1,90 @@
-<%= turbo_frame_tag "rankings" do %>
-<!-- ランキング選択箇所 -->
-<div class="space-y-4 mb-5">
-  <!-- ランキング対象 -->
-  <div class="space-y-2 ml-3">
-    <div class="flex space-x-1 items-center">
-      <svg xmlns="http://www.w3.org/2000/svg" height="22px" viewBox="0 -960 960 960" width="22px" fill="#1f1f1f">
-        <path d="M192-216h144v-312H192v312Zm216 0h144v-528H408v528Zm216 0h144v-240H624v240Zm-504 72v-456h216v-216h288v288h216v384H120Z" />
-      </svg>
-      <span>ランキング対象</span>
-    </div>
-    <div class="flex space-x-2">
-      <%= link_to "お題", topics_index_rankings_path, class: "btn btn-info rounded-xl" %>
-      <%= link_to "例え", "#", class: "btn btn-outline btn-info rounded-xl pointer-events-none" %>
-    </div>
-  </div>
-  <!-- 期間 -->
-  <div class="space-y-2 ml-3">
-    <div class="flex space-x-1 items-center">
-      <svg xmlns="http://www.w3.org/2000/svg" height="22px" viewBox="0 -960 960 960" width="22px" fill="#1f1f1f">
-        <path d="M320-400q-17 0-28.5-11.5T280-440q0-17 11.5-28.5T320-480q17 0 28.5 11.5T360-440q0 17-11.5 28.5T320-400Zm160 0q-17 0-28.5-11.5T440-440q0-17 11.5-28.5T480-480q17 0 28.5 11.5T520-440q0 17-11.5 28.5T480-400Zm160 0q-17 0-28.5-11.5T600-440q0-17 11.5-28.5T640-480q17 0 28.5 11.5T680-440q0 17-11.5 28.5T640-400ZM200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Zm0-480h560v-80H200v80Zm0 0v-80 80Z" />
-      </svg>
-      <span>対象期間</span>
-    </div>
-    <div class="flex space-x-2">
-      <%= link_to "総合", answers_index_rankings_path, class: "btn btn-info rounded-xl pointer-events-none" %>
-      <%= link_to "1週間", answers_index_rankings_path, class: "btn btn-outline btn-info rounded-xl" %>
-      <%= link_to "1ヶ月", answers_index_rankings_path, class: "btn btn-outline btn-info rounded-xl" %>
-    </div>
-  </div>
-  <!-- ランキング基準 -->
-  <div>
-    <div class="space-y-2 ml-3">
-      <div class="flex space-x-1 items-center">
-        <svg xmlns="http://www.w3.org/2000/svg" height="22px" viewBox="0 -960 960 960" width="22px" fill="#1f1f1f">
-          <path d="m363-310 117-71 117 71-31-133 104-90-137-11-53-126-53 126-137 11 104 90-31 133ZM480-28 346-160H160v-186L28-480l132-134v-186h186l134-132 134 132h186v186l132 134-132 134v186H614L480-28Zm0-112 100-100h140v-140l100-100-100-100v-140H580L480-820 380-720H240v140L140-480l100 100v140h140l100 100Zm0-340Z" />
-        </svg>
-        <span>ランキング基準</span>
+<% content_for(:title, "例えランキング") %>
+<div class="pt-5 pb-15 px-2">
+  <div class="bg-white shadow-lg rounded-2xl w-full py-8 px-2">
+    <div class="text-center mb-5">
+      <h2 class=" text-2xl font-bold text-gray-800">ランキング</h2>
+    </div><!-- ランキング選択箇所 -->
+    <div class="space-y-4 mb-5">
+      <!-- ランキング対象 -->
+      <div class="space-y-2 ml-3">
+        <div class="flex space-x-1 items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" height="22px" viewBox="0 -960 960 960" width="22px" fill="#1f1f1f">
+            <path d="M192-216h144v-312H192v312Zm216 0h144v-528H408v528Zm216 0h144v-240H624v240Zm-504 72v-456h216v-216h288v288h216v384H120Z" />
+          </svg>
+          <span>ランキング対象</span>
+        </div>
+        <div class="flex space-x-2">
+          <%= link_to "お題", topics_index_rankings_path, class: "btn btn-outline btn-info rounded-xl" %>
+          <%= link_to "例え", "#", class: "btn btn-info rounded-xl pointer-events-none" %>
+        </div>
       </div>
-      <div class="flex space-x-2">
-        <%= link_to topics_index_rankings_path, class: "btn btn-info rounded-xl pointer-events-none" do %>
-        <svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 -960 960 960" width="18px" fill="#EA3323">
-          <path d="m480-120-58-52q-101-91-167-157T150-447.5Q111-500 95.5-544T80-634q0-94 63-157t157-63q52 0 99 22t81 62q34-40 81-62t99-22q94 0 157 63t63 157q0 46-15.5 90T810-447.5Q771-395 705-329T538-172l-58 52Zm0-108q96-86 158-147.5t98-107q36-45.5 50-81t14-70.5q0-60-40-100t-100-40q-47 0-87 26.5T518-680h-76q-15-41-55-67.5T300-774q-60 0-100 40t-40 100q0 35 14 70.5t50 81q36 45.5 98 107T480-228Zm0-273Z" />
-        </svg>
-        <span>全リアクション</span>
-        <% end %>
-        <%= link_to answers_index_rankings_path, class: "btn btn-outline btn-info rounded-xl" do %>
-        <svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 -960 960 960" width="18px" fill="#999999">
-          <path d="M240-400h480v-80H240v80Zm0-120h480v-80H240v80Zm0-120h480v-80H240v80ZM880-80 720-240H160q-33 0-56.5-23.5T80-320v-480q0-33 23.5-56.5T160-880h640q33 0 56.5 23.5T880-800v720ZM160-320h594l46 45v-525H160v480Zm0 0v-480 480Z" />
-        </svg>
-        <span>共感</span>
-        <% end %>
-        <%= link_to answers_index_rankings_path, class: "btn btn-outline btn-info rounded-xl" do %>
-        <svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 -960 960 960" width="18px" fill="#999999">
-          <path d="M240-400h480v-80H240v80Zm0-120h480v-80H240v80Zm0-120h480v-80H240v80ZM880-80 720-240H160q-33 0-56.5-23.5T80-320v-480q0-33 23.5-56.5T160-880h640q33 0 56.5 23.5T880-800v720ZM160-320h594l46 45v-525H160v480Zm0 0v-480 480Z" />
-        </svg>
-        <span>納得</span>
-        <% end %>
-        <%= link_to answers_index_rankings_path, class: "btn btn-outline btn-info rounded-xl" do %>
-        <svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 -960 960 960" width="18px" fill="#999999">
-          <path d="M240-400h480v-80H240v80Zm0-120h480v-80H240v80Zm0-120h480v-80H240v80ZM880-80 720-240H160q-33 0-56.5-23.5T80-320v-480q0-33 23.5-56.5T160-880h640q33 0 56.5 23.5T880-800v720ZM160-320h594l46 45v-525H160v480Zm0 0v-480 480Z" />
-        </svg>
-        <span>爆笑</span>
-        <% end %>
+      <!-- 期間 -->
+      <div class="space-y-2 ml-3">
+        <div class="flex space-x-1 items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" height="22px" viewBox="0 -960 960 960" width="22px" fill="#1f1f1f">
+            <path d="M320-400q-17 0-28.5-11.5T280-440q0-17 11.5-28.5T320-480q17 0 28.5 11.5T360-440q0 17-11.5 28.5T320-400Zm160 0q-17 0-28.5-11.5T440-440q0-17 11.5-28.5T480-480q17 0 28.5 11.5T520-440q0 17-11.5 28.5T480-400Zm160 0q-17 0-28.5-11.5T600-440q0-17 11.5-28.5T640-480q17 0 28.5 11.5T680-440q0 17-11.5 28.5T640-400ZM200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Zm0-480h560v-80H200v80Zm0 0v-80 80Z" />
+          </svg>
+          <span>対象期間</span>
+        </div>
+        <div class="flex space-x-2">
+          <%= link_to "総合", answers_index_rankings_path, class: "btn btn-info rounded-xl pointer-events-none" %>
+          <%= link_to "1週間", answers_index_rankings_path, class: "btn btn-outline btn-info rounded-xl" %>
+          <%= link_to "1ヶ月", answers_index_rankings_path, class: "btn btn-outline btn-info rounded-xl" %>
+        </div>
+      </div>
+      <!-- ランキング基準 -->
+      <div>
+        <div class="space-y-2 ml-3">
+          <div class="flex space-x-1 items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" height="22px" viewBox="0 -960 960 960" width="22px" fill="#1f1f1f">
+              <path d="m363-310 117-71 117 71-31-133 104-90-137-11-53-126-53 126-137 11 104 90-31 133ZM480-28 346-160H160v-186L28-480l132-134v-186h186l134-132 134 132h186v186l132 134-132 134v186H614L480-28Zm0-112 100-100h140v-140l100-100-100-100v-140H580L480-820 380-720H240v140L140-480l100 100v140h140l100 100Zm0-340Z" />
+            </svg>
+            <span>ランキング基準</span>
+          </div>
+          <div class="flex space-x-2">
+            <%= link_to topics_index_rankings_path, class: "btn btn-info rounded-xl pointer-events-none" do %>
+            <svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 -960 960 960" width="18px" fill="#EA3323">
+              <path d="m480-120-58-52q-101-91-167-157T150-447.5Q111-500 95.5-544T80-634q0-94 63-157t157-63q52 0 99 22t81 62q34-40 81-62t99-22q94 0 157 63t63 157q0 46-15.5 90T810-447.5Q771-395 705-329T538-172l-58 52Zm0-108q96-86 158-147.5t98-107q36-45.5 50-81t14-70.5q0-60-40-100t-100-40q-47 0-87 26.5T518-680h-76q-15-41-55-67.5T300-774q-60 0-100 40t-40 100q0 35 14 70.5t50 81q36 45.5 98 107T480-228Zm0-273Z" />
+            </svg>
+            <span>全リアクション</span>
+            <% end %>
+            <%= link_to answers_index_rankings_path, class: "btn btn-outline btn-info rounded-xl" do %>
+            <svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 -960 960 960" width="18px" fill="#999999">
+              <path d="M240-400h480v-80H240v80Zm0-120h480v-80H240v80Zm0-120h480v-80H240v80ZM880-80 720-240H160q-33 0-56.5-23.5T80-320v-480q0-33 23.5-56.5T160-880h640q33 0 56.5 23.5T880-800v720ZM160-320h594l46 45v-525H160v480Zm0 0v-480 480Z" />
+            </svg>
+            <span>共感</span>
+            <% end %>
+            <%= link_to answers_index_rankings_path, class: "btn btn-outline btn-info rounded-xl" do %>
+            <svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 -960 960 960" width="18px" fill="#999999">
+              <path d="M240-400h480v-80H240v80Zm0-120h480v-80H240v80Zm0-120h480v-80H240v80ZM880-80 720-240H160q-33 0-56.5-23.5T80-320v-480q0-33 23.5-56.5T160-880h640q33 0 56.5 23.5T880-800v720ZM160-320h594l46 45v-525H160v480Zm0 0v-480 480Z" />
+            </svg>
+            <span>納得</span>
+            <% end %>
+            <%= link_to answers_index_rankings_path, class: "btn btn-outline btn-info rounded-xl" do %>
+            <svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 -960 960 960" width="18px" fill="#999999">
+              <path d="M240-400h480v-80H240v80Zm0-120h480v-80H240v80Zm0-120h480v-80H240v80ZM880-80 720-240H160q-33 0-56.5-23.5T80-320v-480q0-33 23.5-56.5T160-880h640q33 0 56.5 23.5T880-800v720ZM160-320h594l46 45v-525H160v480Zm0 0v-480 480Z" />
+            </svg>
+            <span>爆笑</span>
+            <% end %>
+          </div>
+        </div>
       </div>
     </div>
+    <!-- ランキング -->
+    <%= turbo_frame_tag "rankings" do %>
+    <div>
+      <!-- タイトル -->
+      <div class="flex justify-between items-center h-20 mx-4">
+        <!-- タイトル -->
+        <span class="text-2xl font-semibold">お題ランキング</span>
+        <span>
+          <%="#{@answers.count}件"%>
+        </span>
+      </div>
+      <div>
+        <%= render partial: "answer", collection: @answers %>
+      </div>
+    </div>
+    <% end %>
   </div>
 </div>
-<!-- ランキング -->
-<div>
-  <!-- タイトル -->
-  <div class="flex justify-between items-center h-20 mx-4">
-    <!-- タイトル -->
-    <span class="text-2xl font-semibold">お題ランキング</span>
-    <span>
-      <%="#{@answers.count}件"%>
-    </span>
-  </div>
-  <div>
-    <%= render partial: "answer", collection: @answers %>
-  </div>
-</div>
-<% end %>
