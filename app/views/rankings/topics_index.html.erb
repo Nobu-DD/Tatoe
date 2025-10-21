@@ -4,6 +4,7 @@
     <div class="text-center mb-5">
       <h2 class=" text-2xl font-bold text-gray-800">ランキング</h2>
     </div>
+    <%= turbo_frame_tag "rankings" do %>
     <!-- ランキング選択箇所 -->
     <div class="space-y-4 mb-5">
       <!-- ランキング対象 -->
@@ -61,7 +62,6 @@
     </div>
     <!-- ランキング -->
     <div>
-      <%= turbo_frame_tag "rankings" do %>
       <!-- タイトル -->
       <div class="flex justify-between items-center h-20 mx-4">
         <!-- タイトル -->
@@ -73,7 +73,7 @@
       <div>
         <%= render partial: "element", collection: @topics %>
       </div>
-      <% end %>
     </div>
+    <% end %>
   </div>
 </div>
