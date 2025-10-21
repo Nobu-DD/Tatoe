@@ -24,6 +24,10 @@ class User < ApplicationRecord
     id == object.user_id
   end
 
+  def not_own?(object)
+    id != object.user_id
+  end
+
   def answer_reaction(answer, reaction)
     answer_reactions.find_or_create_by(answer: answer, reaction: reaction)
   end
