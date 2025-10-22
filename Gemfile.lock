@@ -505,7 +505,7 @@ DEPENDENCIES
   byebug
   capybara
   carrierwave (~> 3.0)
-  counter_culture (~> 3.2)
+  counter_culture
   cssbundling-rails
   debug
   devise
