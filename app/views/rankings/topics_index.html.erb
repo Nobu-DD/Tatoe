@@ -5,6 +5,7 @@
       <h2 class=" text-2xl font-bold text-gray-800">ランキング</h2>
     </div>
     <!-- ランキング選択箇所 -->
+    <%= turbo_frame_tag "rankings" do %>
     <div class="space-y-4 mb-5">
       <!-- ランキング対象 -->
       <div class="space-y-2 ml-3">
@@ -16,7 +17,7 @@
         </div>
         <div class="flex space-x-2">
           <%= link_to "お題", "#", class: "btn btn-info rounded-xl pointer-events-none" %>
-          <%= link_to "例え", answers_index_rankings_path, class: "btn btn-outline btn-info rounded-xl" %>
+          <%= link_to "例え", answers_index_rankings_path, class: "btn btn-outline btn-info rounded-xl", data: { turbo: false } %>
         </div>
       </div>
       <!-- 期間 -->
@@ -60,7 +61,6 @@
       </div>
     </div>
     <!-- ランキング -->
-    <%= turbo_frame_tag "rankings" do %>
     <div>
       <!-- タイトル -->
       <div class="flex justify-between items-center h-20 mx-4">

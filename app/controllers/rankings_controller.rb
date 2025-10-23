@@ -8,19 +8,19 @@ class RankingsController < ApplicationController
   end
 
   def answers_index
-    @q = Answer.ransack(search_params)
-    @q.sorts = params[:s].blank? ? "reactions_count desc" : params[:s]
+    @q = Answer.ransack(params[:q])
+    @q.sorts = "reactions_count desc" if @q.sorts.empty?
     @answers = @q.result(distinct: true).includes(:user, :topic, :reactions, :comments).limit(5)
     @reactions = Reaction.all
   end
 
   private
 
-  def search_params
-  return params[:q] if params[:q].blank?
+  # def search_params
+  # return params[:q] if params[:q].blank?
 
-  params.require(:q).permit(
-    :published_at_gteq, :published_at_lteq
-  )
-  end
+  # params.require(:q).permit(
+  #   :published_at_gteq, :published_at_lteq
+  # )
+  # end
 end

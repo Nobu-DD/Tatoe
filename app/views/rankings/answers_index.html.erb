@@ -4,6 +4,7 @@
     <div class="text-center mb-5">
       <h2 class=" text-2xl font-bold text-gray-800">ランキング</h2>
     </div><!-- ランキング選択箇所 -->
+    <%= turbo_frame_tag "rankings" do %>
     <div class="space-y-4 mb-5">
       <!-- ランキング対象 -->
       <div class="space-y-2 ml-3">
@@ -14,12 +15,14 @@
           <span>ランキング対象</span>
         </div>
         <div class="flex space-x-2">
-          <%= link_to "お題", topics_index_rankings_path, class: "btn btn-outline btn-info rounded-xl" %>
+          <%= link_to "お題", topics_index_rankings_path, class: "btn btn-outline btn-info rounded-xl", data: { turbo: false } %>
           <%= link_to "例え", "#", class: "btn btn-info rounded-xl pointer-events-none" %>
         </div>
       </div>
       <!-- 期間 -->
-      <%= form_with url: answers_index_rankings_path, method: :get, data: { turbo_frame: "rankings"}, class: "space-y-4" do |f| %>
+      <%= search_form_for @q, url: answers_index_rankings_path, method: :get, data: { turbo_frame: "rankings"}, class: "space-y-4" do |f| %>
+      <!-- ランキング対象の引き継ぎのため、hidden使用 -->
+      <%= f.hidden_field :s %>
       <div class="space-y-2 ml-3">
         <div class="flex space-x-1 items-center">
           <svg xmlns="http://www.w3.org/2000/svg" height="22px" viewBox="0 -960 960 960" width="22px" fill="#1f1f1f">
@@ -28,12 +31,16 @@
           <span>対象期間</span>
         </div>
         <div class="flex space-x-2">
-          <%= link_to "総合", answers_index_rankings_path, class: "btn btn-info rounded-xl pointer-events-none" %>
-          <%= link_to "1週間", answers_index_rankings_path, class: "btn btn-outline btn-info rounded-xl" %>
-          <%= link_to "1ヶ月", answers_index_rankings_path, class: "btn btn-outline btn-info rounded-xl" %>
+          <%= f.button "総合", type: "submit", name: :published_at_gteq, value: "", class: "btn btn-info rounded-xl pointer-events-none" %>
+          <%= f.button "1週間", type: "submit", name: :published_at_gteq, value: Date.today - 6, class: "btn btn-outline btn-info rounded-xl" %>
+          <%= f.button "1ヶ月", type: "submit", name: :published_at_gteq, value: Date.today.prev_month, class: "btn btn-outline btn-info rounded-xl" %>
         </div>
       </div>
+      <% end %>
       <!-- ランキング基準 -->
+      <%= search_form_for @q, url: answers_index_rankings_path, method: :get, data: { turbo_frame: "rankings" }, class: "space-y-4" do |f| %>
+      <!-- ランキング期間を引き継ぐためにhiddenを使用 -->
+      <%= f.hidden_field :published_at_gteq %>
       <div class="space-y-2 ml-3">
         <div class="flex space-x-1 items-center">
           <svg xmlns="http://www.w3.org/2000/svg" height="22px" viewBox="0 -960 960 960" width="22px" fill="#1f1f1f">
@@ -71,7 +78,6 @@
       <% end %>
     </div>
     <!-- ランキング -->
-    <%= turbo_frame_tag "rankings" do %>
     <div>
       <!-- タイトル -->
       <div class="flex justify-between items-center h-20 mx-4">

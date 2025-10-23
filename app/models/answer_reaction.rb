@@ -25,4 +25,11 @@ class AnswerReaction < ApplicationRecord
       ["answer_reactions.reaction_id = ?", 2] => "consent_count",
       ["answer_reactions.reaction_id = ?", 3] => "smile_count"
     }
+
+    private
+
+    # Ransack
+    def self.ransackable_attributes(auth_object = nil)
+      %w[answer_id reaction_id published_at]
+    end
 end
