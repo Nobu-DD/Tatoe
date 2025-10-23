@@ -20,7 +20,7 @@ class RankingsController < ApplicationController
   return params[:q] if params[:q].blank?
 
   params.require(:q).permit(
-    :published_at_gteq, :published_at_lteq, :likes_count_desc, :answers_count_desc, :reactions_count_desc, :empathy_count_desc, :consent_count_desc, :smile_count_desc
+    :published_at_gteq, :published_at_lteq
   )
   end
 end

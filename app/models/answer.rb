@@ -18,4 +18,8 @@ class Answer < ApplicationRecord
   def self.ransackable_attributes(auth_object = nil)
     %w[comments_count reactions_count empathy_count consent_count smile_count] + _ransackers.keys
   end
+
+  def self.ransackable_associations(auth_object = nil)
+    %w[user topic reactions comments]
+  end
 end
