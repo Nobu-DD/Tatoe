@@ -1,11 +1,14 @@
 <%= link_to topic_answer_path(answer.topic, answer), data: { turbo:false } do %>
 <div class="bg-white hover:shadow-md border border-gray-200 rounded-xl shadow-sm transition mb-4 py-5 px-5">
-  <div class="grid grid-cols-[30px_1fr_45px] gap-2">
+  <div class="grid grid-cols-[30px_1fr_70px] gap-2">
     <div class="flex items-center">
       <%= render "logo", count: answer_counter %>
     </div>
-    <div class="col-span-2">
+    <div>
       <span><%= answer.topic.title %></span>
+    </div>
+    <div class="items-center justify-end">
+      <span><%= l answer.published_at, format: :date %></span>
     </div>
     <div class="col-span-2 col-start-2 bg-gray-50 rounded-xl p-3">
       <span class="text-xl font-medium"><%= "💡 #{answer.body}" %></span>

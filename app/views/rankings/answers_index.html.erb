@@ -20,9 +20,9 @@
         </div>
       </div>
       <!-- 期間 -->
-      <%= search_form_for @q, url: answers_index_rankings_path, method: :get, data: { turbo_frame: "rankings"}, class: "space-y-4" do |f| %>
+      <%= form_with url: answers_index_rankings_path, method: :get, data: { turbo_frame: "rankings"}, class: "space-y-4" do |f| %>
       <!-- ランキング対象の引き継ぎのため、hidden使用 -->
-      <%= f.hidden_field :s %>
+      <%= f.hidden_field :s, value: @sort%>
       <div class="space-y-2 ml-3">
         <div class="flex space-x-1 items-center">
           <svg xmlns="http://www.w3.org/2000/svg" height="22px" viewBox="0 -960 960 960" width="22px" fill="#1f1f1f">
@@ -38,9 +38,11 @@
       </div>
       <% end %>
       <!-- ランキング基準 -->
-      <%= search_form_for @q, url: answers_index_rankings_path, method: :get, data: { turbo_frame: "rankings" }, class: "space-y-4" do |f| %>
+      <%= form_with url: answers_index_rankings_path, method: :get, data: { turbo_frame: "rankings" }, class: "space-y-4" do |f| %>
       <!-- ランキング期間を引き継ぐためにhiddenを使用 -->
-      <%= f.hidden_field :published_at_gteq %>
+      <% if @q.published_at_gteq.present? %>
+      <%= f.hidden_field :published_at_gteq, value: @q.published_at_gteq %>
+      <% end %>
       <div class="space-y-2 ml-3">
         <div class="flex space-x-1 items-center">
           <svg xmlns="http://www.w3.org/2000/svg" height="22px" viewBox="0 -960 960 960" width="22px" fill="#1f1f1f">
