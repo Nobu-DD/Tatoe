@@ -32,8 +32,8 @@
         </div>
         <div class="flex space-x-2">
           <%= f.button "総合", type: "submit", name: :published_at_gteq, value: "", class: "btn btn-info rounded-xl pointer-events-none", data: { action: "click->rankings#period_change", rankings_target: "general_button", after_content: "general", current_period: "" } %>
-          <%= f.button "1週間", type: "submit", name: :published_at_gteq, value: Date.today - 6, class: "btn btn-outline btn-info rounded-xl", data: { action: "click->rankings#period_change", rankings_target: "week_button", before_content: "general", after_content: "week", current_period: "#{Date.today - 6}" } %>
           <%= f.button "1ヶ月", type: "submit", name: :published_at_gteq, value: Date.today.prev_month, class: "btn btn-outline btn-info rounded-xl", data: { action: "click->rankings#period_change", rankings_target: "month_button", before_content: "general", after_content: "month", current_period: "#{Date.today.prev_month}" } %>
+          <%= f.button "1週間", type: "submit", name: :published_at_gteq, value: Date.today - 6, class: "btn btn-outline btn-info rounded-xl", data: { action: "click->rankings#period_change", rankings_target: "week_button", before_content: "general", after_content: "week", current_period: "#{Date.today - 6}" } %>
         </div>
       </div>
       <% end %>

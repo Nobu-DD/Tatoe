@@ -15,12 +15,4 @@ class RankingsController < ApplicationController
     @answers = @q.result(distinct: true).includes(:user, :topic, :reactions, :comments).limit(5)
     @reactions = Reaction.all
   end
-
-  private
-
-  # def published_at_params
-  # params.require(:q).permit(
-  #   :published_at_gteq
-  # )
-  # end
 end
