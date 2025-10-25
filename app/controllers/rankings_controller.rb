@@ -3,8 +3,8 @@ class RankingsController < ApplicationController
 
   def topics_index
     @q = Topic.ransack(params)
-    @q.sorts = @q.sorts.empty? ? "likes_count desc" : params[:s]
-    @sort = params[:s]
+    @sort = @q.sorts.empty? ? "likes_count desc" : params[:s]
+    @q.sorts = @sort
     @topics = @q.result(distinct: true).includes(:user, :genres, :hints).limit(5)
   end
 

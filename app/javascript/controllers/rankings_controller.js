@@ -2,24 +2,38 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="rankings"
 export default class extends Controller {
-  static targets = ["general_button", "week_button", "month_button", "reference_like", "reference_topic"]
+  static targets = ["general_button", "week_button", "month_button", "like_button", "answer_button", "current_period", "current_sort"]
 
   period_change(event) {
     console.log("ランキングを期間で切り替え");
 
-    // data-beforeを書き換えるための配列を作成
-    const periodTargets = [this.general_buttonTarget, this.week_buttonTarget, this.month_buttonTarget];
+    const contentTargets = [this.general_buttonTarget, this.week_buttonTarget, this.month_buttonTarget];
     const clickedElement = event.currentTarget;
-    const beforePeriod = clickedElement.dataset.beforePeriod;
-    const afterPeriod = clickedElement.dataset.afterPeriod;
+    const beforeContent = clickedElement.dataset.beforeContent;
+    const afterContent = clickedElement.dataset.afterContent;
 
-    this[`${beforePeriod}_buttonTarget`].className = "btn btn-outline btn-info rounded-xl";
-    this[`${afterPeriod}_buttonTarget`].className = "btn btn-info rounded-xl pointer-events-none";
-    periodTargets.forEach(target => {
-      if (!(target.dataset.rankingsTarget == `${afterPeriod}_button`)) {
-        target.dataset.beforePeriod = `${afterPeriod}`;
+    this[`${beforeContent}_buttonTarget`].className = "btn btn-outline btn-info rounded-xl";
+    this[`${afterContent}_buttonTarget`].className = "btn btn-info rounded-xl pointer-events-none";
+    contentTargets.forEach(target => {
+      if (!(target.dataset.rankingsTarget == `${afterContent}_button`)) {
+        target.dataset.beforeContent = `${afterContent}`;
       }
     })
-    delete clickedElement.dataset.beforePeriod;
+    delete clickedElement.dataset.beforeContent;
+
+    this.current_periodTarget.value = clickedElement.dataset.currentPeriod
+  }
+
+  sort_change(event) {
+    const clickedElement = event.currentTarget;
+    const beforeContent = clickedElement.dataset.beforeContent;
+    const afterContent = clickedElement.dataset.afterContent;
+
+    this[`${beforeContent}_buttonTarget`].className = "btn btn-outline btn-info rounded-xl";
+    this[`${afterContent}_buttonTarget`].className = "btn btn-info rounded-xl pointer-events-none";
+    this[`${beforeContent}_buttonTarget`].dataset.beforeContent = `${afterContent}`;
+    delete clickedElement.dataset.beforeContent
+
+    this.current_sortTarget.value = `${afterContent}s_count desc`
   }
 }
