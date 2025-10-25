@@ -2,8 +2,9 @@ class RankingsController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[ topics_index answers_index ]
 
   def topics_index
-    @q = Topic.ransack(:q[params[:q]])
-    @q.sorts = params[:s].blank? ? "likes_count desc" : params[:s]
+    @q = Topic.ransack(params)
+    @q.sorts = @q.sorts.empty? ? "likes_count desc" : params[:s]
+    @sort = params[:s]
     @topics = @q.result(distinct: true).includes(:user, :genres, :hints).limit(5)
   end
 

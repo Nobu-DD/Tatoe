@@ -4,7 +4,6 @@
     <div class="text-center mb-5">
       <h2 class=" text-2xl font-bold text-gray-800">ランキング</h2>
     </div><!-- ランキング選択箇所 -->
-    <%= turbo_frame_tag "rankings" do %>
     <div class="space-y-4 mb-5">
       <!-- ランキング対象 -->
       <div class="space-y-2 ml-3">
@@ -20,7 +19,7 @@
         </div>
       </div>
       <!-- 期間 -->
-      <%= form_with url: answers_index_rankings_path, method: :get, data: { turbo_frame: "rankings"}, class: "space-y-4" do |f| %>
+      <%= form_with url: answers_index_rankings_path, method: :get, data: { turbo_frame: "rankings" }, class: "space-y-4" do |f| %>
       <!-- ランキング対象の引き継ぎのため、hidden使用 -->
       <%= f.hidden_field :s, value: @sort%>
       <div class="space-y-2 ml-3">
@@ -80,6 +79,7 @@
       <% end %>
     </div>
     <!-- ランキング -->
+    <%= turbo_frame_tag "rankings" do %>
     <div>
       <!-- タイトル -->
       <div class="flex justify-between items-center h-20 mx-4">
