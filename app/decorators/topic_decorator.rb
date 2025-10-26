@@ -9,5 +9,4 @@ class TopicDecorator < Draper::Decorator
       hints: object.hints.map(&:body)
     }.to_json
   end
-
 end

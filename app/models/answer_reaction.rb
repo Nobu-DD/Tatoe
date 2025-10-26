@@ -10,7 +10,7 @@ class AnswerReaction < ApplicationRecord
 
   counter_culture :answer, column_name: "reactions_count"
   counter_culture :answer,
-    column_name: proc {|model|
+    column_name: proc { |model|
       case model.reaction_id
       when 1
         "empathy_count"
@@ -21,9 +21,9 @@ class AnswerReaction < ApplicationRecord
       end
     },
     column_names: {
-      ["answer_reactions.reaction_id = ?", 1] => "empathy_count",
-      ["answer_reactions.reaction_id = ?", 2] => "consent_count",
-      ["answer_reactions.reaction_id = ?", 3] => "smile_count"
+      [ "answer_reactions.reaction_id = ?", 1 ] => "empathy_count",
+      [ "answer_reactions.reaction_id = ?", 2 ] => "consent_count",
+      [ "answer_reactions.reaction_id = ?", 3 ] => "smile_count"
     }
 
     private
