@@ -4,6 +4,7 @@ class RankingsController < ApplicationController
   def topics_index
     @q = Topic.ransack(params)
     @sort = @q.sorts.empty? ? "likes_count desc" : params[:s]
+    @topic_period = params[:published_at_gteq].present? ? params[:published_at_gteq] : false
     @q.sorts = @sort
     @topics = @q.result(distinct: true).includes(:user, :genres, :hints).limit(5)
   end
