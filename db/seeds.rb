@@ -27,26 +27,34 @@ topics = []
     user: users.sample,
     title: Faker::Lorem.sentence(word_count: 3),
     description: Faker::Lorem.paragraph,
-    published_at: Faker::Date.backward(days: 30)
+    published_at: Faker::Date.between(from: "2024-01-01", to: Date.today)
   )
 end
 
 # Answers
 puts 'Creating answers...'
 150.times do
+  selected_topic = topics.sample
+
   Answer.create!(
     user: users.sample,
-    topic: topics.sample,
+    topic: selected_topic,
     body: Faker::Lorem.paragraph(sentence_count: 2),
     reason: Faker::Lorem.sentence,
-    published_at: Faker::Date.backward(days: 15)
+    published_at: Faker::Date.between(from: selected_topic.published_at, to: Date.today)
   )
 end
 
 # reactions
 puts 'Creating reactions...'
 Reaction.create!(
-  name: "確かに！"
+  name: "共感"
+)
+Reaction.create!(
+  name: "納得"
+)
+Reaction.create!(
+  name: "爆笑"
 )
 
 puts 'Seeding done!'

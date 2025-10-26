@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_10_18_144842) do
+ActiveRecord::Schema[7.2].define(version: 2025_10_21_112656) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -35,8 +35,11 @@ ActiveRecord::Schema[7.2].define(version: 2025_10_18_144842) do
     t.datetime "published_at", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "comments_count"
-    t.integer "reactions_count"
+    t.integer "comments_count", default: 0
+    t.integer "reactions_count", default: 0
+    t.integer "empathy_count", default: 0, null: false
+    t.integer "consent_count", default: 0, null: false
+    t.integer "smile_count", default: 0, null: false
     t.index ["topic_id"], name: "index_answers_on_topic_id"
     t.index ["user_id"], name: "index_answers_on_user_id"
   end
@@ -121,8 +124,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_10_18_144842) do
     t.datetime "published_at", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "answers_count"
-    t.integer "likes_count"
+    t.integer "answers_count", default: 0
+    t.integer "likes_count", default: 0
     t.index ["user_id"], name: "index_topics_on_user_id"
   end
 

@@ -9,5 +9,6 @@ class AnswerReactionsController < ApplicationController
     @answer = Answer.find(params[:answer_id])
     @reaction = Reaction.find(params[:reaction_id])
     current_user.unanswer_reaction(@answer, @reaction)
+    @answer.reload
   end
 end

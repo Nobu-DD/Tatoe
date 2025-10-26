@@ -26,3 +26,9 @@ RUN gem install bundler
 
 # ホスト(自分のPC)のプロジェクトファイル(Railsアプリ)を/myappにコピー
 COPY . /myapp
+
+# gemfileを元にインストール
+RUN bundle install
+
+# package.jsonの依存関係をインストール
+RUN yarn install --check-files
