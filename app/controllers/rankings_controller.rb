@@ -11,6 +11,7 @@ class RankingsController < ApplicationController
   def answers_index
     @q = Answer.ransack(params)
     @sort = @q.sorts.empty? ? "reactions_count desc" : params[:s]
+    @answer_period = params[:published_at_gteq].present? ? params[:published_at_gteq] : false
     @q.sorts = @sort
     @answers = @q.result(distinct: true).includes(:user, :topic, :reactions, :comments).limit(5)
     @reactions = Reaction.all

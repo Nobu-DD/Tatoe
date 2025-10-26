@@ -83,9 +83,18 @@
       <div class="flex justify-between items-center h-20 mx-4">
         <!-- タイトル -->
         <span class="text-2xl font-semibold">例えランキング</span>
-        <span>
-          <%="#{@answers.count}件"%>
-        </span>
+        <% if @answer_period %>
+        <div>
+          <div>
+            <span><%= @answer_period %></span>
+          </div>
+          <div class="flex justify-end">
+            <span>〜 <%= l Date.today, format: :date %></span>
+          </div>
+        </div>
+        <% else %>
+        全期間
+        <% end %>
       </div>
       <div>
         <%= render partial: "answer", collection: @answers %>

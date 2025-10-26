@@ -5,6 +5,9 @@ ja:
       pickup: "%m/%d %H:%M:%S"
       date: "%Y/%m/%d"
       short: "%H:%M"
+  date:
+    formats:
+      date: "%Y-%m-%d"
   devise:
     failure:
       unauthenticated: ログインが必要です。
