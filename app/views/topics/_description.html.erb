@@ -13,7 +13,7 @@
         <% end %>
       </div>
       <div class="flex items-center space-x-2">
-        <% if user_signed_in? %>
+        <% if user_signed_in? && current_user.not_own?(topic) %>
         <% if current_user.likes.exists?(likeable_type: "Topic", likeable_id: topic.id) %>
         <%= render "likes/unlike", object: topic, type: "Topic" %>
         <% else %>

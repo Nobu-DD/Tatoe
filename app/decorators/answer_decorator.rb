@@ -9,4 +9,15 @@ class AnswerDecorator < Draper::Decorator
   #       object.created_at.strftime("%a %m/%d/%y")
   #     end
   #   end
+
+  def reactions_count(id)
+    case id
+    when 1
+      object.empathy_count
+    when 2
+      object.consent_count
+    when 3
+      object.smile_count
+    end
+  end
 end

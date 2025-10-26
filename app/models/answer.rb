@@ -9,12 +9,17 @@ class Answer < ApplicationRecord
   has_many :answer_reactions
   has_many :reactions, through: :answer_reactions
   belongs_to :user
-  belongs_to :topic, counter_cache: :answers_count
+  belongs_to :topic
+  counter_culture :topic, column_name: "answers_count"
 
   private
 
   # Ransack
   def self.ransackable_attributes(auth_object = nil)
-    %w[comments_count] + _ransackers.keys
+    %w[comments_count reactions_count empathy_count consent_count smile_count published_at] + _ransackers.keys
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    %w[user topic reactions comments]
   end
 end
