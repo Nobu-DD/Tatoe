@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="rankings"
 export default class extends Controller {
-  static targets = ["general_button", "week_button", "month_button", "like_button", "answer_button", "current_period", "current_sort", "all_button", "empathy_button", "consent_button", "smile_button" ]
+  static targets = ["general_button", "week_button", "month_button", "like_button", "answer_button", "current_period", "current_sort", "reaction_button", "empathy_button", "consent_button", "smile_button" ]
 
   period_change(event) {
     console.log("ランキングを期間で切り替え");

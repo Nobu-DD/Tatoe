@@ -10,8 +10,8 @@ class RankingsController < ApplicationController
 
   def answers_index
     @q = Answer.ransack(params)
-    @q.sorts = @q.sorts.empty? ? "reactions_count desc" : params[:s]
-    @sort = params[:s]
+    @sort = @q.sorts.empty? ? "reactions_count desc" : params[:s]
+    @q.sorts = @sort
     @answers = @q.result(distinct: true).includes(:user, :topic, :reactions, :comments).limit(5)
     @reactions = Reaction.all
   end
