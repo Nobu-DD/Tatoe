@@ -20,6 +20,20 @@ class User < ApplicationRecord
 
   attr_accessor :genre_names
 
+  def self.from_omniauth(access_token)
+    data = access_token.info
+    user = User.where(email: data['email']).first
+
+    # ユーザーが存在しない場合、新規作成する処理。
+    # unless user
+    #     user = User.create(name: data['name'],
+    #        email: data['email'],
+    #        password: Devise.friendly_token[0,20]
+    #     )
+    # end
+    user
+end
+
   def own?(object)
     id == object.user_id
   end
