@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="rankings"
 export default class extends Controller {
-  static targets = ["general_button", "week_button", "month_button", "like_button", "answer_button", "current_period", "current_sort", "reaction_button", "empathy_button", "consent_button", "smile_button" ]
+  static targets = ["general_button", "week_button", "month_button", "like_button", "answer_button", "current_period", "current_sort", "reactions_button", "empathy_button", "consent_button", "smile_button" ]
 
   period_change(event) {
     console.log("ランキングを期間で切り替え");
@@ -38,7 +38,7 @@ export default class extends Controller {
   }
 
   answers_sort_change(event) {
-    const contentTargets = [this.all_buttonTarget, this.empathy_buttonTarget, this.consent_buttonTarget, this.smile_buttonTarget];
+    const contentTargets = [this.reactions_buttonTarget, this.empathy_buttonTarget, this.consent_buttonTarget, this.smile_buttonTarget];
     const clickedElement = event.currentTarget;
     const beforeContent = clickedElement.dataset.beforeContent;
     const afterContent = clickedElement.dataset.afterContent;
@@ -52,6 +52,6 @@ export default class extends Controller {
     })
     delete clickedElement.dataset.beforeContent;
 
-    this.current_sortTarget.value = `${afterContent}s_count desc`
+    this.current_sortTarget.value = `${afterContent}_count desc`
   }
 }
