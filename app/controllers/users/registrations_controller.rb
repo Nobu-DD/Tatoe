@@ -2,7 +2,7 @@
 
 class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
-  before_action :configure_account_update_params, only: [ :update ]
+  # before_action :configure_account_update_params, only: [ :update ]
 
   # GET /resource/sign_up
   def new
@@ -22,7 +22,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # PUT /resource
   def update
-    super
+    @user = current_user
+    if @user.update(user_params)
+      flash.now.notice = t("devise.registrations.user.updated")
+    else
+      flash.now.alert = t("devise.registrations.user.failure")
+    end
   end
 
   def edit_password
@@ -59,8 +64,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # If you have extra params to permit, append them to the sanitizer.
-  def configure_account_update_params
-    devise_parameter_sanitizer.permit(:account_update, keys: [ :name, :genre_names ])
+  # def configure_account_update_params
+  #   devise_parameter_sanitizer.permit(:account_update, keys: [ :name, :genre_names ])
+  # end
+
+  def user_params
+    params.require(:user).permit(
+      :name, :email, :genre_names
+    )
   end
 
   # The path used after sign up.

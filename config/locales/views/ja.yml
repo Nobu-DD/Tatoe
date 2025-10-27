@@ -22,6 +22,7 @@ ja:
       user:
         signed_up: 新規登録が完了しました。
         updated: ユーザー情報を変更しました。
+        failure: ユーザー情報に不備があります。
     passwords:
       user:
         updated: パスワードを変更しました。
@@ -29,6 +30,8 @@ ja:
     mailer:
       reset_password_instructions:
         subject: パスワード再設定のお知らせ
+    omniauth_callbacks:
+      success: "%{kind}での認証が完了しました。"
   topic:
     create:
       success: お題を投稿しました。
