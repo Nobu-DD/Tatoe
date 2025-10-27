@@ -25,12 +25,14 @@ class User < ApplicationRecord
     user = User.where(email: data['email']).first
 
     # ユーザーが存在しない場合、新規作成する処理。
-    # unless user
-    #     user = User.create(name: data['name'],
-    #        email: data['email'],
-    #        password: Devise.friendly_token[0,20]
-    #     )
-    # end
+    unless user
+        user = User.create(name: data['name'],
+           email: data['email'],
+           password: Devise.friendly_token[0,20],
+           provider: access_token.provider,
+           uid: access_token.uid
+        )
+    end
     user
 end
 
