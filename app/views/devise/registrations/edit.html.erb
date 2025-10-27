@@ -1,7 +1,7 @@
 <%= turbo_frame_tag "user_information" do %>
-<div class="bg-white py-8 space-y-6">
-  <div class="text-center mb-5">
-    <h2 class=" text-2xl font-bold text-gray-800">ユーザー編集</h2>
+<div class="bg-white pb-8 space-y-6">
+  <div class="text-center">
+    <h2 class="text-2xl font-bold text-gray-800">ユーザー編集</h2>
   </div>
 
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
