@@ -1,8 +1,28 @@
 <% content_for(:title, "新規登録") %>
 <div class="pt-5 pb-15 px-2">
-  <div class="bg-white shadow-lg rounded-2xl w-full py-8 px-4 space-y-6">
-    <div class="text-center mb-5">
+  <div class="bg-white shadow-lg rounded-2xl w-full py-8 px-4 space-y-1">
+    <div class="text-center mb-10">
       <h2 class=" text-2xl font-bold text-gray-800">新規登録</h2>
+    </div>
+    <div class="space-y-2 mb-6">
+      <div class="flex justify-end">
+        <%= button_to user_google_oauth2_omniauth_authorize_path, class: "btn bg-white text-black border-[#e5e5e5] rounded-xl", data: { turbo: false } do %>
+        <svg aria-label=" Google logo" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+          <g>
+            <path d="m0 0H512V512H0" fill="#fff"></path>
+            <path fill="#34a853" d="M153 292c30 82 118 95 171 60h62v48A192 192 0 0190 341"></path>
+            <path fill="#4285f4" d="m386 400a140 175 0 0053-179H260v74h102q-7 37-38 57"></path>
+            <path fill="#fbbc02" d="m90 341a208 200 0 010-171l63 49q-12 37 0 73"></path>
+            <path fill="#ea4335" d="m153 219c22-69 116-109 179-50l55-54c-78-75-230-72-297 55"></path>
+          </g>
+        </svg>
+        Google認証はこちら
+        <% end %>
+      </div>
+      <div class="flex justify-end mb-5">
+        <span class="text-sm text-gray-500">※既にGmailで本アプリを登録済みの場合、ログイン処理となります。</span>
+      </div>
+      <div class="border-b-1 border-gray-300"></div>
     </div>
 
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
@@ -28,7 +48,7 @@
       <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "input input-info text-base w-full rounded-xl border-gray-200", placeholder: "もう一度パスワードを入力" %>
     </div>
 
-    <div class="actions">
+    <div class="mb-7">
       <%= f.submit "新規登録", class: "btn w-full bg-[#A0D8EF] hover:bg-[#7CC7E8] text-white font-semibold rounded-xl" %>
     </div>
     <% end %>

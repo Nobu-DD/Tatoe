@@ -1,0 +1,22 @@
+<% if flash[:notice] %>
+  <%= turbo_stream.update "user_information" do %>
+    <%= render "mypages/information", user: @user %>
+  <% end %>
+  <%= turbo_stream.replace "user_edit_flash" do %>
+    <div id="user_edit_flash" class="alert alert-info flex justify-center py-2 mb-3">
+      <%= "#{notice}" %>
+    </div>
+  <% end %>
+  <% elsif flash[:alert]%>
+    <%= turbo_stream.replace "user_edit_flash" do %>
+    <div id="user_edit_flash" class="my-3">
+      <div role="alert" class="alert alert-error flex justify-center py-2">
+        <ul class="mb-0">
+          <% @user.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+<% end %>

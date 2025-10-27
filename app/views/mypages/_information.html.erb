@@ -1,0 +1,42 @@
+<div id="user_edit_flash"></div>
+<div class=" space-y-2">
+  <label class="text-sm font-medium leading-none text-gray-700">ユーザー名</label>
+  <div class="flex items-center justify-between p-3 bg-gray-50 rounded-xl">
+    <span class="text-gray-800 font-medium"><%= user[:name] %></span>
+  </div>
+</div>
+
+<div class="space-y-2">
+  <label class="text-sm font-medium leading-none text-gray-700">メールアドレス</label>
+  <div class="flex items-center justify-between p-3 bg-gray-50 rounded-xl">
+    <div class="flex items-center">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-gray-400 mr-3">
+        <path d="M22 18V6H2L22 18z" />
+        <path d="M2 6l10 7L22 6" />
+      </svg>
+      <span class="text-gray-600"><%= user[:email] %></span>
+    </div>
+  </div>
+</div>
+
+<div class="space-y-2">
+  <label class="text-sm font-medium leading-none text-gray-700">好き・得意ジャンル</label>
+  <div class="flex items-start justify-between p-3 bg-gray-50 rounded-xl">
+    <div class="flex-1">
+      <% if user.genres.present? %>
+      <div class="flex flex-wrap gap-1">
+        <% user.genres.each do |genre| %>
+        <span class="bg-[#E0F2FE] text-[#0369A1] px-2 py-1 rounded-full text-xs">
+          <%= genre.name %>
+        </span>
+        <% end %>
+      </div>
+      <% else %>
+      <span class="text-gray-500">未設定</span>
+      <% end %>
+    </div>
+  </div>
+</div>
+<div class="space-y-2">
+  <%= link_to "編集", edit_user_registration_path(user), class: "block mt-4 w-full text-center bg-[#A0D8EF] hover:bg-[#7CC7E8] text-white font-medium text-xl px-4 py-2 rounded-xl" %>
+</div>
