@@ -24,10 +24,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def update
     @user = current_user
     if @user.update(user_params)
-      flash[:notice] = t("devise.registrations.user.updated")
-      redirect_to mypage_path
+      flash.now.notice = t("devise.registrations.user.updated")
     else
-      render :edit, status: :unprocessable_entity
+      flash.now.alert = t("devise.registrations.user.failure")
     end
   end
 

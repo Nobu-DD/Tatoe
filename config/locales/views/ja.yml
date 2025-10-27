@@ -22,6 +22,7 @@ ja:
       user:
         signed_up: 新規登録が完了しました。
         updated: ユーザー情報を変更しました。
+        failure: ユーザー情報に不備があります。
     passwords:
       user:
         updated: パスワードを変更しました。
