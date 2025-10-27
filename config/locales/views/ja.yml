@@ -29,6 +29,8 @@ ja:
     mailer:
       reset_password_instructions:
         subject: パスワード再設定のお知らせ
+    omniauth_callbacks:
+      success: "%{kind}でのログインが完了しました。"
   topic:
     create:
       success: お題を投稿しました。
