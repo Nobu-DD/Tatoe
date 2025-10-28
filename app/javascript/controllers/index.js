@@ -18,3 +18,6 @@ application.register("topics-search", TopicsSearchController)
 
 import RankingsController from "./rankings_controller"
 application.register("rankings", RankingsController)
+
+import AutocompleteController from "./autocomplete_controller"
+application.register("autocomplete", AutocompleteController)
