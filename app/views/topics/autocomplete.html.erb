@@ -1,0 +1,5 @@
+<% @genres.each do |genre| %>
+<li class="py-3 px-2 border border-gray-300 hover:bg-info cursor-pointer" data-autocomplete-value="<%= genre.id %>">
+  <%= genre.name %>
+</li>
+<% end %>

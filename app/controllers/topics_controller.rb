@@ -55,6 +55,15 @@ class TopicsController < ApplicationController
     render json: response
   end
 
+  # オートコンプリート用アクション
+  def autocomplete
+    @genres = Genre.where("name like ?", "%#{params[:q]}%")
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
   private
 
   def topic_params
