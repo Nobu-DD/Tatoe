@@ -18,6 +18,7 @@ export default class extends Controller {
   static uniqOptionId = 0
 
   connect() {
+    this.close()
     console.log("オートコンプリート")
 
     if(!this.inputTarget.hasAttribute("autocomplete")) this.inputTarget.setAttribute("autocomplete", "off")
@@ -29,6 +30,7 @@ export default class extends Controller {
 
     this.inputTarget.addEventListener("keydown", this.onKeydown)
     this.inputTarget.addEventListener("blur", this.onInputBlur)
+    this.inputTarget.addEventListener("focus", this.onInputFocus)
     this.inputTarget.addEventListener("input", this.onInputChange)
     this.resultsTarget.addEventListener("mousedown", this.onResultsMouseDown)
     this.resultsTarget.addEventListener("click", this.onResultsClick)
@@ -51,6 +53,18 @@ export default class extends Controller {
       this.resultsTarget.removeEventListener("mousedown", this.onResultsMouseDown)
       this.resultsTarget.removeEventListener("click", this.onResultsClick)
     }
+  }
+
+  // input以外をクリックした時(フォーカスを失う)、オートコンプリート表示を消去する処理
+  onInputBlur = () => {
+    if (this.mouseDown) return
+    this.close()
+  }
+
+  // inputをクリックした時(フォーカスした時)、オートコンプリートを再度表示する処理
+  onInputFocus = () => {
+    if (!this.resultsTarget.querySelector('[role="option"]')) return
+    this.open()
   }
 
   // 検索候補をparamsに保存する処理
