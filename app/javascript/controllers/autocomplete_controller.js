@@ -46,6 +46,7 @@ export default class extends Controller {
     if (this.hasInputTarget) {
       this.inputTarget.removeEventListener("keydown", this.onKeydown)
       this.inputTarget.removeEventListener("blur", this.onInputBlur)
+      this.inputTarget.removeEventListener("focus", this.onInputFocus)
       this.inputTarget.removeEventListener("input", this.onInputChange)
     }
 
