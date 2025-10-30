@@ -16,7 +16,7 @@ export default class extends Controller {
     queryParam: { type: String, default: "q" },
   }
   static uniqOptionId = 0
-
+	// DOM読み込み時に毎回発動
   connect() {
     this.close()
     console.log("オートコンプリート")
@@ -41,7 +41,7 @@ export default class extends Controller {
 
     this.readyValue = true
   }
-
+	// DOM切断時に毎回発動
   disconnect() {
     if (this.hasInputTarget) {
       this.inputTarget.removeEventListener("keydown", this.onKeydown)
@@ -73,32 +73,22 @@ export default class extends Controller {
     // selectedの属性にaria-disabled: trueが定義されていればfalseを返す
     if (selected.getAttribute("aria-disabled") === "true") return
 
-    // selectedのElementがaタグの場合、link先に移行する処理を書いて,コントローラをクローズする
-    if (selected instanceof HTMLAnchorElement) {
-      selected.click()
-      this.close()
-      return
-    }
-
     // data-autocomplete-labelに値があれば取得する。なければターゲット内で定義している文字列を取得
     const textValue = selected.getAttribute("data-autocomplete-label") || selected.textContent.trim()
+
     // data-autocomplete-valueに値があれば取得する。なければtextValueと同じ値を取得
     const value = selected.getAttribute("data-autocomplete-value") || textValue
     // text_fieldに値を入力
     this.inputTarget.value = textValue
 
-    // inputにhiddenを定義している場合、処理を実行
-    if (this.hasHiddenTarget) {
-      // hidden要素にvalueの値を代入
-      this.hiddenTarget.value = value
-      // hidden要素にinputとchangeイベントを起動させる(理解出来てない)
-      this.hiddenTarget.dispatchEvent(new Event("input"))
-      this.hiddenTarget.dispatchEvent(new Event("change"))
-    } else {
-      // hiddenが無い場合、inputの初期値にvalueを代入する
-      this.inputTarget.value = value
-    }
-    // inputにフォーカスを設定する
+		// 選択されたジャンル文字列をgenre_names[name][]に格納(hidden)
+		const genreElement = document.createElement("input", { type: "hidden", name: "genre_names[name][]" })
+		genreElement.setAttribute("type", "hidden")
+		genreElement.setAttribute("name", "genre_names[name][]")
+		genreElement.value = value
+		this.hiddenTarget.appendChild(genreElement)
+
+    // inputにフォーカスを設定し、検索候補を消去
     this.inputTarget.focus()
     this.hideAndRemoveOptions()
 
@@ -110,10 +100,18 @@ export default class extends Controller {
     )
   }
 
+	// 検索候補をクリックした時、一番最初に実行(blurを無効化)
+  onResultsMouseDown = () => {
+    this.mouseDown = true
+    this.resultsTarget.addEventListener("mouseup", () => {
+      this.mouseDown = false
+    }, { once: true })
+  }
   // 検索候補をクリックした時の処理
   onResultsClick = (event) => {
     if (!(event.target instanceof Element)) return
     const selected = event.target.closest(optionSelector)
+		console.log(selected)
     if (selected) this.commit(selected)
   }
 
@@ -169,7 +167,7 @@ export default class extends Controller {
     return html
   }
 
-  // inputの入力が無い場合、コントローラの情報をリセットする
+  // 検索候補を削除する
   hideAndRemoveOptions() {
     this.close()
     this.resultsTarget.innerHTML = null
