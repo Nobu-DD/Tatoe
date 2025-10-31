@@ -17,6 +17,7 @@
 <div class="mb-5" data-controller="autocomplete" data-autocomplete-url-value="/topics/autocomplete">
   <%= f.label :genre_names, "お題ジャンル(区切りはスペース カンマ、スラッシュ/)", class: "block text-base font-medium text-gray-700" %>
   <span class="text-sm pl-2 opacity-50">例：Tatoe お題 例え　RUNTEQ,プログラミング,スクール　Ruby/MySQL/React など</span>
+	<div class="flex space-x-2" data-autocomplete-target="labels"></div>
   <input type="text" class="input input-info text-base w-full rounded-xl border-gray-200 mt-1" data-topic-target="genres" data-autocomplete-target="input" />
 	<div data-autocomplete-target="hidden">
 	</div>

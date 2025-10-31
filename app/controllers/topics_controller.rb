@@ -67,7 +67,7 @@ class TopicsController < ApplicationController
 
   def topic_params
     params.require(:topic).permit(
-      :title, :description, :genre_names,
+      :title, :description, genre_names: [],
       hints_attributes: [ :id, :body, :_destroy ]
     )
   end

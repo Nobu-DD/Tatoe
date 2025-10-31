@@ -5,7 +5,7 @@ const activeSelector = "[aria-selected='true']"
 
 // Connects to data-controller="autocomplete"
 export default class extends Controller {
-  static targets = ["input", "hidden", "results"]
+  static targets = ["input", "hidden", "results", "labels"]
   static classes = ["selected"]
   static values = {
     ready: Boolean,
@@ -76,29 +76,37 @@ export default class extends Controller {
     // data-autocomplete-labelに値があれば取得する。なければターゲット内で定義している文字列を取得
     const textValue = selected.getAttribute("data-autocomplete-label") || selected.textContent.trim()
 
-    // data-autocomplete-valueに値があれば取得する。なければtextValueと同じ値を取得
-    const value = selected.getAttribute("data-autocomplete-value") || textValue
-    // text_fieldに値を入力
-    this.inputTarget.value = textValue
+    const genreId = selected.getAttribute("id")
+    this.inputTarget.value = ""
 
-		// 選択されたジャンル文字列をgenre_names[name][]に格納(hidden)
-		const genreElement = document.createElement("input", { type: "hidden", name: "genre_names[name][]" })
+		const genreButton = document.createElement("button")
+		genreButton.classList.add("bg-[#E0F2FE]","hover:bg-[#ACCDE2]","cursor-pointer","text-[#0369A1]","text-lg","px-2","py-1","rounded-full","mt-3","mb-4")
+		genreButton.setAttribute("type","button")
+		genreButton.setAttribute("id",genreId)
+		genreButton.innerHTML = `${textValue}   ✕`
+		this.labelsTarget.appendChild(genreButton)
+		genreButton.addEventListener("click", this.onDeleteGenre)
+
+		// 選択されたジャンル文字列をgenre_names[]に格納(hidden)
+		const genreElement = document.createElement("input")
 		genreElement.setAttribute("type", "hidden")
-		genreElement.setAttribute("name", "genre_names[name][]")
-		genreElement.value = value
+		genreElement.setAttribute("name", "topic[genre_names][]")
+		genreElement.setAttribute("id", genreId)
+		genreElement.value = textValue
 		this.hiddenTarget.appendChild(genreElement)
 
     // inputにフォーカスを設定し、検索候補を消去
     this.inputTarget.focus()
     this.hideAndRemoveOptions()
-
-    this.element.dispatchEvent(
-      new CustomEvent("autocomplete.change", {
-        bubbles: true,
-        detail: { value: value, textValue: textValue, selected: selected }
-      })
-    )
   }
+
+	// 押したジャンルの削除処理(hiddenの値消去)
+	onDeleteGenre = (event) => {
+		const genreId = event.target.id
+		event.target.remove()
+    console.log(genreId)
+		this.hiddenTarget.querySelector(`#${genreId}`).remove()
+	}
 
 	// 検索候補をクリックした時、一番最初に実行(blurを無効化)
   onResultsMouseDown = () => {
@@ -111,7 +119,6 @@ export default class extends Controller {
   onResultsClick = (event) => {
     if (!(event.target instanceof Element)) return
     const selected = event.target.closest(optionSelector)
-		console.log(selected)
     if (selected) this.commit(selected)
   }
 
@@ -181,7 +188,7 @@ export default class extends Controller {
   // viewに検索結果を反映させる処理
   replaceResults(html) {
     this.resultsTarget.innerHTML = html
-    this.identifyOptions()
+		this.identifyOptions()
     if (!!this.options) {
       this.open()
     } else {
@@ -191,9 +198,8 @@ export default class extends Controller {
 
   // レスポンスで渡されたlistタグに一意なidを付与
   identifyOptions() {
-      const prefix = this.resultsTarget.id || "stimulus-autocomplete"
-      const optionsWithoutId = this.resultsTarget.querySelectorAll(`${optionSelector}:not([id])`)
-      optionsWithoutId.forEach(el => el.id = `${prefix}-option-${this.constructor.uniqOptionId++}`)
+		const optionsWithoutId = this.resultsTarget.querySelectorAll("li")
+		optionsWithoutId.forEach(el => el.id = `genre-${this.constructor.uniqOptionId++}`)
   }
 
   // オートコンプリート表示を展開させる処理
