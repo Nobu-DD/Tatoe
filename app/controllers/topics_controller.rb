@@ -27,8 +27,7 @@ class TopicsController < ApplicationController
   end
 
   def edit
-    @topic = current_user.topics.find(params[:id])
-    @topic.genre_names = @topic.edit_genre_names_form
+    @topic = current_user.topics.includes(:genres).find(params[:id])
   end
 
   def update

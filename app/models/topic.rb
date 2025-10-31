@@ -31,11 +31,6 @@ class Topic < ApplicationRecord
     ransack(search)
   }
 
-  # 編集ページにgenre_names
-  def edit_genre_names_form
-    genres.pluck(:name).join(",")
-  end
-
   private
 
   # Ransack
