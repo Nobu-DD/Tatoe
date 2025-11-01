@@ -33,7 +33,6 @@ export default class extends Controller {
     this.inputTarget.addEventListener("focus", this.onInputFocus)
     this.inputTarget.addEventListener("input", this.onInputChange)
     this.resultsTarget.addEventListener("mousedown", this.onResultsMouseDown)
-    this.resultsTarget.addEventListener("click", this.onResultsClick)
 
     if (this.inputTarget.hasAttribute("autofocus")) {
       this.inputTarget.focus()
@@ -41,7 +40,7 @@ export default class extends Controller {
 
     this.readyValue = true
   }
-	// DOM切断時に毎回発動
+  // DOM切断時に毎回発動
   disconnect() {
     if (this.hasInputTarget) {
       this.inputTarget.removeEventListener("keydown", this.onKeydown)
@@ -79,36 +78,35 @@ export default class extends Controller {
     const genreId = selected.getAttribute("id")
     this.inputTarget.value = ""
 
-		const genreButton = document.createElement("button")
-		genreButton.classList.add("bg-[#E0F2FE]","hover:bg-[#ACCDE2]","cursor-pointer","text-[#0369A1]","text-lg","px-2","py-1","rounded-full","mt-3","mb-4")
-		genreButton.setAttribute("type","button")
-		genreButton.setAttribute("id",genreId)
-		genreButton.innerHTML = `${textValue}   ✕`
-		this.labelsTarget.appendChild(genreButton)
-		genreButton.addEventListener("click", this.onDeleteGenre)
+    const genreButton = document.createElement("button")
+    genreButton.classList.add("bg-[#E0F2FE]","hover:bg-[#ACCDE2]","cursor-pointer","text-[#0369A1]","text-lg","px-2","py-1","rounded-full","mt-3","mb-4")
+    genreButton.setAttribute("type","button")
+    genreButton.setAttribute("id",genreId)
+    genreButton.innerHTML = `${textValue}   ✕`
+    this.labelsTarget.appendChild(genreButton)
+    genreButton.addEventListener("click", this.onDeleteGenre)
 
-		// 選択されたジャンル文字列をgenre_names[]に格納(hidden)
-		const genreElement = document.createElement("input")
-		genreElement.setAttribute("type", "hidden")
-		genreElement.setAttribute("name", "topic[genre_names][]")
-		genreElement.setAttribute("id", genreId)
-		genreElement.value = textValue
-		this.hiddenTarget.appendChild(genreElement)
+    // 選択されたジャンル文字列をgenre_names[]に格納(hidden)
+    const genreElement = document.createElement("input")
+    genreElement.setAttribute("type", "hidden")
+    genreElement.setAttribute("name", "topic[genre_names][]")
+    genreElement.setAttribute("id", genreId)
+    genreElement.value = textValue
+    this.hiddenTarget.appendChild(genreElement)
 
     // inputにフォーカスを設定し、検索候補を消去
     this.inputTarget.focus()
     this.hideAndRemoveOptions()
   }
 
-	// 押したジャンルの削除処理(hiddenの値消去)
-	onDeleteGenre = (event) => {
-		const genreId = event.target.id
-		event.target.remove()
-    console.log(genreId)
-		this.hiddenTarget.querySelector(`#${genreId}`).remove()
-	}
+  // 押したジャンルの削除処理(hiddenの値消去)
+  onDeleteGenre = (event) => {
+    const genreId = event.target.id
+    event.target.remove()
+    this.hiddenTarget.querySelector(`#${genreId}`).remove()
+  }
 
-	// 検索候補をクリックした時、一番最初に実行(blurを無効化)
+    // 検索候補をクリックした時、一番最初に実行(blurを無効化)
   onResultsMouseDown = () => {
     this.mouseDown = true
     this.resultsTarget.addEventListener("mouseup", () => {
@@ -188,18 +186,18 @@ export default class extends Controller {
   // viewに検索結果を反映させる処理
   replaceResults(html) {
     this.resultsTarget.innerHTML = html
-		this.identifyOptions()
-    if (!!this.options) {
+    this.identifyOptions()
+    if (!!this.options.length) {
       this.open()
     } else {
-      this.close()
+      this.addGenreCreateButton()
     }
   }
 
   // レスポンスで渡されたlistタグに一意なidを付与
   identifyOptions() {
-		const optionsWithoutId = this.resultsTarget.querySelectorAll("li")
-		optionsWithoutId.forEach(el => el.id = `genre-${this.constructor.uniqOptionId++}`)
+    const optionsWithoutId = this.resultsTarget.querySelectorAll("li")
+    optionsWithoutId.forEach(el => el.id = `genre-${this.constructor.uniqOptionId++}`)
   }
 
   // オートコンプリート表示を展開させる処理
@@ -208,11 +206,6 @@ export default class extends Controller {
 
     this.resultsShown = true
     this.element.setAttribute("aria-expanded", "true")
-    this.element.dispatchEvent(
-      new CustomEvent("toggle", {
-        detail: { action: "open", inputTarget: this.inputTarget, resultsTarget: this.resultsTarget }
-      })
-    )
   }
 
   // オートコンプリート表示を終了させる処理
@@ -222,11 +215,48 @@ export default class extends Controller {
     this.resultsShown = false
     this.inputTarget.removeAttribute("aria-activedescendant")
     this.element.setAttribute("aria-expanded", "false")
-    this.element.dispatchEvent(
-      new CustomEvent("toggle", {
-        detail: { action: "close", inputTarget: this.inputTarget, resultsTarget: this.resultsTarget }
+  }
+
+  // ジャンルを登録するボタンを表示
+  addGenreCreateButton() {
+    const genreName = this.inputTarget.value
+    if (!genreName.length) return
+    this.resultsShown = true
+    this.element.setAttribute("aria-expanded", "true")
+    const genreButton = document.createElement("button")
+    genreButton.setAttribute("type", "button")
+    genreButton.setAttribute("role", "option")
+    genreButton.classList.add("btn", "btn-lg", "btn-outline", "btn-info")
+    genreButton.setAttribute("name", "genre")
+    genreButton.value = `${genreName}`
+    genreButton.innerHTML = `"${genreName}"を登録して選択`
+    genreButton.addEventListener("click",this.genreCreate)
+    this.resultsTarget.appendChild(genreButton)
+  }
+  // ジャンルを新規登録する処理
+  genreCreate(event) {
+    const genreElement = event.target
+    fetch("/genre", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRF-Token": document.head.querySelector("meta[name=csrf-token]")?.content
+      },
+      body: JSON.stringify({
+        genre:{
+          name: genreElement.value
+        }
       })
-    )
+    })
+    .then(response => response.json())
+    .then(genre => {
+      console.log(genre)
+    })
+    .catch((error) => {
+      alert("ジャンル登録に失敗しました。")
+      console.error(error)
+      this.hideAndRemoveOptions()
+    })
   }
 
   // オートコンプリートの検索候補が表示しているか真偽を返す(ゲッター)

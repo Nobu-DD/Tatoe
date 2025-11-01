@@ -59,6 +59,10 @@ ja:
       failure: 未入力、もしくは文字数オーバーです。100文字以下で入力してください。
     deleted:
       success: コメントを削除しました。
+  genre:
+    create:
+      success: ジャンルを新規登録しました。
+      failure: ジャンル登録に失敗しました。
   views:
     pagination:
       first: 最初

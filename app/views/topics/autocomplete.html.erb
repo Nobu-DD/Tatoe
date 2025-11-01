@@ -1,5 +1,5 @@
 <% @genres.each do |genre| %>
-<li class="py-2 px-2 border border-gray-300 hover:bg-info cursor-pointer" role="option">
+<li class="py-2 px-2 border border-gray-300 hover:bg-info cursor-pointer" role="option" data-action="click->autocomplete#onResultsClick">
   <%= genre.name %>
 </li>
 <% end %>
