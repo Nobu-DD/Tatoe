@@ -81,7 +81,7 @@
               </div>
               <div class="collapse-content space-y-2">
                 <% if @answers.present? %>
-                <%= @answers.each do |answer| %>
+                <% @answers.each do |answer| %>
                 <div id="<%="topic_answer_#{answer.id}"%>" class="flex flex-wrap justify-between mt-2">
                   <div class="flex items-center space-x-2 space-y-1 justify-end">
                     <div class="h-8 w-8 overflow-hidden rounded-full">
