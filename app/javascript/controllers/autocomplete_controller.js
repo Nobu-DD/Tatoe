@@ -193,18 +193,11 @@ export default class extends Controller {
   // viewに検索結果を反映させる処理
   replaceResults(html) {
     this.resultsTarget.innerHTML = html
-    this.identifyOptions()
     if (!!this.options.length) {
       this.open()
     } else {
       this.addGenreCreateButton()
     }
-  }
-
-  // レスポンスで渡されたlistタグに一意なidを付与
-  identifyOptions() {
-    const optionsWithoutId = this.resultsTarget.querySelectorAll("li")
-    optionsWithoutId.forEach(el => el.id = `genre-${this.constructor.uniqOptionId++}`)
   }
 
   // オートコンプリート表示を展開させる処理
