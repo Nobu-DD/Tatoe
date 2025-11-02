@@ -238,6 +238,25 @@ export default class extends Controller {
     genreButton.addEventListener("click",this.genreCreate)
     this.resultsTarget.appendChild(genreButton)
   }
+
+  // フラッシュメッセージを定義する処理
+  addFlash(response) {
+    // お題ジャンルを追加
+    const flashElement = this.querySelector("#flash-message")
+    switch (response.status) {
+    case "create":
+      flashElement.classList.add("alert", "alert-info", "mb-3")
+      flashElement.innerHTML(response.message)
+      break
+    case "unprocessable_entity":
+      flashElement.classList.add("alert", "alert-error", "mb-3")
+      response.messages.forEach(message => {
+        flashElement.insertAdjacentHTML("beforeend", message)
+      })
+      break
+    }
+  }
+
   // ジャンルを新規登録する処理
   genreCreate(event) {
     const genreElement = event.target
@@ -255,9 +274,8 @@ export default class extends Controller {
     })
     .then(response => response.json())
     .then(data => {
-      addFlash(data)
+      this.addFlash(data)
       this.addTopicGenre(data.genre.id, data.genre.name)
-
     })
     .catch((error) => {
       alert("ジャンル登録に失敗しました。")
@@ -266,21 +284,6 @@ export default class extends Controller {
     })
   }
 
-  // フラッシュメッセージを定義する処理
-  addFlash(response) {
-    // お題ジャンルを追加
-    const flashElement = this.querySelector("#flash-message")
-    switch (response.status) {
-    case "create":
-      flashElement.classList.add("alert", "alert-info", "mb-3")
-      flashElement.innerHTML(response.message)
-    case "unprocessable_entity":
-      flashElement.classList.add("alert", "alert-error", "mb-3")
-      response.messages.forEach(message => {
-        flashElement.insertAdjacentHTML("beforeend", message)
-      })
-    }
-  }
   // オートコンプリートの検索候補が表示しているか真偽を返す(ゲッター)
   get resultsShown() {
     return !this.resultsTarget.hidden
