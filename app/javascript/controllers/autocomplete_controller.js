@@ -77,12 +77,21 @@ export default class extends Controller {
 
     const genreId = selected.getAttribute("id")
     this.inputTarget.value = ""
+    
+    this.addTopicGenre(genreId, textValue)
 
+    // inputにフォーカスを設定し、検索候補を消去
+    this.inputTarget.focus()
+    this.hideAndRemoveOptions()
+  }
+
+  // ジャンル取り消しボタンとparams追加
+  addTopicGenre = (id, name) => {
     const genreButton = document.createElement("button")
     genreButton.classList.add("bg-[#E0F2FE]","hover:bg-[#ACCDE2]","cursor-pointer","text-[#0369A1]","text-lg","px-2","py-1","rounded-full","mt-3","mb-4")
     genreButton.setAttribute("type","button")
-    genreButton.setAttribute("id",genreId)
-    genreButton.innerHTML = `${textValue}   ✕`
+    genreButton.setAttribute("id", id)
+    genreButton.innerHTML = `${name}   ✕`
     this.labelsTarget.appendChild(genreButton)
     genreButton.addEventListener("click", this.onDeleteGenre)
 
@@ -90,13 +99,9 @@ export default class extends Controller {
     const genreElement = document.createElement("input")
     genreElement.setAttribute("type", "hidden")
     genreElement.setAttribute("name", "topic[genre_names][]")
-    genreElement.setAttribute("id", genreId)
-    genreElement.value = textValue
-    this.hiddenTarget.appendChild(genreElement)
-
-    // inputにフォーカスを設定し、検索候補を消去
-    this.inputTarget.focus()
-    this.hideAndRemoveOptions()
+    genreElement.setAttribute("id", id)
+    genreElement.value = name
+    this.hiddenTarget.appendChild(genreElement)     
   }
 
   // 押したジャンルの削除処理(hiddenの値消去)
@@ -249,8 +254,10 @@ export default class extends Controller {
       })
     })
     .then(response => response.json())
-    .then(genre => {
-      console.log(genre)
+    .then(data => {
+      addFlash(data)
+      this.addTopicGenre(data.genre.id, data.genre.name)
+
     })
     .catch((error) => {
       alert("ジャンル登録に失敗しました。")
@@ -259,6 +266,21 @@ export default class extends Controller {
     })
   }
 
+  // フラッシュメッセージを定義する処理
+  addFlash(response) {
+    // お題ジャンルを追加
+    const flashElement = this.querySelector("#flash-message")
+    switch (response.status) {
+    case "create":
+      flashElement.classList.add("alert", "alert-info", "mb-3")
+      flashElement.innerHTML(response.message)
+    case "unprocessable_entity":
+      flashElement.classList.add("alert", "alert-error", "mb-3")
+      response.messages.forEach(message => {
+        flashElement.insertAdjacentHTML("beforeend", message)
+      })
+    }
+  }
   // オートコンプリートの検索候補が表示しているか真偽を返す(ゲッター)
   get resultsShown() {
     return !this.resultsTarget.hidden
