@@ -5,7 +5,7 @@ const activeSelector = "[aria-selected='true']"
 
 // Connects to data-controller="autocomplete"
 export default class extends Controller {
-  static targets = ["input", "hidden", "results", "labels"]
+  static targets = ["input", "hidden", "results", "labels", "flash"]
   static classes = ["selected"]
   static values = {
     ready: Boolean,
@@ -59,6 +59,8 @@ export default class extends Controller {
   onInputBlur = () => {
     if (this.mouseDown) return
     this.close()
+    this.flashTarget.classList.remove("alert", "alert-info", "alert-error", "mb-3")
+    this.flashTarget.innerHTML = ""
   }
 
   // inputをクリックした時(フォーカスした時)、オートコンプリートを再度表示する処理
@@ -88,7 +90,7 @@ export default class extends Controller {
   // ジャンル取り消しボタンとparams追加
   addTopicGenre = (id, name) => {
     const genreButton = document.createElement("button")
-    genreButton.classList.add("bg-[#E0F2FE]","hover:bg-[#ACCDE2]","cursor-pointer","text-[#0369A1]","text-lg","px-2","py-1","rounded-full","mt-3","mb-4")
+    genreButton.classList.add("bg-[#E0F2FE]","hover:bg-[#ACCDE2]","cursor-pointer","text-[#0369A1]","text-lg","px-2","py-1","rounded-full","mb-2")
     genreButton.setAttribute("type","button")
     genreButton.setAttribute("id", id)
     genreButton.innerHTML = `${name}   ✕`
@@ -242,23 +244,22 @@ export default class extends Controller {
   // フラッシュメッセージを定義する処理
   addFlash(response) {
     // お題ジャンルを追加
-    const flashElement = this.querySelector("#flash-message")
     switch (response.status) {
     case "create":
-      flashElement.classList.add("alert", "alert-info", "mb-3")
-      flashElement.innerHTML(response.message)
+      this.flashTarget.classList.add("alert", "alert-info", "mb-3")
+      this.flashTarget.innerHTML = response.message
       break
     case "unprocessable_entity":
-      flashElement.classList.add("alert", "alert-error", "mb-3")
+      this.flashTarget.classList.add("alert", "alert-error", "mb-3")
       response.messages.forEach(message => {
-        flashElement.insertAdjacentHTML("beforeend", message)
+        this.flashTarget.insertAdjacentHTML("beforeend", message)
       })
       break
     }
   }
 
   // ジャンルを新規登録する処理
-  genreCreate(event) {
+  genreCreate = (event) => {
     const genreElement = event.target
     fetch("/genre", {
       method: "POST",
@@ -274,9 +275,12 @@ export default class extends Controller {
     })
     .then(response => response.json())
     .then(data => {
+      const genreId = `genre-${data.genre.id}`
       this.addFlash(data)
-      this.addTopicGenre(data.genre.id, data.genre.name)
-    })
+      this.addTopicGenre(genreId, data.genre.name)
+      this.hideAndRemoveOptions()
+      this.inputTarget.value = ""
+    }) 
     .catch((error) => {
       alert("ジャンル登録に失敗しました。")
       console.error(error)
