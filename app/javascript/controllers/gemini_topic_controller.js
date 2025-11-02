@@ -25,7 +25,7 @@ export default class extends Controller {
     .then(data => {
       this.titleTarget.value = data["title"];
       this.descriptionTarget.value = data["description"];
-      this.genresTarget.value = data["genres"].join(" ");
+      this.genresSetting(data["genres"]);
       this.hint_1Target.value = data["hints"]["hint_1"];
       this.hint_2Target.value = data["hints"]["hint_2"];
       this.hint_3Target.value = data["hints"]["hint_3"];
@@ -36,5 +36,11 @@ export default class extends Controller {
         console.error(error);
       this.buttonTarget.innerHTML = "AI出力";
     });
+  }
+
+  genresSetting(genres) {
+    genres.forEach((genre) => {
+
+    })
   }
 }

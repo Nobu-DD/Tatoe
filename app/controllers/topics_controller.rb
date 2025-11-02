@@ -51,7 +51,9 @@ class TopicsController < ApplicationController
   def generate_ai
     request_params = params.slice(:genre, :compare)
     response = GeminiGenerationService.new(:topic, request_params).run
-    render json: response
+    response_hash = JSON.parse(response, symbolize_names: true)
+    response_hash[:genres] = Genre.genre_creat_confimation(response_hash[:genres])
+    render json: response_hash
   end
 
   # オートコンプリート用アクション
