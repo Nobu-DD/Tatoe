@@ -193,10 +193,14 @@ export default class extends Controller {
   // viewに検索結果を反映させる処理
   replaceResults(html) {
     this.resultsTarget.innerHTML = html
+
+    if (!!this.resultsTarget.querySelector("li")) {
+      const genres = this.resultsTarget.querySelectorAll("li")
+      const genresName = [...genres].map(li => li.innerHTML.trim())
+      this.addGenreCreateButton(genresName)
+    }
     if (!!this.options.length) {
       this.open()
-    } else {
-      this.addGenreCreateButton()
     }
   }
 
@@ -218,9 +222,9 @@ export default class extends Controller {
   }
 
   // ジャンルを登録するボタンを表示
-  addGenreCreateButton() {
+  addGenreCreateButton(genres) {
     const genreName = this.inputTarget.value
-    if (!genreName.length) return
+    if (!genreName.length && genres.some((name) => name === genreName )) return
     this.resultsShown = true
     this.element.setAttribute("aria-expanded", "true")
     const genreButton = document.createElement("button")

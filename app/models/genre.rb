@@ -1,5 +1,5 @@
 class Genre < ApplicationRecord
-  validates :name, presence: true, length: { maximum: 15 }
+  validates :name, presence: true, length: { maximum: 15 }, uniqueness: true
 
   has_many :my_genres, dependent: :destroy
   has_many :users, through: :my_genres
