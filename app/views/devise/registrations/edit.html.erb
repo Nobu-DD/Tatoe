@@ -17,11 +17,15 @@
     <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "input input-info text-base w-full rounded-xl border-gray-200"%>
   </div>
 
-  <div class="field mb-5">
-    <%= f.label :genre_names, "好き・得意ジャンル(区切りはスペース カンマ、スラッシュ/)", class: "block text-base font-medium text-gray-700" %>
-    <span class="text-sm pl-2 opacity-50">例：Tatoe お題 例え　RUNTEQ,プログラミング,スクール　Ruby/MySQL/React など</span>
+  <%#<div class="field mb-5" data-controller="autocomplete" data-autocomplete-url-value="/topics/autocomplete">
+    <%#= f.label :genre_names, "好き・得意ジャンル", class: "block text-base font-medium text-gray-700" %>
+    <%#<span class="text-sm pl-2 opacity-50">単語を入力して選択、または登録</span>
+    <div data-autocomplete-target="flash"></div>
+    <div class="flex flex-wrap space-x-2" id="labels-area" data-autocomplete-target="labels">
+    </div>
     <%= f.text_field :genre_names, class: "input input-info text-base w-full rounded-xl border-gray-200 mt-1", value: @user.edit_genre_names_form %>
-  </div>
+  <%#</div> %>
+
   <div class="actions">
     <%= f.submit "変更", class: "btn w-full bg-[#A0D8EF] hover:bg-[#7CC7E8] text-white font-semibold rounded-xl" %>
   </div>

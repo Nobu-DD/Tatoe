@@ -14,10 +14,27 @@
 </div>
 
 <!-- ジャンル選択 -->
-<div class="mb-5">
-  <%= f.label :genre_names, "お題ジャンル(区切りはスペース カンマ、スラッシュ/)", class: "block text-base font-medium text-gray-700" %>
-  <span class="text-sm pl-2 opacity-50">例：Tatoe お題 例え　RUNTEQ,プログラミング,スクール　Ruby/MySQL/React など</span>
-  <%= f.text_field :genre_names, class: "input input-info text-base w-full rounded-xl border-gray-200 mt-1", data: { topic_target: "genres" } %>
+<div class="mb-5" data-controller="autocomplete" data-autocomplete-url-value="/topics/autocomplete">
+  <%= f.label :genre_names, "お題ジャンル", class: "block text-base font-medium text-gray-700" %>
+  <span class="text-sm pl-2 opacity-50">単語を入力して選択、または登録</span>
+  <div data-autocomplete-target="flash"></div>
+  <div class="flex flex-wrap space-x-2" id="labels-area" data-autocomplete-target="labels">
+    <% if @topic.genres.present? %>
+      <% @topic.genres.each do |genre| %>
+        <button type="button" class="bg-[#E0F2FE] hover:bg-[#ACCDE2] cursor-pointer text-[#0369A1] text-lg px-2 py-1 rounded-full mb-2" id="<%="genre-#{genre.id}"%>" data-action="click->autocomplete#onDeleteGenre"><%= "#{genre.name}  ✕"%></button>
+      <% end %>
+    <% end %>
+  </div>
+  <input type="text" class="input input-info text-base w-full rounded-xl border-gray-200 mt-1" data-topic-target="genres" data-autocomplete-target="input" placeholder="ジャンルを検索"/>
+  <div id="hidden-area" data-autocomplete-target="hidden">
+    <% if @topic.genres.present? %>
+      <% @topic.genres.each do |genre| %>
+       <input type="hidden" name="topic[genre_names][]" id="<%="genre-#{genre.id}"%>" value="<%="#{genre.name}"%>" />
+      <% end %>
+    <% end %>
+  </div>
+  <ul class="list-group mt-2" data-autocomplete-target="results">
+  </ul>
 </div>
 
 <!-- ヒント -->

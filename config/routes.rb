@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   resources :topics, only: %i[index new create show edit update destroy] do
     post :generate_ai, on: :collection
     get :ogp_image, on: :member, to: "ogp_images#show_topic"
+    get :autocomplete, on: :collection
     resources :answers, only: %i[new show create edit update destroy] do
       post :generate_ai, on: :collection
       get :ogp_image, on: :member, to: "ogp_images#show_answer"
@@ -27,6 +28,7 @@ Rails.application.routes.draw do
   end
   resource :mypage, only: %i[show update destroy]
   resource :likes, only: %i[create destroy]
+  resource :genre, only: %i[create]
   resources :rankings do
     collection do
       get :topics_index

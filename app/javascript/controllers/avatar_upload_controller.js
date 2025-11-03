@@ -5,7 +5,7 @@ export default class extends Controller {
   static targets = ["form", "revision"]
 
   submitForm(event) {
-    this.revisionTarget.innerHTML = `画像変更中...<span class="loading loading-spinner text-neutral text-sm text-gray-500 mb-1"></span>`
+    this.revisionTarget.innerHTML = `画像変更中...<span class="loading loading-spinner text-sm text-gray-500 mb-1"></span>`
     this.formTarget.requestSubmit();
   }
 }
