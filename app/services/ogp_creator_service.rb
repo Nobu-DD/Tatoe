@@ -40,11 +40,11 @@ class OgpCreatorService
 
   def self.x_share_encode(object)
     if object.is_a?(Topic)
-      message = "お題を投稿しました！例えてみてください！"
+      message = "『#{object.title}』を投稿しました！例えてみてください！"
       url = "https://tatoe.net/topics/#{object.id}"
       genres = object.genres.limit(5).map { |genre| "##{genre.name}" }.join(" ")
     else
-      message = "例えを投稿しました！コメントをしてみましょう！"
+      message = "『#{object.body}』を投稿しました！コメントをしてみましょう！"
       url = "https://tatoe.net/topics/#{object.topic_id}/answers/#{object.id}"
       genres = object.topic.genres.limit(5).map { |genre| "##{genre.name}" }.join(" ")
     end
