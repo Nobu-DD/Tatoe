@@ -1,6 +1,6 @@
 class Topic < ApplicationRecord
   include PublishedAtSettable
-  before_save :assign_genres
+  before_save :create_genres
 
   validates :title, presence: true, length: { maximum: 255 }
   validates :description, length: { maximum: 255 }
@@ -31,11 +31,6 @@ class Topic < ApplicationRecord
     ransack(search)
   }
 
-  # 編集ページにgenre_names
-  def edit_genre_names_form
-    genres.pluck(:name).join(",")
-  end
-
   private
 
   # Ransack
@@ -48,19 +43,16 @@ class Topic < ApplicationRecord
   end
 
   # ジャンル新規登録
-  def assign_genres
-    if genre_names.blank?
-      self.genres = []
-      return
-    end
+  def create_genres
+    return self.genres = [] if genre_names.blank?
 
-    names = genre_names.split(/[[:space:],、\/]|　+/).reject(&:blank?).uniq
+    names = genre_names.uniq
     self.genres = names.map { |name| Genre.find_or_create_by(name: name) }
   end
 
   def genre_names_length
     return if genre_names.blank?
-    genre_names.split(/[[:space:],、\/]|　+/).reject(&:blank?).uniq.each do |genre|
+    genre_names.uniq.each do |genre|
       if genre.strip.length > 15
         errors.add(:genres, :too_long, count: 15)
       end
