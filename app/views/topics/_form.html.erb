@@ -25,7 +25,7 @@
       <% end %>
     <% end %>
   </div>
-  <input type="text" class="input input-info text-base w-full rounded-xl border-gray-200 mt-1" data-topic-target="genres" data-autocomplete-target="input" />
+  <input type="text" class="input input-info text-base w-full rounded-xl border-gray-200 mt-1" data-topic-target="genres" data-autocomplete-target="input" placeholder="ジャンルを検索"/>
   <div id="hidden-area" data-autocomplete-target="hidden">
     <% if @topic.genres.present? %>
       <% @topic.genres.each do |genre| %>

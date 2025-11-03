@@ -193,12 +193,8 @@ export default class extends Controller {
   // viewに検索結果を反映させる処理
   replaceResults(html) {
     this.resultsTarget.innerHTML = html
-
-    if (!!this.resultsTarget.querySelector("li")) {
-      const genres = this.resultsTarget.querySelectorAll("li")
-      const genresName = [...genres].map(li => li.innerHTML.trim())
-      this.addGenreCreateButton(genresName)
-    }
+    this.addGenreCreateButton()
+    
     if (!!this.options.length) {
       this.open()
     }
@@ -222,20 +218,24 @@ export default class extends Controller {
   }
 
   // ジャンルを登録するボタンを表示
-  addGenreCreateButton(genres) {
+  addGenreCreateButton() {
     const genreName = this.inputTarget.value
-    if (!genreName.length && genres.some((name) => name === genreName )) return
+    if (!!this.resultsTarget.querySelector("li")) {
+      const genres = this.resultsTarget.querySelectorAll("li")
+      const genresName = [...genres].map(li => li.innerHTML.trim())
+      if (genresName.includes(genreName)) return
+    }
     this.resultsShown = true
     this.element.setAttribute("aria-expanded", "true")
     const genreButton = document.createElement("button")
     genreButton.setAttribute("type", "button")
     genreButton.setAttribute("role", "option")
-    genreButton.classList.add("btn", "btn-lg", "btn-outline", "btn-info")
+    genreButton.classList.add("btn", "btn-lg", "btn-outline", "btn-info", "mb-2")
     genreButton.setAttribute("name", "genre")
     genreButton.value = `${genreName}`
-    genreButton.innerHTML = `"${genreName}"を登録して選択`
+    genreButton.innerHTML = `「${genreName}」を登録して選択`
     genreButton.addEventListener("click",this.genreCreate)
-    this.resultsTarget.appendChild(genreButton)
+    this.resultsTarget.prepend(genreButton)
   }
 
   // フラッシュメッセージを定義する処理
