@@ -43,7 +43,8 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "top#index"
-  
+
+  # 静的ページ
   get "privacy_policy", to: "static_pages#privacy_policy"
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 end
