@@ -28,7 +28,7 @@ Rails.application.routes.draw do
   end
   resource :mypage, only: %i[show update destroy]
   resource :likes, only: %i[create destroy]
-	resource :genre, only: %i[create]
+  resource :genre, only: %i[create]
   resources :rankings do
     collection do
       get :topics_index

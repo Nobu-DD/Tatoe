@@ -44,7 +44,7 @@ class Topic < ApplicationRecord
 
   # ジャンル新規登録
   def create_genres
-		return self.genres = [] if genre_names.blank?
+    return self.genres = [] if genre_names.blank?
 
     names = genre_names.uniq
     self.genres = names.map { |name| Genre.find_or_create_by(name: name) }

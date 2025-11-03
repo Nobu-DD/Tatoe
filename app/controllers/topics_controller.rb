@@ -60,7 +60,7 @@ class TopicsController < ApplicationController
   def autocomplete
     @genres = Genre.where("name like ?", "%#{params[:q]}%")
 
-    respond_to do |format| 
+    respond_to do |format|
       format.js
     end
   end

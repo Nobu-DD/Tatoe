@@ -72,4 +72,4 @@ ja:
       last: 最後
   errors:
     messages:
-        extension_allowlist_error: を登録できる拡張子はjpg jpeg pngのみとなります。
+      extension_allowlist_error: を登録できる拡張子はjpg jpeg pngのみとなります。
