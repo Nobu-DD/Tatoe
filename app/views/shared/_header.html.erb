@@ -41,7 +41,7 @@
         <%= link_to "アプリの使い方", "#", class: "btn btn-outline border-none btn-lg" %>
         <%= link_to "お問い合わせ", "#", class: "btn btn-outline border-none btn-lg" %>
         <%= link_to "利用規約", "#", class: "btn btn-outline border-none btn-lg" %>
-        <%= link_to "プライバシーポリシー", "#", class: "btn btn-outline border-none btn-lg" %>
+        <%= link_to "プライバシーポリシー", privacy_policy_path, class: "btn btn-outline border-none btn-lg" %>
         <div class="border-b-4 border-gray-100"></div>
         <% if user_signed_in? %>
         <%= link_to "ログアウト", destroy_user_session_path, data: { turbo_method: :delete }, class: "btn btn-outline btn-error border-none btn-lg" %>
