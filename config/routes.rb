@@ -46,5 +46,7 @@ Rails.application.routes.draw do
 
   # 静的ページ
   get "privacy_policy", to: "static_pages#privacy_policy"
+  get "terms_of_service", to: "static_pages#terms_of_service"
+
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 end
