@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem "rails", "~> 7.2.2", ">= 7.2.2.1"
+gem "rails", "~> 7.2.3"
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
 # Use postgresql as the database for Active Record
@@ -42,8 +42,7 @@ gem "ransack"
 
 gem "kaminari"
 
-gem "rails-i18n", "~> 7.0.0"
-
+gem "rails-i18n"
 gem "aws-sdk-s3", require: false
 
 gem "carrierwave", "~> 3.0"
@@ -88,7 +87,7 @@ group :development, :test do
 
   gem "faker"
 
-  gem "rspec-rails", "~> 7.0.0"
+  gem "rspec-rails"
 
   gem "factory_bot_rails"
 
