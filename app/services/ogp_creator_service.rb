@@ -26,10 +26,10 @@ class OgpCreatorService
       # 基本設定
       config.font FONT
       # お題タイトル
-      config.fill "#65cff2"
-      config.gravity "north"
-      config.pointsize 50
-      config.draw "text 0,50 '#{topic_text}'"
+      # config.fill "#65cff2"
+      # config.gravity "north"
+      # config.pointsize 50
+      # config.draw "text 0,50 '#{topic_text}'"
       # 例え内容
       config.fill "#03B4F3"
       config.gravity "center"
