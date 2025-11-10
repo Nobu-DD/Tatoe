@@ -43,7 +43,7 @@ class OgpCreatorService
     io.define_singleton_method(:original_filename) { filename }
     io.define_singleton_method(:content_type) { "image/png" }
 
-    return io
+    io
   end
 
   def self.x_share_encode(object)
