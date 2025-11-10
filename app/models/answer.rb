@@ -17,7 +17,7 @@ class Answer < ApplicationRecord
   private
 
   def add_ogp
-    self[:ogp_image] = OgpCreatorService.answer_build(self.topic, self)
+    self.ogp_image = OgpCreatorService.answer_build(self.topic, self)
   end
   # Ransack
   def self.ransackable_attributes(auth_object = nil)

@@ -38,9 +38,12 @@ class OgpCreatorService
     end
     image.format "png"
     png_data = image.to_blob
-    # filename = "ogp_image.png"
+    filename = "ogp_image.png"
     io = StringIO.new(png_data)
-    # io.define_singleton_method(:original_filename) { filename }
+    io.define_singleton_method(:original_filename) { filename }
+    io.define_singleton_method(:content_type) { "image/png" }
+
+    return io
   end
 
   def self.x_share_encode(object)
