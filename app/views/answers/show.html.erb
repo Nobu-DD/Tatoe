@@ -1,4 +1,4 @@
-<% set_meta_tags(twitter: {image: ogp_image_topic_answer_url(@topic, @answer)})  %>
+<% set_meta_tags(twitter: {image: @answer.ogp_image.url})  %>
 <% content_for(:title, @answer.body) %>
 <% set_meta_tags("turbo-refresh-scroll": "preserve") %>
 <div class="pt-5 pb-15 px-2">

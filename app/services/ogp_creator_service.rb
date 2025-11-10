@@ -18,24 +18,32 @@ class OgpCreatorService
     end
   end
 
-  def self.answer_build(topic_title, answer_body)
-    topic_text = prepare_head_text(topic_title)
-    answer_text = prepare_main_text(answer_body)
+  def self.answer_build(topic, answer)
+    topic_text = prepare_head_text(topic.title)
+    answer_text = prepare_main_text(answer.body)
     image = MiniMagick::Image.open(BASE_IMAGE_PATH)
     image.combine_options do |config|
       # 基本設定
       config.font FONT
       # お題タイトル
-      # config.fill "#65cff2"
-      # config.gravity "north"
-      # config.pointsize 50
-      # config.draw "text 0,50 '#{topic_text}'"
+      config.fill "#65cff2"
+      config.gravity "north"
+      config.pointsize 50
+      config.draw "text 0,50 '#{topic_text}'"
       # 例え内容
       config.fill "#03B4F3"
       config.gravity "center"
       config.pointsize 65
       config.draw "text 0,0 '#{answer_text}'"
     end
+    image.format "png"
+    png_data = image.to_blob
+    filename = "ogp_image.png"
+    io = StringIO.new(png_data)
+    io.define_singleton_method(:original_filename) { filename }
+    io.define_singleton_method(:content_type) { "image/png" }
+
+    io
   end
 
   def self.x_share_encode(object)
