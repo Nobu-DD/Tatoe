@@ -1,5 +1,6 @@
 class Answer < ApplicationRecord
   include PublishedAtSettable
+  before_save :add_ogp
 
   validates :body, presence: true, length: { maximum: 30 }
   validates :reason, length: { maximum: 255 }
@@ -11,9 +12,13 @@ class Answer < ApplicationRecord
   belongs_to :user
   belongs_to :topic
   counter_culture :topic, column_name: "answers_count"
+  mount_uploader :ogp_image, AvatarUploader
 
   private
 
+  def add_ogp
+    self[:ogp_image] = OgpCreatorService.answer_build(self.topic, self)
+  end
   # Ransack
   def self.ransackable_attributes(auth_object = nil)
     %w[comments_count reactions_count empathy_count consent_count smile_count published_at] + _ransackers.keys

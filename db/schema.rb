@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_11_06_093454) do
+ActiveRecord::Schema[7.2].define(version: 2025_11_09_174402) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -40,6 +40,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_11_06_093454) do
     t.integer "empathy_count", default: 0, null: false
     t.integer "consent_count", default: 0, null: false
     t.integer "smile_count", default: 0, null: false
+    t.string "ogp_image"
     t.index ["topic_id"], name: "index_answers_on_topic_id"
     t.index ["user_id"], name: "index_answers_on_user_id"
   end
@@ -128,6 +129,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_11_06_093454) do
     t.datetime "updated_at", null: false
     t.integer "answers_count", default: 0
     t.integer "likes_count", default: 0
+    t.string "ogp_image"
     t.index ["user_id"], name: "index_topics_on_user_id"
   end
 
