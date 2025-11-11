@@ -15,7 +15,15 @@ class OgpCreatorService
       config.gravity "center"
       config.pointsize 65
       config.draw "text 0,0 '#{topic_text}'"
+      image.format "png"
     end
+    png_data = image.to_blob
+    filename = "ogp_image.png"
+    io = StringIO.new(png_data)
+    io.define_singleton_method(:original_filename) { filename }
+    io.define_singleton_method(:content_type) { "image/png" }
+
+    io
   end
 
   def self.answer_build(topic, answer)
