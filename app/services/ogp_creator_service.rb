@@ -5,8 +5,8 @@ class OgpCreatorService
   FONT = "./app/assets/fonts/Noto_Sans_JP/static/NotoSansJP-ExtraBold.ttf"
   ROW_LIMIT = 2
 
-  def self.topic_build(topic_title)
-    topic_text = prepare_main_text(topic_title)
+  def self.topic_build(topic)
+    topic_text = prepare_main_text(topic.title)
     image = MiniMagick::Image.open(BASE_IMAGE_PATH)
     image.combine_options do |config|
       # お題タイトル
