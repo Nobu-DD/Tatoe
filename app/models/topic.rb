@@ -15,6 +15,7 @@ class Topic < ApplicationRecord
   has_many :pickups, dependent: :destroy
   has_many :likes, as: :likeable
   belongs_to :user
+  mount_uploader :ogp_image, AvatarUploader
 
   attr_accessor :genre_names
   accepts_nested_attributes_for :hints, allow_destroy: true
