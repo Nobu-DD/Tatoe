@@ -1,6 +1,7 @@
 class Topic < ApplicationRecord
   include PublishedAtSettable
   before_save :create_genres
+  before_save :add_ogp
 
   validates :title, presence: true, length: { maximum: 255 }
   validates :description, length: { maximum: 255 }
@@ -48,6 +49,10 @@ class Topic < ApplicationRecord
 
     names = genre_names.uniq
     self.genres = names.map { |name| Genre.find_or_create_by(name: name) }
+  end
+
+  def add_ogp
+    self.ogp_image = OgpCreatorService.topic_build(self)
   end
 
   def genre_names_length
