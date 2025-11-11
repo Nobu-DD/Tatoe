@@ -9,6 +9,9 @@
    - [ターゲット層の理由](#ターゲット層の理由)
 - [機能紹介](#機能紹介)
 - [技術構成](#技術構成)
+   - [使用技術](#使用技術)
+   - [画面遷移図](#画面遷移図)
+   - [ER図](#ER図)
 ## サービス概要
 このサービスは、普段接点のない趣味や文化、職業などを、ユーザー同士で“例え”を使って共感を生むアプリです。<br>
 知ってほしい趣味、文化、職業」をお題として登録し、それに対して他のユーザーが「自分の得意分野」で例えていく<br>
@@ -56,27 +59,28 @@ Google認証を使用して簡単に新規登録＆ログインが可能です�
 | 共感・納得・笑ってしまった例えにコメントを残すことが出来ます。交流の場としてお使いいただけます。 | 例えに対してリアクションを残すことが出来ます。「共感」「納得」「爆笑」といったリアクションを用意しています。リアクションをした例えはランキングページに反映されます。|
 - - -
 ### Xシェア機能
-| お題シェア | 例えシェア |
-| ---------- | ---------- |
-| ![お題Xシェア](public/README/Xshare_topic) | ![例えXシェア](public/README/Xshare_answer) |
+| お題シェア |
+| ---------- |
+| ![Xシェア](public/README/Xshere.gif) |
+| 気に入ったお題・例えはXに投稿して共有することが出来ます。OGPは内容によって変更されるので、一目見るだけで内容を把握することが出来ます。
 
-投稿した**お題**と**例え**はXにてシェアをすることが出来ます。動的OGPを採用しているので、OGPにそれぞれのタイトルが埋め込まれます。
 ## 技術構成
+### 使用技術
 
 | 項目      | 内容                                                   |
 | ------- | ---------------------------------------------------- |
-| バックエンド  | Ruby on Rails 7.0.0・Ruby 3.2.3                 |
-| フロントエンド | HTML, CSS, TailwindCSS, Daisy UI, Turbo(Hotwire) |
+| バックエンド  | Ruby on Rails 7.2.3・Ruby 3.2.3                 |
+| フロントエンド | TailwindCSS, Daisy UI, Hotwire(Turbo・Stimulus) |
 | データベース  | PostgreSQL                                           |
 | ストレージ   | AWS S3|
 | 認証        | Devise |
 | デプロイ    | Render |
 | 開発環境    | Docker |
-| 外部API    | OpenAI API（gpt-4.1-nano）                 |
+| 外部API    | GeminiAI API（gemini-2.5-flash-lite）                 |
 
 ## 画面遷移図
-[Tatoe 画面遷移図](https://www.figma.com/design/h52ZY57d0laEO1PN7lCgp2/Tatoe?node-id=0-1&t=EiHWBsNduQXxuWzz-1)
-![画面遷移図](https://i.gyazo.com/d61bf98c39573f4cb957a45cc4c9e920.png)
+[Tatoe 画面遷移図](https://www.figma.com/design/h52ZY57d0laEO1PN7lCgp2/Tatoe?node-id=0-1&t=EiHWBsNduQXxuWzz-1) ←Figmaはこちら
+![画面遷移図](public/README/transition_diagram.png)
 
 ## ER図
-![ER図](https://i.gyazo.com/49eaeb23ff23d26df6c50e999af0cb24.png)
+![ER図](public/README/ER_diagram.png)
