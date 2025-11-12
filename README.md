@@ -1,6 +1,10 @@
 # Tatoe〜例えでつながる共感アプリ〜
 ![Tatoe画像](https://i.gyazo.com/8cd21f82e25686692b8e6d0b550fa000.jpg)
 ## サービスURL：https://tatoe.net
+## ゲストユーザー用アカウント
+アカウントを作らない方は以下をお使いください。(マイページにて登録情報を変更しないようお願いします。)<br>
+**メールアドレス：guest@example.com**<br>
+**パスワード：password**
 ## 目次
 - [サービス概要](#サービス概要)
 - [開発背景](#開発背景)
@@ -78,9 +82,170 @@ Google認証を使用して簡単に新規登録＆ログインが可能です�
 | 開発環境    | Docker |
 | 外部API    | GeminiAI API（gemini-2.5-flash-lite）                 |
 
-## 画面遷移図
+### 画面遷移図
 [Tatoe 画面遷移図](https://www.figma.com/design/h52ZY57d0laEO1PN7lCgp2/Tatoe?node-id=0-1&t=EiHWBsNduQXxuWzz-1) ←Figmaはこちら
 ![画面遷移図](public/README/transition_diagram.png)
 
-## ER図
+### ER図
 ![ER図](public/README/ER_diagram.png)
+
+## 工夫した実装内容
+### 目次
+- [お題・例えのAI出力機能](#お題・例えのAI出力機能)
+- [ジャンル選択オートコンプリート機能](#ジャンル選択オートコンプリート機能)
+- [動的OGPによるXシェア機能](#動的OGPによるXシェア機能)
+### お題・例えのAI出力機能
+#### どういった機能か？
+今回作成したアプリは**テーマに対して様々な物事で例える**というコンセプトになります。<br>
+しかし、物事に例えるのは意外にも難しく、投稿する前にアプリから離れてしまう欠点があるのを感じていました。
+
+そこで、自身の興味あるジャンルを入力するだけで、手軽にお題や例えが投稿できる機能があれば投稿のハードルを下げることができるのでは？と思い、今回AI生成機能を実装しました。
+#### 処理の流れ
+
+1. **AI生成ボタンをクリック〜アプリケーション・サーバーへのリクエスト**<br>
+前提として今回はStimulusを使用した非同期処理を採用しています。<br>
+まずは好きなジャンルを入力してStimulusで定義したボタンをクリックします。(ジャンルは空欄でも問題ありません)<br>
+コントローラの内容は以下のとおりです。(一部省略)
+```javascript:javascript/controllers/gemini_topic_controller.js
+export default class extends Controller {
+  static targets = ["genre", "compare", "title", "description", "genres", "hint_1", "hint_2", "hint_3", "button"]
+
+  output() {
+
+    const genre = this.genreTarget.value;
+    const compare = this.compareTarget.value;
+    const labelsArea = document.querySelector("#labels-area");
+    const hiddenArea = document.querySelector("#hidden-area");
+    this.genreAllDelete(labelsArea)
+    this.genreAllDelete(hiddenArea)
+    this.buttonTarget.innerHTML = `AI出力中...<span class="loading loading-spinner text-info ml-2"></span>`;
+
+    fetch("generate_ai", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRF-Token": document.head.querySelector("meta[name=csrf-token]")?.content
+      },
+      body: JSON.stringify({
+        genre: genre,
+        compare: compare
+      })
+    })
+```
+ルーティングで設定したgenerate_aiコントローラーにPOSTメソッドを定義したHTTPリクエストを作成します。POST送信になるのでhtmlヘッダーのCSRFトークンを取得し、JSON形式でサーバーにリクエストを送信します。<br>
+
+2. **geminiAPI用サービスオブジェクトでの処理**<br>
+AI生成は外部APIとの連携になるので、Serviceパターンを使用しました。<br>
+[gemini_generation_service.rb](https://github.com/Nobu-DD/Tatoe/blob/develop/app/services/gemini_generation_service.rb)<br>
+
+処理の内容は大きく分けて2つあります。<br>
+- **GeminiAI APIに送信するHTTPクラス作成**<br>
+railsではGeminiAI APIと連携するgemが存在していないため、以下の記事を参考にしてリクエスト・レスポンス処理を作成しました。APIキーは`.env`ファイル内で管理しているので、情報漏洩のリスクは非常に低いです。<br>
+[Geminiで真偽判定する機能を作ってみた（Ruby on Rails）](https://zenn.dev/nir_nmttg/articles/464519457cf818)
+- **リクエストボディに含めるプロンプト作成**<br>
+お題と例えそれぞれのプロンプト作成メソッドを作成しました。例としてお題作成のコードを記述します。
+```ruby:gemini_generation_service.rb
+def topic_request_body
+{
+  systemInstruction: {
+    parts: [ {
+      text: "あなたは、ユーザーから与えられた2つの要素(ジャンルと例えの分野)を組み合わせて、ユニークな「例え」の問いかけを生成する専門家です。ユーザーの想像力を刺激し、議論を深めるような、面白くて意外性のある問いかけを1つ提案してください。出力は、厳密に指定されたJSONスキーマに従ってください。なお、入力されていない要素があった場合、指定しているフォーマットを参考にして、自由に作成してください"
+    } ],
+    role: "model"
+  },
+  contents: [ {
+    parts: [ {
+      text: <<~PROMPT
+      まずは以下のフォーマットに従ってtitleを出力してください。
+
+      入力:
+      ジャンル: 競馬
+      例えてほしい内容: 他のスポーツ
+
+      出力:
+      競馬の日本ダービーをサッカーの大会で例えると？
+
+      入力:
+      ジャンル: 手芸
+      例えてほしい内容: ブルーカラーの職業
+
+      出力:
+      手芸の刺繍を土方の業務で例えると？
+
+      入力:
+      ジャンル: #{@params[:genre]}
+      例えてほしい内容: #{@params[:compare]}
+
+      出力:
+      title: [キーワード]の[キーワード]を[キーワード]で例えると？
+      description: 生成した:titleの意図を簡潔に説明してください。少し柔らかい表現で出力してください。
+      genres: ユーザーが提示した「#{@params[:genre]}」と「#{@params[:compare]}」の2つのキーワードと、:titleに関連したジャンル名を配列として5つ以内に含めてください。
+      hints: :titleに対して例えやすくなるように、ヒントを3つ箇条書きで提供してください。1つのヒントにつき30文字前後で出力してください。
+      PROMPT
+    } ],
+    role: "user"
+  } ],
+  generationConfig: {
+    responseMimeType: "application/json",
+    responseSchema: {
+      type: "object",
+      properties: {
+        title: { type: "string" },
+        description: { type: "string" },
+        genres: {
+          type: "array",
+          items: { type: "string" }
+        },
+        hints: {
+          type: "object",
+          properties: {
+            hint_1: { type: "string" },
+            hint_2: { type: "string" },
+            hint_3: { type: "string" }
+          }
+        }
+      },
+      required: [ "title", "description", "genres", "hints" ]
+    }
+  }
+}.to_json
+end
+```
+APIに送信するプロンプトは以下の内容を意識して作成しました。
+   - **例えてもらう前提の文章構造(「〜とは？」「〜で例えて！」など)**
+   - **同じ形式で出力される再現性(上記のような生成を毎回生成出来るか)**
+
+出力される内容がある程度固定するように入力と出力の例文を2つ提示することで、AIが生成しやすい環境を作るようにしました。
+また、AIに対してレスポンス内容をJSON形式で指定することで、再現性の高い回答を出力させています。<br>
+プロンプト生成時の流れは以下の記事にまとまっています。<br>
+[AIに伝えるプロンプトを僕なりに成形してみた](https://note.com/nobu64a/n/n588a12728a54)
+
+3. **AI生成レスポンス受取後の処理(ジャンルセーブ処理)**<br>
+APIからのレスポンス処理をViewに返す前に、データベースに存在しないジャンル名を新規登録します。<br>
+新規登録する理由として、後述する[ジャンルオートコンプリート機能](#ジャンル選択オートコンプリート機能)でジャンルを選択する処理にてgenres.idが必要になるからです。
+
+```javascript:gemini_topic_controller.js
+.then(response => response.json())
+.then(data => {
+  this.titleTarget.value = data["title"];
+  this.descriptionTarget.value = data["description"];
+  this.genresSetting(data["genres"]);
+  this.hint_1Target.value = data["hints"]["hint_1"];
+  this.hint_2Target.value = data["hints"]["hint_2"];
+  this.hint_3Target.value = data["hints"]["hint_3"];
+  this.buttonTarget.innerHTML = "AI出力"
+})
+.catch((error) => {
+  alert("AI生成に失敗しました。時間を置いてもう一度お試しください。");
+  console.error(error);
+  this.buttonTarget.innerHTML = "AI出力";
+});
+```
+サーバーからのレスポンス内容をそれぞれのinputフィールドに格納します。`genresSetting`メソッドはオートコンプリート機能でジャンル選択済みの状態にするための処理が書かれています。
+#### 現在抱えている課題
+- **ジャンル未入力時にAI生成をすると、例文の内容そのまま出力してしまうことがある**<br>
+フォーマットをある程度固定するために例文を2つ提示していますが、例文をそのまま出力してしまうことがあります。今後プロンプトの内容をブラッシュアップしていく必要があります。
+### 動的OGPによるXシェア機能
+### ジャンル選択オートコンプリート機能
+
+
