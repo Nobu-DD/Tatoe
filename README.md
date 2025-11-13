@@ -13,15 +13,15 @@
    - [ターゲット層の理由](#ターゲット層の理由)
 - [機能紹介](#機能紹介)
    - [認証機能](#認証機能)
-   - [お題投稿/例え投稿(AI生成)](#お題投稿/例え投稿(AI生成))
-   - [例えコメント/例えリアクション](#例えコメント/例えリアクション)
+   - [お題投稿と例え投稿(AI生成)](#お題投稿と例え投稿(AI生成))
+   - [例えコメントと例えリアクション](#例えコメントと例えリアクション)
    - [Xシェア機能](#Xシェア機能)
 - [技術構成](#技術構成)
    - [使用技術](#使用技術)
    - [画面遷移図](#画面遷移図)
    - [ER図](#ER図)
 - [工夫した実装](#工夫した実装)
-   - [お題/例えのAI出力機能](#お題/例えのAI出力機能)
+   - [お題と例えのAI出力機能](#お題/例えのAI出力機能)
    - [ジャンル選択オートコンプリート機能](#ジャンル選択オートコンプリート機能)
    - [動的OGPによるXシェア機能](#動的OGPによるXシェア機能)
 ## サービス概要
@@ -56,7 +56,7 @@
 
 Google認証を使用して簡単に新規登録＆ログインが可能です。Gmailアドレスでログイン済みの方は、自動的にそのメールアドレスでログインされます。
 - - -
-### お題投稿/例え投稿(AI生成)
+### お題投稿と例え投稿(AI生成)
 | お題投稿　　　　　　　　　　　　| 例え投稿                                             |
 | --------------------------------- | -------------------------------------------------- |
 | ![お題投稿](public/README/topic_create.gif) | ![例え投稿](public/README/answer_create.gif) |
@@ -64,7 +64,7 @@ Google認証を使用して簡単に新規登録＆ログインが可能です�
 
 お題と例えが思いつかない場合、**AI生成機能**(GeminiAI API)を使用すると簡単に生成出来ます。思いついたワードを入力してみましょう。
 - - -
-### 例えコメント/例えリアクション
+### 例えコメントと例えリアクション
 | 例えコメントページ | 例えリアクション/ランキング |
 | ------------------- | ---------------- |
 | ![コメントページ](public/README/answer_comments.gif) | ![リアクション追加](public/README/answer_reaction.gif) |
@@ -103,7 +103,7 @@ Google認証を使用して簡単に新規登録＆ログインが可能です�
 - [ジャンル選択オートコンプリート機能](#ジャンル選択オートコンプリート機能)
 - [動的OGPによるXシェア機能](#動的OGPによるXシェア機能)
 - - -
-### お題/例えのAI出力機能
+### お題と例えのAI出力機能
 #### どういった機能か？
 今回作成したアプリは**テーマに対して様々な物事で例える**というコンセプトになります。<br>
 しかし、物事に例えるのは意外にも難しく、投稿する前にアプリから離れてしまう欠点があるのを感じていました。
@@ -264,7 +264,91 @@ APIからのレスポンス処理をViewに返す前に、データベースに�
 
 ![ジャンル登録オートコンプリート](public/README/auto_complete.gif)
 #### 処理の流れ
-
+今回オートコンプリートを実装するために[stimulus-autocomplete](https://github.com/afcapel/stimulus-autocomplete)の一部コードを流用しています。Tatoeアプリに対応するため以下の機能を新たに実装しました。
+- **ジャンル候補選択時にフォーム用のbutton(削除用)タグとhiddenタグ追加**<br>
+上記2つのタグは以下の役割を持っています。
+   - button：ジャンル選択の表示＆削除処理
+   - hidden：お題登録時、ジャンル名をサーバーに送信するために使用<br>
+選択後のbuttonとhiddenは以下の内容で出力されます。
+```ruby:app/views/topics/new.html.erb
+<div class="flex flex-wrap space-x-2" data-autocomplete-target="labels">
+  <button class="bg-[#E0F2FE] hover:bg-[#ACCDE2] cursor-pointer text-[#0369A1] text-lg px-2 py-1 rounded-full mb-2" type="button" id="genre-[id]">ここにジャンル名が入ります   ✕</button>
+</div>
+<div data-autocomplete-target="hidden">
+  <input type="hidden" name="topic[genre_names][]" id="genre-[id]" value="ここにジャンル名が入ります">
+</div>
+```
+ジャンルを選択すると、それぞれ定義したターゲットに「ジャンル名」・「ジャンルID」を含めた子要素を追加します。ジャンルIDを使用して一意に識別するように定義しています。
+- **完全一致のジャンルが無い時の新規登録処理**<br>
+オートコンプリート機能はgenresテーブルに存在しているデータのみ取得するので、新たにジャンルを登録して選択済みにする処理を定義しました。内容としてinputに入力した値とオートコンプリートで取得した値が**完全一致**であるか判定させています。
+```javascript
+// ジャンルを登録するボタンを表示
+addGenreCreateButton() {
+const genreName = this.inputTarget.value
+if (!!this.resultsTarget.querySelector("li")) {
+  const genres = this.resultsTarget.querySelectorAll("li")
+  const genresName = [...genres].map(li => li.innerHTML.trim())
+  if (genresName.includes(genreName)) return
+}
+this.resultsShown = true
+this.element.setAttribute("aria-expanded", "true")
+const genreButton = document.createElement("button")
+genreButton.setAttribute("type", "button")
+genreButton.setAttribute("role", "option")
+genreButton.classList.add("btn", "btn-lg", "btn-outline", "btn-info", "mb-2")
+genreButton.setAttribute("name", "genre")
+genreButton.value = `${genreName}`
+genreButton.innerHTML = `「${genreName}」を登録して選択`
+genreButton.addEventListener("click",this.genreCreate)
+this.resultsTarget.prepend(genreButton)
+}
+```
+`genreName`にはinputに入力したジャンル名、`genresName`にはオートコンプリートでDBから取得したジャンル名を配列として取得しています。includesメソッドを使用して**完全一致**のジャンル名が存在しない場合、新規登録用のボタンを親要素内の先頭(prepend)に配置します。<br>
+```javascript
+// ジャンルを新規登録する処理
+genreCreate = (event) => {
+const genreElement = event.target
+fetch("/genre", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+    "X-CSRF-Token": document.head.querySelector("meta[name=csrf-token]")?.content
+  },
+  body: JSON.stringify({
+    genre:{
+      name: genreElement.value
+    }
+  })
+})
+.then(response => response.json())
+.then(data => {
+  const genreId = `genre-${data.genre.id}`
+  this.addFlash(data)
+  this.addTopicGenre(genreId, data.genre.name)
+  this.hideAndRemoveOptions()
+  this.inputTarget.value = ""
+})
+.catch((error) => {
+  alert("ジャンル登録に失敗しました。")
+  console.error(error)
+  this.hideAndRemoveOptions()
+})
+}
+```
+新規登録ボタンを押すとgenresコントローラのcreateアクションにてジャンル登録を行い、選択状態にします。
+- ボタンを押した時のジャンル削除処理
+ジャンル削除処理はボタン作成時に付与させたイベントハンドラ(onDeleteGenreメソッド実行)によって実行させます。
+```javascript
+onDeleteGenre = (event) => {
+  const genreId = event.target.id
+  event.target.remove()
+  this.hiddenTarget.querySelector(`#${genreId}`).remove()
+}
+```
+先にボタンを削除し、事前に取得したid(genres-[id])で対象のhiddenタグを削除します。
+#### 現在抱えている課題
+- `autocomplete_controller.js`の可読性<br>
+元々`stimulus-autocomplete`ライブラリのソースコードから手を加えているので、**300行超え**の冗長なコードになってしまいました。そのため該当するメソッドを探し出す為に時間が掛かってしまう問題点が残っています。これは今後リファクタリングが必要になってくると考えています。
 ### 動的OGPによるXシェア機能
 
 
