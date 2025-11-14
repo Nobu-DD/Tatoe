@@ -354,3 +354,39 @@ onDeleteGenre = (event) => {
 アプリの存在を知ってもらうために、Xでのシェア機能を実装しました。最初はTatoeアプリのイメージ画像を載せるのみの簡単なシェア機能でしたが、ポストを見た方がすぐに「どんなお題があるんだろう？」「どんな例えが出されたんだろう？」と把握しやすいように、動的なOGPシェアを作ることにしました。<br>
 **お題**と**例え**にはそれぞれ**Xシェアボタン**が存在しており、お題であれば「タイトル」、例えであれば「お題タイトル」と「例え内容」が埋め込まれたOGPが出力されます。
 ![Xシェア](public/README/Xshere.gif)
+#### 処理の流れ
+各お題・例えページにはX(旧Twitter)専用のmetaタグが設定されています。metaタグの管理はgem "meta-tags"を使用しています。
+```ruby
+# お題用のmeta_tag
+<% set_meta_tags(twitter: {image: @topic.ogp_image.url})  %>
+# 例え用のmeta_tag
+<% set_meta_tags(twitter: {image: @answer.ogp_image.url})  %>
+```
+topicsとanswersテーブルにはそれぞれ画像ファイルをストレージで管理するogp_imageカラムを作成しています。<br>
+topicsとanswersが新規登録されるたびにservices/ogp_creator_service.rbファイルを呼び出し、`ImageMagick(gem MiniMagick)`にてOGPを作成します。以下はお題用のOGP作成メソッドです。
+```ruby
+def self.topic_build(topic)
+  topic_text = prepare_main_text(topic.title)
+  image = MiniMagick::Image.open(BASE_IMAGE_PATH)
+  image.combine_options do |config|
+    # お題タイトル
+    config.fill "#03B4F3"
+    config.font FONT
+    config.gravity "center"
+    config.pointsize 65
+    config.draw "text 0,0 '#{topic_text}'"
+    image.format "png"
+  end
+  png_data = image.to_blob
+  filename = "ogp_image.png"
+  io = StringIO.new(png_data)
+  io.define_singleton_method(:original_filename) { filename }
+  io.define_singleton_method(:content_type) { "image/png" }
+
+  io
+end
+```
+`MiniMagick::Image`のインスタンスを作成し、combine_optionsにてOGP画像に埋め込むテキストを指定しています。最終的にpngとして画像を保存するので、画像のバイナリデータをStringIOクラスとして扱います。
+##### 補足：ogp_imageカラムでOGPを管理した理由
+当初は画像を保存しておくストレージサーバー(S3)の容量を使わないように、お題・例えのリンクを参照するたびに画像を生成する処理を書いていました。しかし例えページのOGP画像を読み込む際、画像の生成が終了する前にheadタグの読み込みが終了してしまい、画像が表示されない不具合が生じていました。<br>
+そこで事前に生成した画像を保存しておくことで、metaタグの読み込みに間に合わせるよう対応しました。<br>
