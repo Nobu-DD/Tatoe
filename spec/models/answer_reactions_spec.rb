@@ -13,10 +13,7 @@ RSpec.describe "AnswerReaction", type: :model do
 
     context '正常系：例えに対してリアクション(3つ)登録ができる' do
       it '何も登録されていない時' do
-        
       end
     end
   end
 end
-
-
