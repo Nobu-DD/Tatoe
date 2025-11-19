@@ -17,16 +17,17 @@ class GeminiGenerationService
   private
 
   def prepare_http_request
-    # geminiApiのエンドポイント先を指定(Gemini 2.5 Flash-Lite)
-    endpoint = "https://generativelanguage.googleapis.com/v1beta/models/#{Rails.application.config.gemini_api[:default_model]}:generateContent"
-    # エンドポイントにapiキークエリパラメータとして追加後URLに変換
-    url = URI.parse("#{endpoint}?key=#{Rails.application.config.gemini_api[:api_key]}")
+    # geminiApiのエンドポイント先を指定(Gemini 2.5 Flash-Lite)し、URLに変換
+    url = URI.parse("https://generativelanguage.googleapis.com/v1beta/models/#{Rails.application.config.gemini_api[:default_model]}:generateContent")
     # host名("generativelanguage.googleapis.com")とポート番号("443")を指定してHTTPの送受信を扱うクラスを作成
     http = Net::HTTP.new(url.host, url.port)
     # https(暗号化プロコトル)を使用するため、必ずsslをtrueに設定
     http.use_ssl = true
     # HTTP::POSTクラスを新規作成して、POSTメソッドのリクエストを作成する。内容はJSON形式。
-    request = Net::HTTP::Post.new(url, { "Content-Type" => "application/json" })
+    request = Net::HTTP::Post.new(url, {
+      "Content-Type" => "application/json",
+      "x-goog-api-key" => "#{Rails.application.config.gemini_api[:api_key]}"
+    })
     # geminiapiのHTTPクラスとJSON形式が含まれているHTTP:POSTクラスをハッシュに格納してメソッドの返り値とする。
     { http:, request: }
   end

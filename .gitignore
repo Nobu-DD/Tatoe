@@ -42,5 +42,8 @@
 
 *.swp
 .*.swp
+*.swo
+.*.swo
 
 .DS_Store
+/coverage/*
