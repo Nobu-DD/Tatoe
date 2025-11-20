@@ -3,8 +3,6 @@ class MypagesController < ApplicationController
 
   def show
     @reactions = Reaction.all
-    @topics = @user.topics
-    @answers = @user.answers
   end
 
   def update
