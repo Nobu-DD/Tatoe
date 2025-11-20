@@ -54,7 +54,7 @@
                 <div>
                   <div class="font-medium text-gray-800">投稿したお題</div>
                   <div class="text-sm text-gray-500">
-                    <span id="topics_size"><%=@user.topics.count %>件のお題</span>
+                    <span id="topics_size"><%=@user.topics.size %>件のお題</span>
                   </div>
                 </div>
               </div>
@@ -75,7 +75,7 @@
                 </svg>
                 <div>
                   <div class="font-medium text-gray-800">投稿した例え</div>
-                  <div class="text-sm text-gray-500"><%= @user.answers.count%>件の例え
+                  <div class="text-sm text-gray-500"><%= @user.answers.size%>件の例え
                   </div>
                 </div>
               </div>

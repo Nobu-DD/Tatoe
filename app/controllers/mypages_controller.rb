@@ -27,7 +27,7 @@ class MypagesController < ApplicationController
   private
 
   def set_user
-    @user = User.includes(:topics, :answers, :genres).find(current_user.id)
+    @user = User.includes({ topics: :genres }, { answers: { topic: [:user, :genres] } }, :genres).find(current_user.id)
   end
 
   def avatar_params
