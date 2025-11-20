@@ -54,13 +54,13 @@
                 <div>
                   <div class="font-medium text-gray-800">投稿したお題</div>
                   <div class="text-sm text-gray-500">
-                    <span id="topics_size"><%=@topics.count %>件のお題</span>
+                    <span id="topics_size"><%=@user.topics.count %>件のお題</span>
                   </div>
                 </div>
               </div>
               <div class="collapse-content">
-                <% if @topics.present? %>
-                <%= render partial: "topics/topic", collection: @topics %>
+                <% if @user.topics.present? %>
+                <%= render partial: "topics/topic", collection: @user.topics %>
                 <% else %>
                 <p>まだお題は投稿していません。</p>
                 <% end %>
@@ -75,13 +75,13 @@
                 </svg>
                 <div>
                   <div class="font-medium text-gray-800">投稿した例え</div>
-                  <div class="text-sm text-gray-500"><%= @answers.count%>件の例え
+                  <div class="text-sm text-gray-500"><%= @user.answers.count%>件の例え
                   </div>
                 </div>
               </div>
               <div class="collapse-content space-y-2">
-                <% if @answers.present? %>
-                <% @answers.each do |answer| %>
+                <% if @user.answers.present? %>
+                <% @user.answers.each do |answer| %>
                 <div id="<%="topic_answer_#{answer.id}"%>" class="flex flex-wrap justify-between mt-2">
                   <div class="flex items-center space-x-2 space-y-1 justify-end">
                     <div class="h-8 w-8 overflow-hidden rounded-full">
