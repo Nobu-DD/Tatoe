@@ -4,6 +4,7 @@ class TopicsController < ApplicationController
     @q = Topic.ransack_search(search_params)
     @q.sorts = params[:s].blank? ? "published_at desc" : params[:s]
     @topics = @q.result(distinct: true).includes(:user, :genres, :hints).page(params[:page]).per(10)
+    @my_user = user_signed_in? ? User.includes(:likes).find(current_user.id) : false
   end
 
   def new
