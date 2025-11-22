@@ -58,11 +58,11 @@ class OgpCreatorService
     if object.is_a?(Topic)
       message = "『#{object.title}』を投稿しました！例えてみてください！"
       url = "https://tatoe.net/topics/#{object.id}"
-      genres = object.genres.limit(5).map { |genre| "##{genre.name}" }.join(" ")
+      genres = object.genres.first(5).map { |genre| "##{genre.name}" }.join(" ")
     else
       message = "『#{object.body}』を投稿しました！コメントをしてみましょう！"
       url = "https://tatoe.net/topics/#{object.topic_id}/answers/#{object.id}"
-      genres = object.topic.genres.limit(5).map { |genre| "##{genre.name}" }.join(" ")
+      genres = object.topic.genres.first(5).map { |genre| "##{genre.name}" }.join(" ")
     end
     encode_text = URI.encode_www_form_component("#{message} #{genres}")
     "https://twitter.com/share?text=#{encode_text}&url=#{url}"
