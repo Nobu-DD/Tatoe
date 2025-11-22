@@ -44,7 +44,7 @@
       <% else %>
       <div class="flex items-center space-x-2">
         <% if user_signed_in? %>
-        <% if my_user.likes.exists?(likeable_type: "Topic", likeable_id: topic.id) %>
+        <% if current_user.likes.exists?(likeable_type: "Topic", likeable_id: topic.id) %>
         <%= render "likes/unlike", object: topic, type: "Topic" %>
         <% else %>
         <%= render "likes/like", object: topic, type: "Topic" %>
