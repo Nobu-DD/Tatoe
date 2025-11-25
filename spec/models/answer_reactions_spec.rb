@@ -11,8 +11,12 @@ RSpec.describe "AnswerReaction", type: :model do
       @reaction_smaile = create(:reaction, :smile)
     end
 
-    context '正常系：例えに対してリアクション(3つ)登録ができる' do
+    context '正常系：例えに対してリアクション(3種類)登録ができる' do
       it '何も登録されていない時' do
+        # answer_reactionのモデルをuserとanswerのidを使用して作成(モデルインスタンスのみ)
+        @answer_empathy = build(:answer_reaction, user_id: @user.id, answer_id: @answer.id, reaction_id: @reaction_empathy.id)
+        # expectでbe_validに引っかからないか検証
+        expect(@answer_empathy).to be_valid
       end
     end
   end
