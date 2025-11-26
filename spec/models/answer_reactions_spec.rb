@@ -14,14 +14,14 @@ RSpec.describe "AnswerReaction", type: :model do
     context '正常系：例えに対してリアクション(3種類)登録ができる' do
       it '何も登録されていない時' do
         # answer_reactionのモデルをuserとanswerのidを使用して作成(モデルインスタンスのみ)
-        @answer_empathy = build(:answer_reaction, user_id: @user.id, answer_id: @answer.id, reaction_id: @reaction_empathy.id)
+        answer_empathy = create(:answer_reaction, user_id: @user.id, answer_id: @answer.id, reaction_id: @reaction_empathy.id)
         # expectでbe_validに引っかからないか検証
-        expect(@answer_empathy).to be_valid
+        expect(answer_empathy).to be_valid
       end
       it '共感が既に登録済みの時、納得を登録する時' do
-        @answer_empathy = create(:answer_reaction, user_id: @user.id, answer_id: @answer.id, reaction_id: @reaction_empathy.id)
-        duplicate_reaction = build(:answer_reaction, user_id: @user.id, answer_id: @answer.id, reaction_id: @reaction_empathy.id)
-        expect(duplicate_reaction).to be_invalid
+        answer_empathy = create(:answer_reaction, user_id: @user.id, answer_id: @answer.id, reaction_id: @reaction_empathy.id)
+        reaction_consent = create(:answer_reaction, user_id: @user.id, answer_id: @answer.id, reaction_id: @reaction_consent.id)
+        expect(reaction_consent).to be_valid
       end
     end
   end
